@@ -11,8 +11,8 @@ const projects = [
     description:
       "Developed a food ordering platform (FodHub) with dynamic food management and role-based access (Admin, Moderator, Restaurant Owner). ",
     liveLink: "https://foodhub-d3e1e.web.app/",
-    frontendRepo: "https://github.com/infan11/FoodHub-Frontend-Projects",
-    backendRepo: "https://github.com/infan11/FoodHub-Backend-Projects",
+    frontendRepo: "https://github.com/Infan-Jioun/FoodHub-Frontend-Projects",
+    backendRepo: "https://github.com/Infan-Jioun/FoodHub-Backend-Projects",
     imageUrl: "https://i.ibb.co/fzkTN1Tw/screenshot-1748712980940.png",
     techStack: [
       "https://i.ibb.co.com/gRXXrDs/react.webp",
@@ -27,8 +27,8 @@ const projects = [
     description:
       "An advanced e-commerce platform with product listing, dynamic navigation, payment integration, a responsive design, and Seller Sale product system.",
     liveLink: "https://shoppinggo-930e2.web.app/",
-    frontendRepo: "https://github.com/infan11/ShoppingGO-Projects-Frontend",
-    backendRepo: "https://github.com/infan11/ShoppingGO-Projects-Backend",
+    frontendRepo: "https://github.com/Infan-Jioun/ShoppingGO-Projects-Frontend",
+    backendRepo: "https://github.com/Infan-Jioun/ShoppingGO-Projects-Backend",
     imageUrl: "https://i.ibb.co/j9wXX893/screenshot-1748713595547.png",
     techStack: [
       "https://i.ibb.co.com/gRXXrDs/react.webp",
@@ -43,8 +43,8 @@ const projects = [
     description:
       "An advanced e-commerce platform with product listing, dynamic navigation, payment integration, and a responsive design.",
     liveLink: "https://infan-web.web.app/",
-    frontendRepo: "https://github.com/infan11/infan-ecommerce-frontend",
-    backendRepo: "https://github.com/infan11/infan-ecommerce-backend",
+    frontendRepo: "https://github.com/Infan-Jioun/infan-ecommerce-frontend",
+    backendRepo: "https://github.com/Infan-Jioun/infan-ecommerce-backend",
     imageUrl: "https://i.ibb.co.com/GHzJT6J/Screenshot-2024-11-23-071650.png",
     techStack: [
       "https://i.ibb.co.com/gRXXrDs/react.webp",
@@ -59,8 +59,8 @@ const projects = [
     description:
       "An interactive pet adoption website connecting adopters with pets through a user-friendly experience.",
     liveLink: "https://petadoptweb.web.app/",
-    frontendRepo: "https://github.com/infan11/Pet-adoption-frontend",
-    backendRepo: "https://github.com/infan11/Pet-adoption-backend",
+    frontendRepo: "https://github.com/Infan-Jioun/Pet-adoption-frontend",
+    backendRepo: "https://github.com/Infan-Jioun/Pet-adoption-backend",
     imageUrl: "https://i.ibb.co.com/ZmZmXPz/2024-11-24.png",
     techStack: [
       "https://i.ibb.co.com/gRXXrDs/react.webp",
@@ -75,8 +75,8 @@ const projects = [
     description:
       "A modern solution simplifying college admissions with an intuitive and efficient online platform.",
     liveLink: "https://edubooker-2f225.web.app/",
-    frontendRepo: "https://github.com/infan11/EduBooker-project-frontend",
-    backendRepo: "https://github.com/infan11/EduBooker-project-backend",
+    frontendRepo: "https://github.com/Infan-Jioun/EduBooker-project-frontend",
+    backendRepo: "https://github.com/Infan-Jioun/EduBooker-project-backend",
     imageUrl: "https://i.ibb.co.com/NtZz2NN/2025-01-27-2.png",
     techStack: [
       "https://i.ibb.co.com/gRXXrDs/react.webp",

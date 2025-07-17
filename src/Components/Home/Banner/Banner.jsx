@@ -85,7 +85,7 @@ const Banner = () => {
             {loading
               ? <Skeleton height={40} width={250} />
               : <>
-                <a href="https://github.com/infan11" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-gray-800"><FaGithub /></a>
+                <a href="https://github.com/Infan-Jioun" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-gray-800"><FaGithub /></a>
                 <a href="https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-blue-600"><FaLinkedinIn /></a>
                 <a href="mailto:infanjiounrahman20606@gmail.com" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-red-600"><IoIosMail /></a>
                 {/* <a href="https://www.fiverr.com/infan_jioun" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-green-600"><TbBrandFiverr /></a> */}

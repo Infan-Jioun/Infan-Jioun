@@ -42,7 +42,7 @@ const Banner = () => {
   ];
 
   const socialLinks = [
-    { icon: <FaGithub />, href: 'https://github.com/infan11', color: 'text-gray-800' },
+    { icon: <FaGithub />, href: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
     {
       icon: <FaLinkedinIn />,
       href: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/',

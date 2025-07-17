@@ -13,7 +13,7 @@ import { FaSquareXTwitter } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 
 const socialLinks = [
-  { icon: <FaGithub />, url: 'https://github.com/infan11', color: 'text-gray-800' },
+  { icon: <FaGithub />, url: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
   { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
   { icon: <IoIosMail />, url: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
   // { icon: <TbBrandFiverr />, url: 'https://www.fiverr.com/infan_jioun', color: 'text-green-600' },

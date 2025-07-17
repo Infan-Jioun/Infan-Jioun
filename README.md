@@ -43,8 +43,8 @@ Passionate **MERN stack developer** with experience building scalable web applic
 ## 📈 GitHub Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=infan11&show_icons=true&theme=radical&hide_border=true" width="45%" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=infan11&theme=radical&hide_border=true" width="45%" />
+  <img src="https://github-readme-stats.vercel.app/api?username=Infan-Jioun&show_icons=true&theme=radical&hide_border=true" width="45%" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Infan-Jioun&theme=radical&hide_border=true" width="45%" />
 </div>
 
 ---
@@ -56,5 +56,5 @@ Passionate **MERN stack developer** with experience building scalable web applic
 [![Facebook](https://img.shields.io/badge/-Facebook-1877F2?logo=facebook)](https://www.facebook.com/InfanJiounRahmanJito.9)
 
 <div align="center">
-  <img src="https://komarev.com/ghpvc/?username=infan11&label=Profile+Views&color=blueviolet" alt="Profile views" />
+  <img src="https://komarev.com/ghpvc/?username=Infan-Jioun&label=Profile+Views&color=blueviolet" alt="Profile views" />
 </div>
