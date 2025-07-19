@@ -23,12 +23,12 @@ const Education = () => {
     {education.map((edu, index) => (
       <div
         key={index}
-        className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40"
+        className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81]  p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40"
       >
         <h3 className="text-lg font-semibold  flex items-center gap-2 mb-1">
           <MdSchool className="text-[#5a1c5a81]" /> {edu.institute}
         </h3>
-        <p className=" font-semibold">{edu.degree}</p>
+        <p className=" font-semibold text-white">{edu.degree}</p>
         <p className="">{edu.field}</p>
         <p className="italic  mt-2">{edu.duration}</p>
       </div>

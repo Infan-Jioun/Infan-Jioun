@@ -5,14 +5,19 @@ import Footer from "../Footer/Footer";
 
 const Main = () => {
     return (
-        <div className=" min-h-screen">
+  <div>
+          <div className=" min-h-screen  max-w-screen-xl mx-auto">
+           <br />
+      
             <Navbar></Navbar>
           
             <div className="">
             <Outlet></Outlet>
             </div>
-            <Footer></Footer>
+          
         </div>
+        <Footer></Footer>
+  </div>
     );
 };
 

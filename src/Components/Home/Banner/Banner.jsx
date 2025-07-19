@@ -41,6 +41,7 @@ const Banner = () => {
   const scrollToForm = () => {
     formRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
   const education = [
     {
       institute: 'Premier University Chittagong',
@@ -48,13 +49,11 @@ const Banner = () => {
       field: 'Fashion Design And Technology',
       duration: '2024 - Present',
     },
-   
   ];
+
   return (
     <div className="max-w-screen-xl mx-auto px-8 py-14">
-      {/* Hero Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-28 items-center">
-        {/* Profile Image - shown on top in mobile */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-28 items-center" id="about">
         <div className="flex justify-center md:order-2 drop-shadow-lg">
           {loading
             ? <Skeleton circle={true} height={320} width={320} />
@@ -62,9 +61,8 @@ const Banner = () => {
           }
         </div>
 
-        {/* Text Content */}
         <div className="text-center md:text-left md:order-1">
-          <h1 className=" md:text-4xl  font-mono text-3xl font-bold    drop-shadow-lg  ">
+          <h1 className=" md:text-4xl  font-mono text-3xl font-bold drop-shadow-lg  ">
             {loading ? <Skeleton width={300} /> : <Typewriter options={{ strings: ['Infan Jioun Rahman'], autoStart: true, loop: true }} />}
           </h1>
           <h2 className="text-xl md:text-2xl font-semibold mt-2 drop-shadow-lg">
@@ -80,7 +78,6 @@ const Banner = () => {
             }
           </p>
 
-          {/* Social Links */}
           <div className="flex flex-wrap justify-center md:justify-start gap-4 drop-shadow-lg mt-5">
             {loading
               ? <Skeleton height={40} width={250} />
@@ -88,7 +85,7 @@ const Banner = () => {
                 <a href="https://github.com/Infan-Jioun" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-gray-800"><FaGithub /></a>
                 <a href="https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-blue-600"><FaLinkedinIn /></a>
                 <a href="mailto:infanjiounrahman20606@gmail.com" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-red-600"><IoIosMail /></a>
-                {/* <a href="https://www.fiverr.com/infan_jioun" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-green-600"><TbBrandFiverr /></a> */}
+                <a href="https://www.fiverr.com/s/dD9ZVj0" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-green-600"><TbBrandFiverr /></a>
                 <a href="https://www.instagram.com/infan_jioun_rahman/" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-pink-600"><FaInstagram /></a>
                 <a href="https://www.facebook.com/InfanJiounRahmanJito.9" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-blue-700"><FaFacebook /></a>
                 <a href="https://t.me/infanjioun" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-cyan-500"><FaTelegram /></a>
@@ -97,7 +94,6 @@ const Banner = () => {
             }
           </div>
 
-          {/* Buttons */}
           <div className="mt-6 flex justify-center md:justify-start items-center drop-shadow-2xl gap-4">
             {loading ? (
               <Skeleton height={45} width={140} count={2} />
@@ -124,7 +120,6 @@ const Banner = () => {
         </div>
       </div>
 
-      {/* Projects Section */}
       {loading ? (
         <div className="mt-12 space-y-4">
           <Skeleton height={200} />
@@ -133,55 +128,58 @@ const Banner = () => {
       ) : (
         <>
           <Card />
+          <div id='myProjects'>
           <MyProjects />
-          
+          </div>
         </>
       )}
-<Skills/>
-<section className="my-10 px-4">
-  <h2 className="text-2xl md:text-4xl font-bold text-center uppercase text-white drop-shadow-lg mb-8">
-    Education
-  </h2>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {education.map((edu, index) => (
-      <div
-        key={index}
-        className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40"
-      >
-        <h3 className="text-lg font-semibold  flex items-center gap-2 mb-1">
-          <MdSchool className="text-[#5a1c5a81]" /> {edu.institute}
-        </h3>
-        <p className=" font-semibold">{edu.degree}</p>
-        <p className="">{edu.field}</p>
-        <p className="italic  mt-2">{edu.duration}</p>
+      <div id="skills">
+        <Skills />
       </div>
-    ))}
 
-    {/* Programming Hero Card */}
-    <div className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40">
-      <h3 className="text-lg font-semibold  flex items-center gap-2 mb-1">
-        <MdSchool className="text-[#5a1c5a81]" /> Programming Hero
-      </h3>
-      <p className=" font-semibold">Additional Course</p>
-      <p className="">Web Development</p>
-      <p className="italic  mt-2">2023 (July - December)</p>
-      <Link
-        to="https://drive.google.com/file/d/19KYaO4wQdPsMMO3ky-jzsL4XJqM6CfS1/view"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 bg-[#5a1c5a81] mt-4 text-white py-2 px-4 rounded-full transition-transform duration-300 hover:scale-105"
-      >
-        <MdDownloading className="text-xl" />
-        Certificate
-      </Link>
-    </div>
-  </div>
-</section>
+      <section className="my-10 px-4" id="education">
+        <h2 className="text-2xl md:text-4xl font-bold text-center uppercase text-white drop-shadow-lg mb-8">
+          Education
+        </h2>
 
-      {/* Contact Form */}
-      <div ref={formRef} className="mt-16">
-        <h2 className="text-center text-3xl md:text-4xl uppercase font-bold   drop-shadow-lg  text-white font-mono">Contact Us</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {education.map((edu, index) => (
+            <div
+              key={index}
+              className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40"
+            >
+              <h3 className="text-lg font-semibold  flex items-center gap-2 mb-1">
+                <MdSchool className="text-[#5a1c5a81]" /> {edu.institute}
+              </h3>
+              <p className=" font-semibold">{edu.degree}</p>
+              <p className="">{edu.field}</p>
+              <p className="italic  mt-2">{edu.duration}</p>
+            </div>
+          ))}
+
+          <div className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40">
+            <h3 className="text-lg font-semibold  flex items-center gap-2 mb-1">
+              <MdSchool className="text-[#5a1c5a81]" /> Programming Hero
+            </h3>
+            <p className=" font-semibold">Additional Course</p>
+            <p className="">Web Development</p>
+            <p className="italic  mt-2">2023 (July - December)</p>
+            <Link
+              to="https://drive.google.com/file/d/19KYaO4wQdPsMMO3ky-jzsL4XJqM6CfS1/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#5a1c5a81] mt-4 text-white py-2 px-4 rounded-full transition-transform duration-300 hover:scale-105"
+            >
+              <MdDownloading className="text-xl" />
+              Certificate
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <div ref={formRef} id="contact" className="mt-16">
+        <h2 className="text-center text-3xl md:text-4xl uppercase font-bold drop-shadow-lg text-white font-mono">Contact Us</h2>
         <div className="card max-w-3xl mx-auto mt-6 shadow-lg rounded-xl p-6 drop-shadow-xl backdrop-blur-2xl bg-white">
           <form ref={form} onSubmit={sendEmail} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

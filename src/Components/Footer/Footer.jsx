@@ -16,7 +16,7 @@ const socialLinks = [
   { icon: <FaGithub />, url: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
   { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
   { icon: <IoIosMail />, url: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
-  // { icon: <TbBrandFiverr />, url: 'https://www.fiverr.com/infan_jioun', color: 'text-green-600' },
+  { icon: <TbBrandFiverr />, url: 'https://www.fiverr.com/s/dD9ZVj0', color: 'text-green-600' },
   { icon: <FaInstagram />, url: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-600' },
   { icon: <FaFacebook />, url: 'https://www.facebook.com/InfanJiounRahmanJito.9', color: 'text-blue-700' },
   { icon: <FaTelegram />, url: 'https://t.me/infanjioun', color: 'text-cyan-500' },

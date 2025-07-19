@@ -28,33 +28,38 @@ const Navbar = () => {
   const toggleDropdown = () => setIsOpen(!isOpen);
   const closeDropdown = () => setIsOpen(false);
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const navItems = [
-    { path: "/", label: "ABOUT" },
-    { path: "/skills", label: "MY SKILLS" },
-    { path: "/myProjects", label: "MY PROJECTS" },
-    { path: "/education", label: "EDUCATION" },
-    { path: "/contact", label: "CONTACT US" },
+    { path: "about", label: "ABOUT" },
+    { path: "myProjects", label: "MY PROJECTS" },
+    { path: "skills", label: "MY SKILLS" },
+    { path: "education", label: "EDUCATION" },
+    { path: "contact", label: "CONTACT US" },
   ];
 
   const navLinks = navItems.map(({ path, label }) => (
-    <NavLink
+    <button
       key={path}
-      to={path}
-      className={({ isActive }) =>
-        isActive
-          ? "font-bold text-white border-b-2 border-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-100 before:transition-transform before:duration-300 hover:before:scale-100"
-          : "font-bold text-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded"
-      }
-      onClick={closeDropdown}
+      onClick={() => {
+        scrollToSection(path);
+        closeDropdown();
+      }}
+      className="font-bold text-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded"
     >
       {label}
-    </NavLink>
+    </button>
   ));
 
   return (
-    <div>
-      <div className={`navbar bg-[#37133746] backdrop-blur border-b-2 px-8 md:px-20 text-white ${scrolled ? 'fixed top-0 left-0 w-full shadow-md z-50' : ''}`}>
+    <div className="">
 
+      <div className={`navbar bg-[#37133746]  backdrop-blur  max-w-screen-xl  rounded-3xl drop-shadow-xl  mx-auto px-8 md:px-20  mb-4 text-white ${scrolled ? 'fixed top-0  w-full max-w-screen-xl shadow-md mx-auto  z-50 mt-3' : ' max-w-screen-xl shadow-md mx-auto  z-50 mt-0 md:mt-3'}`}>
         <div className="navbar-start flex items-center gap-4">
           <div className="dropdown md:hidden block">
             <Menu open={isOpen} handler={setIsOpen}>
@@ -66,17 +71,15 @@ const Navbar = () => {
               <MenuList className="bg-[#37133746] ml-3 mt-3 backdrop-blur-md text-black z-[1000]">
                 {navItems.map(({ path, label }) => (
                   <MenuItem key={path} className="hover:bg-transparent focus:bg-transparent active:bg-transparent">
-                    <NavLink
-                      to={path}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "font-bold text-white border-b-2 border-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-100 before:transition-transform before:duration-300 hover:before:scale-100"
-                          : "font-bold text-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded"
-                      }
-                      onClick={closeDropdown}
+                    <button
+                      onClick={() => {
+                        scrollToSection(path);
+                        closeDropdown();
+                      }}
+                      className="font-bold text-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded"
                     >
                       {label}
-                    </NavLink>
+                    </button>
                   </MenuItem>
                 ))}
               </MenuList>
