@@ -29,7 +29,7 @@ const DarkMode = () => {
                 onClick={toggleTheme}
                 aria-label="Toggle dark mode"
             >
-                {isDarkMode ? <LuSun size={24} /> : <LuSunMoon size={24} />}
+                {isDarkMode ? <LuSun size={20} /> : <LuSunMoon size={24} />}
             </button>
         </div>
     );

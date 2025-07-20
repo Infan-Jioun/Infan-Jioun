@@ -5,14 +5,18 @@ module.exports = withMT({
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    
+
   ],
   theme: {
     extend: {
       fontFamily: {
-        Kanit : ["Kanit" , "sans-serif"],
+        Kanit: ["Kanit", "sans-serif"],
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),
+  // require("@heroui/react")
+  ],
 });
+
+// @plugin './hero.ts';

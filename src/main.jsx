@@ -11,12 +11,15 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
 import { Toaster } from 'react-hot-toast';
 import SplashCursor from './Components/SplashCursor/SplashCursor.jsx';
-
+import { Theme } from '@radix-ui/themes';
+// import "@radix-ui/themes/styles.css";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     
  <HelmetProvider>
+  <Theme  />
+  
  <div className='font-Kanit'>
   <SplashCursor/>
  <RouterProvider router={router} />

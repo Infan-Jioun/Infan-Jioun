@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 const Main = () => {
     return (
   <div>
-          <div className=" min-h-screen  max-w-screen-xl mx-auto">
+          <div className="   max-w-screen-xl mx-auto">
            <br />
       
             <Navbar></Navbar>
@@ -14,9 +14,12 @@ const Main = () => {
             <div className="">
             <Outlet></Outlet>
             </div>
-          
+            <div className="px-1">
+            <Footer></Footer>
+            </div>
+            <br />
         </div>
-        <Footer></Footer>
+        
   </div>
     );
 };

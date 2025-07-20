@@ -25,13 +25,13 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-10 bg-[#7f407f77] backdrop-blur text-white rounded-t-3xl mt-16">
+    <footer className="footer footer-center p-6 bg-[#37133746]  backdrop-blur text-white rounded-xl mt-16">
       {/* Navigation Links */}
       <motion.nav
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="flex justify-center gap-10 mb-6 uppercase font-bold text-sm tracking-widest"
+        transition={{ duration: 0.3 }}
+        className="flex justify-center gap-10 mb-3 uppercase font-bold text-sm tracking-widest"
       >
         {/* <a href="/" className="hover:text-purple-400 transition-colors duration-300">About</a> */}
         <a href="/contact" className="hover:text-purple-400 transition-colors duration-300">Contact</a>
@@ -41,7 +41,7 @@ const Footer = () => {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
+        transition={{ delay: 0.2, duration: 0.3 }}
         className="flex flex-wrap justify-center gap-4"
       >
         {socialLinks.map(({ icon, url, color }, i) => (
@@ -52,7 +52,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.2, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
-            className={`text-xl p-2 rounded-full bg-white shadow transition duration-300 ${color}`}
+            className={`text-sm p-2 rounded-full bg-white shadow transition duration-300 ${color}`}
           >
             {icon}
           </motion.a>
@@ -63,8 +63,8 @@ const Footer = () => {
       <motion.aside
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
-        className="mt-8 text-sm font-mono tracking-wide opacity-90"
+        transition={{ delay: 0.1, duration: 0.1 }}
+        className="mt-4 text-sm font-mono tracking-wide opacity-90"
       >
         <p>© 2025 Infan Jioun Rahman | Portfolio</p>
       </motion.aside>

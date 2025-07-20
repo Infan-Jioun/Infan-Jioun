@@ -50,6 +50,7 @@ const Navbar = () => {
         scrollToSection(path);
         closeDropdown();
       }}
+      
       className="font-bold text-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded"
     >
       {label}
@@ -59,12 +60,12 @@ const Navbar = () => {
   return (
     <div className="">
 
-      <div className={`navbar bg-[#37133746]  backdrop-blur  max-w-screen-xl  rounded-3xl drop-shadow-xl  mx-auto px-8 md:px-20  mb-4 text-white ${scrolled ? 'fixed top-0  w-full max-w-screen-xl shadow-md mx-auto  z-50 mt-3' : ' max-w-screen-xl shadow-md mx-auto  z-50 mt-0 md:mt-3'}`}>
+      <div className={`navbar bg-[#37133746]  backdrop-blur  max-w-screen-xl  rounded-3xl drop-shadow-xl  w-full mx-auto px-8 md:px-20  mb-4 text-white ${scrolled ? 'fixed    max-w-screen-xl shadow-md mx-auto  z-40 ' : '  max-w-screen-xl shadow-md mx-auto  z-40 '}`}>
         <div className="navbar-start flex items-center gap-4">
           <div className="dropdown md:hidden block">
             <Menu open={isOpen} handler={setIsOpen}>
               <MenuHandler>
-                <div className="btn btn-ghost btn-circle text-2xl text-white cursor-pointer" onClick={toggleDropdown}>
+                <div className="btn btn-ghost btn-circle text-xl text-white cursor-pointer" onClick={toggleDropdown}>
                   {isOpen ? <AiOutlineClose /> : <HiOutlineMenu />}
                 </div>
               </MenuHandler>
@@ -86,7 +87,7 @@ const Navbar = () => {
             </Menu>
           </div>
 
-          <Link to="/" className="font-bold text-2xl flex drop-shadow-2xl select-none">
+          <Link to="/" className="font-bold text-xl flex drop-shadow-2xl select-none">
             <Typewriter
               options={{
                 strings: ["INFAN"],
