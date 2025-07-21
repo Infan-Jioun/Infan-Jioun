@@ -25,7 +25,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-6 bg-[#37133746]  backdrop-blur text-white rounded-xl mt-16">
+    <footer className="footer footer-center p-6 bg-[#5a1c5a81]  backdrop-blur text-white rounded-xl mt-16">
       {/* Navigation Links */}
       <motion.nav
         initial={{ opacity: 0, y: 20 }}

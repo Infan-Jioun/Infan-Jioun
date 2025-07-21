@@ -60,7 +60,7 @@ const Navbar = () => {
   return (
     <div className="">
 
-      <div className={`navbar bg-[#37133746]  backdrop-blur  max-w-screen-xl  rounded-3xl drop-shadow-xl  w-full mx-auto px-8 md:px-20  mb-4 text-white ${scrolled ? 'fixed    max-w-screen-xl shadow-md mx-auto  z-40 ' : '  max-w-screen-xl shadow-md mx-auto  z-40 '}`}>
+      <div className={`navbar bg-[#5a1c5a81]  backdrop-blur  max-w-screen-xl  rounded-3xl drop-shadow-xl  w-full mx-auto px-8 md:px-20  mb-4 text-white ${scrolled ? 'fixed    max-w-screen-xl shadow-md mx-auto  z-40 ' : '  max-w-screen-xl shadow-md mx-auto  z-40 '}`}>
         <div className="navbar-start flex items-center gap-4">
           <div className="dropdown md:hidden block">
             <Menu open={isOpen} handler={setIsOpen}>
@@ -69,7 +69,7 @@ const Navbar = () => {
                   {isOpen ? <AiOutlineClose /> : <HiOutlineMenu />}
                 </div>
               </MenuHandler>
-              <MenuList className="bg-[#37133746] ml-3 mt-3 backdrop-blur-md text-black z-[1000]">
+              <MenuList className="bg-[#5a1c5a81] ml-3 mt-3 backdrop-blur-md text-black z-[1000]">
                 {navItems.map(({ path, label }) => (
                   <MenuItem key={path} className="hover:bg-transparent focus:bg-transparent active:bg-transparent">
                     <button

@@ -23,3 +23,22 @@ html {
 [data-aos] {
   transition-property: transform, opacity;
 }
+.fromDivNavM {
+  background: linear-gradient(135deg, rgba(17, 9, 42, 0.584), rgba(2, 82, 255, 0.6));
+  border: 1px solid rgba(44, 6, 125, 0.948);
+  box-shadow: inset 0 0 20px rgb(23, 8, 187); 
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Hover effect: background becomes brighter and animated */
+.fromDivNavM:hover,
+.fromDivNavM:focus {
+  background: linear-gradient(135deg, rgb(0, 0, 0), rgba(17, 9, 42, 0.584));
+ 
+;
+}
