@@ -21,7 +21,7 @@ const Skills = () => {
                 { name: "DAISYUI", icon: "https://i.ibb.co.com/6s0HLvL/DaisyUI.webp" },
                 { name: "JAVASCRIPT", icon: "https://i.ibb.co.com/zRpT9jC/javascript.webp" },
                 { name: "REACT", icon: "https://i.ibb.co.com/gRXXrDs/react.webp" },
-                { name: " MATERIAL TAILWIND", icon: "https://www.material-tailwind.com/favicon.ico" },
+                // { name: " MATERIAL TAILWIND", icon: "https://www.material-tailwind.com/favicon.icon" },
                 { name: "FARMER MOTION  ", icon: "https://cdn.worldvectorlogo.com/logos/framer-motion.svg" },
                 { name: "TANSTACK  ", icon: "https://i.ibb.co/pvXrXCPX/splash-light-CHq-Msyq8.png" },
                 { name: "AXIOS  ", icon: "https://axios-http.com/assets/logo.svg" },

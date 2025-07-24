@@ -14,11 +14,11 @@ const DarkMode = () => {
 
     useEffect(() => {
         if (isDarkMode) {
-            document.body.classList.add("fromDivNavM");
+            document.body.classList.add("bg-dark");
             document.body.classList.remove("bg-white", "text-black");
         } else {
             document.body.classList.add("bg-[#c2caf3]", "text-black");
-            document.body.classList.remove("fromDivNavM");
+            document.body.classList.remove("bg-dark");
         }
     }, [isDarkMode]);
 

@@ -101,7 +101,7 @@ const Banner = () => {
               <>
                 <button
                   onClick={scrollToForm}
-                  className="w-36 bg-[#5a1c5a81] backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105"
+                  className="w-36 bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105"
                 >
                   HIRE ME
                 </button>
@@ -109,7 +109,7 @@ const Banner = () => {
                   to="https://drive.google.com/file/d/1d-9BZmvSCR0dITy2p1aUDEdrR-oQy1QF/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-44 flex justify-center items-center bg-[#5a1c5a81] backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105"
+                  className="w-44 flex justify-center items-center bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105"
                 >
                   <MdDownloading className="text-xl mr-2" />
                   RESUME
@@ -169,7 +169,7 @@ const Banner = () => {
               to="https://drive.google.com/file/d/19KYaO4wQdPsMMO3ky-jzsL4XJqM6CfS1/view"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#5a1c5a81] mt-4 text-white py-2 px-4 rounded-full transition-transform duration-300 hover:scale-105"
+              className="inline-flex items-center gap-2 bg-transparent border-2 border-white mt-4 text-white py-2 px-4 rounded-full transition-transform duration-300 hover:scale-105"
             >
               <MdDownloading className="text-xl" />
               Certificate
@@ -187,7 +187,7 @@ const Banner = () => {
               <Input type="email" label="Email" name="user_email" placeholder="Your Email" required />
             </div>
             <Textarea name="message" label="Your Message" required />
-            <button type="submit" className="w-full bg-[#5a1c5a81] backdrop-blur text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105">
+            <button type="submit" className="w-full btn  border-2 border-white backdrop-blur text-white p-3 rounded-full ">
               Send Your Message
             </button>
           </form>

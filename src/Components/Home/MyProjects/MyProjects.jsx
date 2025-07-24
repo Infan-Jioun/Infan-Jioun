@@ -161,7 +161,7 @@ const MyProjects = () => {
                 ) : (
                   <>
                     <Link to={project.liveLink} target="_blank">
-                      <Button className="px-6 py-2 font-semibold rounded-lg transition bg-[#5a1c5a81]  hover:bg-[#5a1c5a81] shadow-lg">
+                      <Button className="px-6 py-2 font-semibold rounded-lg transition bg-transparent border-2 border-white backdrop-blur-xl  hover:bg-transparent border-2 border-white backdrop-blur-xl shadow-lg">
                         Preview 
                       </Button>
                     </Link>

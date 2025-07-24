@@ -1,25 +1,25 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { MdDownloading } from "react-icons/md";
+import { Link, useLocation } from "react-router-dom";
 import Typewriter from 'typewriter-effect';
-import { RiMenu4Line } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
-import DarkMode from "../DarkMode/DarkMode";
+import { HiOutlineMenu } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
-import { HiOutlineMenu } from "react-icons/hi";
+import DarkMode from "../DarkMode/DarkMode";
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
+const Navbar = ({ setScrolled }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const scrollCheck = window.scrollY > 50;
+      setIsScrolled(scrollCheck);
+      setScrolled(scrollCheck); // send to parent
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [setScrolled]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -50,7 +50,6 @@ const Navbar = () => {
         scrollToSection(path);
         closeDropdown();
       }}
-      
       className="font-bold text-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded"
     >
       {label}
@@ -58,9 +57,12 @@ const Navbar = () => {
   ));
 
   return (
-    <div className="">
-
-      <div className={`navbar bg-[#5a1c5a81]  backdrop-blur  max-w-screen-xl  rounded-3xl drop-shadow-xl  w-full mx-auto px-8 md:px-20  mb-4 text-white ${scrolled ? 'fixed    max-w-screen-xl shadow-md mx-auto  z-40 ' : '  max-w-screen-xl shadow-md mx-auto  z-40 '}`}>
+    <div>
+      <div
+        className={`navbar bg-transparent border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-8 md:px-20 text-white z-40 transition-all duration-300
+          ${isScrolled ? 'fixed top-0' : 'relative mt-3'}
+        `}
+      >
         <div className="navbar-start flex items-center gap-4">
           <div className="dropdown md:hidden block">
             <Menu open={isOpen} handler={setIsOpen}>
@@ -69,9 +71,12 @@ const Navbar = () => {
                   {isOpen ? <AiOutlineClose /> : <HiOutlineMenu />}
                 </div>
               </MenuHandler>
-              <MenuList className="bg-[#5a1c5a81] ml-3 mt-3 backdrop-blur-md text-black z-[1000]">
+              <MenuList className="bg-transparent border-2 border-white backdrop-blur-xl ml-3 mt-3 text-black z-[1000]">
                 {navItems.map(({ path, label }) => (
-                  <MenuItem key={path} className="hover:bg-transparent focus:bg-transparent active:bg-transparent">
+                  <MenuItem
+                    key={path}
+                    className="hover:bg-transparent focus:bg-transparent active:bg-transparent border-2 border-white backdrop-blur-xl"
+                  >
                     <button
                       onClick={() => {
                         scrollToSection(path);

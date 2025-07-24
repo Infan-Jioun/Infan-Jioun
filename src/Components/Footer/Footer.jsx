@@ -5,7 +5,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaTelegram,
-  FaTwitter,
 } from 'react-icons/fa';
 import { IoIosMail } from 'react-icons/io';
 import { TbBrandFiverr } from 'react-icons/tb';
@@ -13,61 +12,61 @@ import { FaSquareXTwitter } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 
 const socialLinks = [
-  { icon: <FaGithub />, url: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
-  { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
-  { icon: <IoIosMail />, url: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
-  { icon: <TbBrandFiverr />, url: 'https://www.fiverr.com/s/dD9ZVj0', color: 'text-green-600' },
-  { icon: <FaInstagram />, url: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-600' },
-  { icon: <FaFacebook />, url: 'https://www.facebook.com/InfanJiounRahmanJito.9', color: 'text-blue-700' },
-  { icon: <FaTelegram />, url: 'https://t.me/infanjioun', color: 'text-cyan-500' },
-  { icon: <FaSquareXTwitter />, url: 'https://twitter.com/RahmanJito', color: 'text-black' },
+  { icon: <FaGithub />, url: 'https://github.com/Infan-Jioun', color: 'hover:text-gray-800' },
+  { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'hover:text-blue-500' },
+  { icon: <IoIosMail />, url: 'mailto:infanjiounrahman20606@gmail.com', color: 'hover:text-red-500' },
+  { icon: <TbBrandFiverr />, url: 'https://www.fiverr.com/s/dD9ZVj0', color: 'hover:text-green-500' },
+  { icon: <FaInstagram />, url: 'https://www.instagram.com/infan_jioun_rahman/', color: 'hover:text-pink-500' },
+  { icon: <FaFacebook />, url: 'https://www.facebook.com/InfanJiounRahmanJito.9', color: 'hover:text-blue-600' },
+  { icon: <FaTelegram />, url: 'https://t.me/infanjioun', color: 'hover:text-cyan-500' },
+  { icon: <FaSquareXTwitter />, url: 'https://twitter.com/RahmanJito', color: 'hover:text-black' },
 ];
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-6 bg-[#5a1c5a81]  backdrop-blur text-white rounded-xl mt-16">
-      {/* Navigation Links */}
-      <motion.nav
+    <footer className="mt-20 text-white">
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="flex justify-center gap-10 mb-3 uppercase font-bold text-sm tracking-widest"
+        transition={{ duration: 0.5 }}
+        className="max-w-screen-xl mx-auto px-4 py-10 rounded-xl backdrop-blur-xl border-2 border-white bg-gradient-to-br from-white/5 to-white/10"
       >
-        {/* <a href="/" className="hover:text-purple-400 transition-colors duration-300">About</a> */}
-        <a href="/contact" className="hover:text-purple-400 transition-colors duration-300">Contact</a>
-      </motion.nav>
+        {/* Links */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Navigation */}
+          <div className="text-center md:text-left space-y-2">
+            <h3 className="text-lg font-semibold">Let’s Connect</h3>
+            <p className="text-sm text-gray-300">
+              Reach out through any platform below.
+            </p>
+          </div>
 
-      {/* Social Icons */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.3 }}
-        className="flex flex-wrap justify-center gap-4"
-      >
-        {socialLinks.map(({ icon, url, color }, i) => (
-          <motion.a
-            key={i}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.2, rotate: 5 }}
-            whileTap={{ scale: 0.95 }}
-            className={`text-sm p-2 rounded-full bg-white shadow transition duration-300 ${color}`}
-          >
-            {icon}
-          </motion.a>
-        ))}
+          {/* Social Icons */}
+          <div className="flex gap-4 flex-wrap justify-center">
+            {socialLinks.map(({ icon, url, color }, i) => (
+              <motion.a
+                key={i}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+                className={`text-xl p-3 bg-white text-black rounded-full shadow-md transition-all duration-300 ${color}`}
+              >
+                {icon}
+              </motion.a>
+            ))}
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-white/20 mt-6 mb-4" />
+
+        {/* Footer Bottom Text */}
+        <div className="text-center text-sm text-gray-400 font-mono">
+          © {new Date().getFullYear()} Infan Jioun Rahman — All Rights Reserved
+        </div>
       </motion.div>
-
-      {/* Footer Text */}
-      <motion.aside
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.1, duration: 0.1 }}
-        className="mt-4 text-sm font-mono tracking-wide opacity-90"
-      >
-        <p>© 2025 Infan Jioun Rahman | Portfolio</p>
-      </motion.aside>
     </footer>
   );
 };

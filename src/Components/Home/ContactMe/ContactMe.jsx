@@ -51,7 +51,7 @@ const ContactMe = () => {
          Contact Me
       </h2>
 
-      <form ref={form} onSubmit={sendEmail} className="bg-white p-8 rounded-lg shadow-md">
+      <form ref={form} onSubmit={sendEmail} className="bg-[#c2caf3] p-8 rounded-lg shadow-md">
         <div className="lg:flex gap-6">
           <div className="form-control md:w-1/2 mb-6 lg:mb-0">
             <Input
@@ -93,7 +93,7 @@ const ContactMe = () => {
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex justify-center items-center w-full md:w-auto px-8 py-3 bg-[#5a1c5a81] text-white font-bold italic rounded-md hover:bg-[#5a1c5a81] transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+            className="bg-transparent border-2 border-white backdrop-blur-xl  drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105"
           >
             {loading ? (
               <Skeleton width={140} height={28} baseColor="#444" highlightColor="#999" />
