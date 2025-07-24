@@ -51,6 +51,21 @@ const Banner = () => {
     },
   ];
 
+  const [showScroll, setShowScroll] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScroll(window.scrollY > 400);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="max-w-screen-xl mx-auto px-8 py-14">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-28 items-center" id="about">
@@ -129,7 +144,7 @@ const Banner = () => {
         <>
           <Card />
           <div id='myProjects'>
-          <MyProjects />
+            <MyProjects />
           </div>
         </>
       )}
@@ -187,11 +202,21 @@ const Banner = () => {
               <Input type="email" label="Email" name="user_email" placeholder="Your Email" required />
             </div>
             <Textarea name="message" label="Your Message" required />
-            <button type="submit" className="w-full btn  border-2 border-white backdrop-blur text-white p-3 rounded-full ">
+            <button title='Send Your Message' type="submit" className="w-full btn  border-2 border-white backdrop-blur text-white p-3 rounded-full ">
               Send Your Message
             </button>
           </form>
         </div>
+        {showScroll && (
+          <button
+            onClick={scrollToTop}
+            className="fixed bg-dark bottom-6 p-3 w-24  font-bold right-6 z-50 rounded-full bg-white text-purple-700 hover:text-white shadow-xl hover:bg-transparent hover:backdrop-blur-3xl  text-xl  transition-all duration-300 animate-bounce"
+            title="Back to top"
+          >
+            ↑
+          </button>
+        )}
+
       </div>
     </div>
   );

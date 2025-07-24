@@ -19,7 +19,7 @@ const Main = () => {
         <div className="">
           <Footer></Footer>
         </div>
-        <br />
+        
       </div>
 
     </div>
