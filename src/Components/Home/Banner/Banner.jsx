@@ -23,7 +23,7 @@ const Banner = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -100,7 +100,7 @@ const Banner = () => {
                 <a href="https://github.com/Infan-Jioun" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-gray-800"><FaGithub /></a>
                 <a href="https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-blue-600"><FaLinkedinIn /></a>
                 <a href="mailto:infanjiounrahman20606@gmail.com" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-red-600"><IoIosMail /></a>
-                <a href="https://www.fiverr.com/s/dD9ZVj0" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-green-600"><TbBrandFiverr /></a>
+             
                 <a href="https://www.instagram.com/infan_jioun_rahman/" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-pink-600"><FaInstagram /></a>
                 <a href="https://www.facebook.com/InfanJiounRahmanJito.9" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-blue-700"><FaFacebook /></a>
                 <a href="https://t.me/infanjioun" target="_blank" rel="noopener noreferrer" className="text-xl p-2 rounded-full bg-white hover:bg-purple-100 shadow hover:scale-110 transition duration-300 text-cyan-500"><FaTelegram /></a>
@@ -121,9 +121,9 @@ const Banner = () => {
                   HIRE ME
                 </button>
                 <Link
-                  to="https://drive.google.com/file/d/1d-9BZmvSCR0dITy2p1aUDEdrR-oQy1QF/view?usp=sharing"
+                  to="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer" title='Resume'
                   className="w-44 flex justify-center items-center bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105"
                 >
                   <MdDownloading className="text-xl mr-2" />
@@ -165,7 +165,7 @@ const Banner = () => {
               className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40"
             >
               <h3 className="text-lg font-semibold  flex items-center gap-2 mb-1">
-                <MdSchool className="text-[#5a1c5a81]" /> {edu.institute}
+                <MdSchool className="text-[#fff]" /> {edu.institute}
               </h3>
               <p className=" font-semibold">{edu.degree}</p>
               <p className="">{edu.field}</p>
@@ -175,13 +175,13 @@ const Banner = () => {
 
           <div className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-purple-800/40">
             <h3 className="text-lg font-semibold  flex items-center gap-2 mb-1">
-              <MdSchool className="text-[#5a1c5a81]" /> Programming Hero
+              <MdSchool className="text-[#fff]" /> Programming Hero
             </h3>
             <p className=" font-semibold">Additional Course</p>
             <p className="">Web Development</p>
             <p className="italic  mt-2">2023 (July - December)</p>
             <Link
-              to="https://drive.google.com/file/d/19KYaO4wQdPsMMO3ky-jzsL4XJqM6CfS1/view"
+              to="https://drive.google.com/file/d/1LRG-O9v8Xi0APntm4gbi6gR7BODlmqBu/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-transparent border-2 border-white mt-4 text-white py-2 px-4 rounded-full transition-transform duration-300 hover:scale-105"
@@ -202,7 +202,7 @@ const Banner = () => {
               <Input type="email" label="Email" name="user_email" placeholder="Your Email" required />
             </div>
             <Textarea name="message" label="Your Message" required />
-            <button title='Send Your Message' type="submit" className="w-full btn  border-2 border-white backdrop-blur text-white p-3 rounded-full ">
+            <button title='Send Your Message' type="submit" className="w-full btn  border-2 border-white backdrop-blur text-white p-3 bg-purple-700 hover:bg-purple-900 rounded-full ">
               Send Your Message
             </button>
           </form>

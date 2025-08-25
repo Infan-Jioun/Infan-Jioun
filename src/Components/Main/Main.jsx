@@ -8,7 +8,7 @@ const Main = () => {
   const [scrolled, setScrolled] = useState(false);
   return (
     <div>
-      <div className="   max-w-screen-xl mx-auto">
+      <div className=" max-w-screen-xl mx-auto">
         <br />
 
         <Navbar setScrolled={setScrolled} />
@@ -19,7 +19,7 @@ const Main = () => {
         <div className="">
           <Footer></Footer>
         </div>
-        
+
       </div>
 
     </div>

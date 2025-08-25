@@ -71,11 +71,11 @@ const Navbar = ({ setScrolled }) => {
                   {isOpen ? <AiOutlineClose /> : <HiOutlineMenu />}
                 </div>
               </MenuHandler>
-              <MenuList className="bg-transparent border-2 border-white backdrop-blur-xl ml-3 mt-3 text-black z-[1000]">
+              <MenuList className="bg-transparent  w-8/12 mx-auto border-2 border-white backdrop-blur-xl ml-3 mt-3 text-black z-[1000]">
                 {navItems.map(({ path, label }) => (
                   <MenuItem
                     key={path}
-                    className="hover:bg-transparent focus:bg-transparent active:bg-transparent border-2 border-white backdrop-blur-xl"
+                    className="hover:bg-transparent focus:bg-transparent active:bg-transparent  backdrop-blur-xl"
                   >
                     <button
                       onClick={() => {

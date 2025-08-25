@@ -17,7 +17,6 @@ const socialLinks = [
   { icon: <FaGithub />, url: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
   { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
   { icon: <IoIosMail />, url: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
-  { icon: <TbBrandFiverr />, url: 'https://www.fiverr.com/s/dD9ZVj0', color: 'text-green-600' },
   { icon: <FaInstagram />, url: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-600' },
   { icon: <FaFacebook />, url: 'https://www.facebook.com/InfanJiounRahmanJito.9', color: 'text-blue-700' },
   { icon: <FaTelegram />, url: 'https://t.me/infanjioun', color: 'text-cyan-500' },
@@ -37,11 +36,11 @@ const Footer = () => {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="max-w-screen-xl mx-auto text-center space-y-8"
       >
         {/* Header */}
-        <h2 className="text-2xl md:text-3xl font-extrabold tracking-wide uppercase">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-wide uppercase">
           Let's build something impactful together!
         </h2>
         <p className="max-w-xl mx-auto text-sm ">

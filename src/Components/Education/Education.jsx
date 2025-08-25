@@ -29,7 +29,7 @@ const Education = () => {
             className="group bg-gradient-to-br from-[#1b1b2f] via-[#2c2c54] to-[#1b1b2f] border border-purple-600/30 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-purple-600/50"
           >
             <h3 className="text-xl font-semibold text-white flex items-center gap-2 mb-2">
-              <MdSchool className="text-purple-400" />
+             
               {edu.institute}
             </h3>
             <p className="text-white/90 font-medium">{edu.degree}</p>
@@ -51,7 +51,7 @@ const Education = () => {
             to="https://drive.google.com/file/d/19KYaO4wQdPsMMO3ky-jzsL4XJqM6CfS1/view"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white px-5 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center gap-2 mt-4 bg-gradient-to-r from-purple-400 to-pink-500 text-white px-5 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
             <MdDownloading className="text-xl" />
             Certificate

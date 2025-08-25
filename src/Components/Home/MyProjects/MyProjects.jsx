@@ -106,10 +106,10 @@ const MyProjects = () => {
         {(loading ? Array.from({ length: 3 }) : projects).map((project, index) => (
           <motion.div
             key={index}
-            className="group relative flex flex-col lg:flex-row bg-[#ffffff08] border border-purple-500/30 backdrop-blur-md shadow-2xl rounded overflow-hidden transition transform hover:scale-[1.02] hover:shadow-purple-500/30 drop-shadow-lg"
+            className="group relative flex flex-col lg:flex-row bg-[#ffffff08] border border-purple-500/30 backdrop-blur-md shadow-2xl rounded overflow-hidden transition transform hover:scale-[1.00] hover:shadow-purple-500/30 drop-shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
           >
             {/* Image Section */}
@@ -126,7 +126,7 @@ const MyProjects = () => {
                   />
                 </Link>
               )}
-            </div>  
+            </div>
 
             {/* Content Section */}
             <div className="lg:w-1/2 p-6 flex flex-col justify-between ">
@@ -161,8 +161,8 @@ const MyProjects = () => {
                 ) : (
                   <>
                     <Link to={project.liveLink} target="_blank">
-                      <Button className="px-6 py-2 font-semibold rounded-lg transition bg-transparent border-2 border-white backdrop-blur-xl  hover:bg-transparent border-2 border-white backdrop-blur-xl shadow-lg">
-                        Preview 
+                      <Button className="px-6 py-2 font-semibold rounded-lg transition bg-transparent   hover:bg-transparent border-2 border-white backdrop-blur-xl shadow-lg">
+                        Preview
                       </Button>
                     </Link>
 

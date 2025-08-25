@@ -46,7 +46,7 @@ const Card = () => {
     <motion.div
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 0.3 }}
       viewport={{ once: true }}
       className="max-w-screen-xl mx-auto my-14 px-4 md:px-6"
     >
@@ -58,7 +58,7 @@ const Card = () => {
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={20}
         loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 1000, disableOnInteraction: false }}
         // pagination={{ clickable: true }}
         breakpoints={{
           320: { slidesPerView: 1 },
