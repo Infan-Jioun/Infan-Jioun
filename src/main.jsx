@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
  <HelmetProvider>
   <Theme  />
   
- <div className='font-Kanit'>
+ <div className='font-poppins bg-dark'>
   <SplashCursor/>
  <RouterProvider router={router} />
  <ToastContainer />

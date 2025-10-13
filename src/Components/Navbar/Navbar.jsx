@@ -5,6 +5,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
 import DarkMode from "../DarkMode/DarkMode";
+import { MdDownloading } from "react-icons/md";
 
 const Navbar = ({ setScrolled }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +16,7 @@ const Navbar = ({ setScrolled }) => {
     const handleScroll = () => {
       const scrollCheck = window.scrollY > 50;
       setIsScrolled(scrollCheck);
-      setScrolled(scrollCheck); // send to parent
+      setScrolled(scrollCheck);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -59,7 +60,7 @@ const Navbar = ({ setScrolled }) => {
   return (
     <div>
       <div
-        className={`navbar bg-transparent border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-8 md:px-20 text-white z-40 transition-all duration-300
+        className={`navbar bg-transparent border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-2 md:px-20 text-white z-40 transition-all duration-300
           ${isScrolled ? 'fixed top-0' : 'relative mt-3'}
         `}
       >
@@ -109,7 +110,16 @@ const Navbar = ({ setScrolled }) => {
               {navLinks}
             </ul>
           </div>
-          <DarkMode />
+          <Link
+            to="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            title='Resume'
+            className=" w-36 flex lg:hidden justify-center  items-center bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-2 rounded-full transform transition-transform duration-300 hover:scale-105 hover:bg-white/10"
+          >
+            <MdDownloading className="text-xl mr-2" />
+            RESUME
+          </Link>
         </div>
       </div>
     </div>

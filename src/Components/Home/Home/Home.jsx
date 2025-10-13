@@ -1,11 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../Banner/Banner";
-
-// import ContactMe from "../ContactMe/ContactMe";
-
-
-
-
 const Home = () => {
     return (
         <div className="  ">
