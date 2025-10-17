@@ -18,7 +18,7 @@ const socialLinks = [
   { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
   { icon: <IoIosMail />, url: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
   { icon: <FaInstagram />, url: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-600' },
-  { icon: <FaFacebook />, url: 'https://www.facebook.com/InfanJiounRahmanJito.9', color: 'text-blue-700' },
+  { icon: <FaFacebook />, url: 'https://www.facebook.com/profile.php?id=61572744838042', color: 'text-blue-700' },
   { icon: <FaTelegram />, url: 'https://t.me/infanjioun', color: 'text-cyan-500' },
   { icon: <FaSquareXTwitter />, url: 'https://twitter.com/RahmanJito', color: 'text-black' },
 ];
