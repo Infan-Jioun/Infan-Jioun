@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import { Toaster } from 'react-hot-toast';
 import SplashCursor from './Components/SplashCursor/SplashCursor.jsx';
 import { Theme } from '@radix-ui/themes';
+import { Analytics } from "@vercel/analytics/react"
 // import "@radix-ui/themes/styles.css";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
  <RouterProvider router={router} />
  <ToastContainer />
  <Toaster />
+ <Analytics/>
  </div>
  </HelmetProvider>
 </React.StrictMode>
