@@ -9,14 +9,18 @@ export const PROJECTS_DATA = [
         imageUrl: "https://i.ibb.co.com/WWDcGs38/screenshot-1760378582857.png",
         additionalImages: [
             "https://i.ibb.co.com/WWDcGs38/screenshot-1760378582857.png",
-            "https://i.ibb.co.com/WWDcGs38/screenshot-1760378582857.png",
+            "https://i.ibb.co.com/qYXvHYZZ/screenshot-1760722489859.png",
+            "https://i.ibb.co.com/V0QZqDGY/screenshot-1760722417104.png",
+            "https://i.ibb.co.com/Gfs84nck/screenshot-1760722349973.png",
+            "https://i.ibb.co.com/fGFQpb9R/screenshot-1760722292392.png"
+
         ],
         techStack: [
             { name: "TypeScript", icon: "https://i.ibb.co.com/HL0sSj4C/typescript.webp" },
             { name: "Next.js", icon: "https://i.ibb.co.com/xtCck3wG/nextJs.webp" },
             { name: "Tailwind CSS", icon: "https://i.ibb.co.com/jJzXpx5/tailwind.webp" },
             { name: "Shadcn UI", icon: "https://i.ibb.co.com/0R3TKXmx/shadcn.webp" },
-            { name: "Firebase", icon: "https://i.ibb.co.com/k2mbXZD0/images.jpg" },
+            { name: "Redux", icon: "https://i.ibb.co.com/k2mbXZD0/images.jpg" },
             { name: "MongoDB", icon: "https://i.ibb.co.com/hJhwkTcL/mongoDB.webp" },
         ],
         features: [
@@ -72,7 +76,7 @@ export const PROJECTS_DATA = [
             { name: "React", icon: "https://i.ibb.co.com/gRXXrDs/react.webp" },
             { name: "Tailwind CSS", icon: "https://i.ibb.co.com/jJzXpx5/tailwind.webp" },
             { name: "DaisyUI", icon: "https://i.ibb.co.com/6s0HLvL/DaisyUI.webp" },
-            { name: "Firebase", icon: "https://i.ibb.co.com/k2mbXZD0/images.jpg" },
+            { name: "Redux", icon: "https://i.ibb.co.com/k2mbXZD0/images.jpg" },
             { name: "Node.js", icon: "https://i.ibb.co.com/jVnm9XT/nodeJS.webp" },
             { name: "Express.js", icon: "https://i.ibb.co.com/ZYWHXHn/express-Js.webp" },
         ],
