@@ -79,7 +79,7 @@ const Navbar = ({ setScrolled }: NavbarProps) => {
         <div>
             <div
                 className={cn(
-                    "navbar bg-black border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-2 md:px-20 text-white z-40 transition-all duration-300",
+                    "navbar bg-transparent border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-2 md:px-20 text-white z-40 transition-all duration-300",
                     isScrolled ? 'fixed top-0' : 'relative mt-3'
                 )}
             >

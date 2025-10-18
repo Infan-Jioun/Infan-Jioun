@@ -34,13 +34,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-poppins bg-dark`}
       >
 
-
-        <SplashCursor />
-        <NavbarPage />
-        {children}
-        <Toaster />
-
-
+        <div className="bg-dark">
+          <SplashCursor />
+          <NavbarPage />
+          <Toaster />
+          {children}
+        </div>
       </body>
     </html>
   );
