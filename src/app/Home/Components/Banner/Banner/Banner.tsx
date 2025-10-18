@@ -3,14 +3,14 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { Card as UICard, CardContent } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import HeroSection from '../Components/HeroSection';
-import Skeleton from '../Components/Skeleton';
 import Card from '../Components/Card';
 import MyProjects from '../Components/MyProjects';
+import Skills from '../Components/Skills';
 import EducationSection from '../Components/EducationSection';
 import ContactSection from '../Components/ContactSection';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
-import Skills from '../Components/Skills';
 
 const Banner = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -31,7 +31,6 @@ const Banner = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Event handlers
   const scrollToForm = useCallback(() => {
     formRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
@@ -63,7 +62,7 @@ const Banner = () => {
         </div>
       ) : (
         <>
-          <Card />
+          <Card/>
           <div id='myProjects' className="mt-16">
             <MyProjects />
           </div>

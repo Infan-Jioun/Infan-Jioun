@@ -18,7 +18,7 @@ const ProfileImage = ({ loading }: ProfileImageProps) => {
     return (
         <div className="rounded-full border-4 border-violet-700 drop-shadow-lg shadow-xl transition-transform duration-300 hover:scale-105 overflow-hidden">
             <Image
-                src={"https://i.ibb.co.com/TDytG77f/Github-Image.png"}
+                src={"https://i.ibb.co/TDytG77f/Github-Image.png"}
                 alt="Infan Jioun Rahman"
                 width={320}
                 height={320}
