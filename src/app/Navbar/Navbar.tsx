@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Typewriter from 'typewriter-effect';
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineMenu } from "react-icons/hi";
 import { useEffect, useState } from "react";
@@ -15,6 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import TextType from '@/components/TextType';
+
 
 interface NavbarProps {
     setScrolled: (scrolled: boolean) => void;
@@ -78,7 +79,7 @@ const Navbar = ({ setScrolled }: NavbarProps) => {
         <div>
             <div
                 className={cn(
-                    "navbar bg-transparent border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-2 md:px-20 text-white z-40 transition-all duration-300",
+                    "navbar bg-black border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-2 md:px-20 text-white z-40 transition-all duration-300",
                     isScrolled ? 'fixed top-0' : 'relative mt-3'
                 )}
             >
@@ -116,13 +117,13 @@ const Navbar = ({ setScrolled }: NavbarProps) => {
                         </DropdownMenu>
                     </div>
 
-                    <Link href="/" className="font-bold text-xl flex drop-shadow-2xl select-none">
-                        <Typewriter
-                            options={{
-                                strings: ["INFAN"],
-                                autoStart: true,
-                                loop: true,
-                            }}
+                    <Link href="/" className="font-bold text-xl flex drop-shadow-2xl select-none min-h-[30px] items-center">
+                        <TextType
+                            text={["INFAN"]}
+                            typingSpeed={75}
+                            pauseDuration={1500}
+                            showCursor={true}
+                            cursorCharacter="|"
                         />
                     </Link>
                 </div>

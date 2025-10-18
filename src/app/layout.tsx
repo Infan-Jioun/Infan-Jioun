@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Toaster } from 'react-hot-toast';
 import SplashCursor from './Components/SplashCursor/SplashCursor';
+import NavbarPage from "./NavbarPage/page";
 
 
 
@@ -35,6 +36,7 @@ export default function RootLayout({
 
 
         <SplashCursor />
+        <NavbarPage />
         {children}
         <Toaster />
 
