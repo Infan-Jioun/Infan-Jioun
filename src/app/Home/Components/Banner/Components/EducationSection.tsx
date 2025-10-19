@@ -45,7 +45,7 @@ const EducationSection = ({ loading }: EducationSectionProps) => {
                 {education.map((edu, index) => (
                     <div
                         key={index}
-                        className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-purple-800/40"
+                        className="relative bg-gray-900/40 backdrop-blur  border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-purple-800/40"
                     >
                         <h3 className="text-lg font-semibold flex items-center gap-2 mb-1">
                             <MdSchool className="text-white" /> {edu.institute}
@@ -56,7 +56,7 @@ const EducationSection = ({ loading }: EducationSectionProps) => {
                     </div>
                 ))}
 
-                <div className="relative bg-white/5 backdrop-blur-sm border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-purple-800/40">
+                <div className="relative bg-gray-900/40 backdrop-blur   border border-[#5a1c5a81] p-6 rounded-xl shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-purple-800/40">
                     <h3 className="text-lg font-semibold flex items-center gap-2 mb-1">
                         <MdSchool className="text-white" /> Programming Hero
                     </h3>
