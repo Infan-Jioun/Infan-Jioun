@@ -5,6 +5,7 @@ import "./globals.css";
 import { Toaster } from 'react-hot-toast';
 import SplashCursor from './Components/SplashCursor/SplashCursor';
 import NavbarPage from "./NavbarPage/page";
+import Footer from "./Components/Footer/Footer";
 
 
 
@@ -39,6 +40,7 @@ export default function RootLayout({
           <NavbarPage />
           <Toaster />
           {children}
+          <Footer/>
         </div>
       </body>
     </html>

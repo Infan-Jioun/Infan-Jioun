@@ -2,9 +2,8 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -48,9 +47,33 @@ const Card = () => {
     const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>(
         cards.reduce((acc, _, index) => ({ ...acc, [index]: false }), {})
     );
+    const [isInView, setIsInView] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const [scaleTitle, setScaleTitle] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const handleImageLoad = useCallback((index: number) => {
         setLoadedImages(prev => ({ ...prev, [index]: true }));
+    }, []);
+
+    // Intersection Observer for entrance animation
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsInView(true);
+                    setTimeout(() => setIsVisible(true), 100);
+                    setTimeout(() => setScaleTitle(true), 300);
+                }
+            },
+            { threshold: 0.1, rootMargin: '-50px' }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
     }, []);
 
     const breakpoints = useMemo(() => ({
@@ -62,15 +85,18 @@ const Card = () => {
     }), []);
 
     const CardItem = useCallback(({ card, index }: { card: CardItem; index: number }) => (
-        <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/10 backdrop-blur-2xl border border-white/30 shadow-xl transition-all duration-300 hover:shadow-purple-500/20"
+        <div
+            className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/10 backdrop-blur-2xl border border-white/30 shadow-xl transition-all duration-300 hover:shadow-purple-500/20 hover:scale-105 active:scale-95 cursor-pointer"
+            style={{
+                transform: isInView ? 'scale(1)' : 'scale(0.9)',
+                opacity: isInView ? 1 : 0,
+                transition: `all 0.3s ease ${index * 100}ms`
+            }}
         >
             <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
                 {!loadedImages[index] && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-gray-700/50 via-gray-600/50 to-gray-700/50 backdrop-blur-sm rounded-lg animate-pulse">
-                        <div className="h-full w-full bg-gray-600/30 rounded-lg" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-700/50 via-gray-600/50 to-gray-700/50 backdrop-blur-sm rounded-lg">
+                        <div className="h-full w-full bg-gray-600/30 rounded-lg animate-pulse" />
                     </div>
                 )}
                 <Image
@@ -80,33 +106,26 @@ const Card = () => {
                     height={160}
                     loading="lazy"
                     onLoad={() => handleImageLoad(index)}
-                    className={`rounded-lg w-full h-40 object-cover transition-all duration-500 ${loadedImages[index]
-                            ? 'opacity-100 scale-100'
-                            : 'opacity-0 scale-95'
+                    className={`rounded-lg w-full h-40 object-cover transition-all duration-500 ${loadedImages[index] ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                         }`}
                     style={{
                         filter: 'drop-shadow(0 0 8px rgba(147, 112, 219, 0.8))',
                     }}
                 />
             </div>
-            <h3 className="text-xl font-semibold text-center text-white mb-3 line-clamp-1 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h3 className="text-xl font-semibold text-center text-white mb-3 line-clamp-1 bg-gradient-to-r from-white to-gray-300 bg-clip-text ">
                 {card.title}
             </h3>
             <p className="text-sm text-center text-white/90 leading-relaxed line-clamp-4">
                 {card.description}
             </p>
-        </motion.div>
-    ), [loadedImages, handleImageLoad]);
+        </div>
+    ), [loadedImages, handleImageLoad, isInView]);
 
     const skeletonCards = useMemo(() =>
         Array.from({ length: 5 }, (_, index) => (
             <SwiperSlide key={`skeleton-${index}`} className="flex justify-center pb-10">
-                <motion.div
-                    initial={{ opacity: 0.5 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-                    className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/5 backdrop-blur-2xl border border-white/20 shadow-xl"
-                >
+                <div className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/5 backdrop-blur-2xl border border-white/20 shadow-xl">
                     {/* Image Skeleton with Glass Effect */}
                     <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-r from-gray-700/40 via-gray-600/40 to-gray-700/40 backdrop-blur-md rounded-lg">
@@ -116,52 +135,52 @@ const Card = () => {
 
                     {/* Title Skeleton */}
                     <div className="flex justify-center mb-3">
-                        <div className="h-6 w-4/5 bg-gradient-to-r from-gray-600/50 to-gray-700/50 rounded-full backdrop-blur-sm animate-pulse" />
+                        <div className="h-6 w-4/5 bg-gradient-to-r from-gray-600/50 to-gray-700/50 rounded-full animate-pulse" />
                     </div>
 
                     {/* Description Skeletons */}
                     <div className="space-y-2">
-                        <div className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full backdrop-blur-sm animate-pulse" />
-                        <div className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full backdrop-blur-sm animate-pulse" />
-                        <div className="h-4 w-2/3 bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full backdrop-blur-sm animate-pulse" />
+                        <div className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full animate-pulse" />
+                        <div className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full animate-pulse" />
+                        <div className="h-4 w-2/3 bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full animate-pulse" />
                     </div>
-                </motion.div>
+                </div>
             </SwiperSlide>
         ))
         , []);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            viewport={{ once: true, margin: "-50px" }}
+        <div
+            ref={containerRef}
             className="max-w-screen-xl mx-auto my-14 px-4 md:px-6"
+            style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(60px)',
+                transition: 'all 0.3s ease'
+            }}
         >
-            <motion.h2
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="text-3xl md:text-4xl font-bold text-center mb-10 uppercase text-white drop-shadow-md bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent"
+            <h2
+                className="text-3xl md:text-4xl font-bold text-center mb-10 uppercase text-white drop-shadow-md bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text "
+                style={{
+                    transform: scaleTitle ? 'scale(1)' : 'scale(0.9)',
+                    opacity: scaleTitle ? 1 : 0,
+                    transition: 'all 0.5s ease'
+                }}
             >
                 Technologies I Work With
-            </motion.h2>
+            </h2>
 
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 spaceBetween={20}
                 loop={true}
                 autoplay={{
-                    delay: 2000,
+                    delay: 1000,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true
                 }}
-                navigation={true}
-                pagination={{
-                    clickable: true,
-                    dynamicBullets: true
-                }}
-                speed={800}
+
+                speed={300}
                 breakpoints={breakpoints}
                 className="pb-12"
             >
@@ -171,7 +190,7 @@ const Card = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </motion.div>
+        </div>
     );
 };
 
