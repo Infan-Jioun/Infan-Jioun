@@ -83,7 +83,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                 <Button
                     onClick={onScrollToForm}
                     variant="outline"
-                    className="w-36 bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105 hover:bg-white/10 h-12"
+                    className="w-36 lg:w-80 hover:text-white bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105 hover:bg-white/10 h-12"
                 >
                     HIRE ME
                 </Button>
@@ -92,7 +92,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title='Resume'
-                    className="w-44 lg:flex hidden justify-center items-center bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105 hover:bg-white/10 border-solid h-12"
+                    className="w-44 hidden justify-center items-center bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-3 rounded-full transform transition-transform duration-300 hover:scale-105 hover:bg-white/10 border-solid h-12"
                 >
                     <MdDownloading className="text-xl mr-2" />
                     RESUME
@@ -101,7 +101,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
         );
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-28 items-center" id="about">
+        <div className="px-0 lg:px-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-32 items-center" id="about">
             <div className="flex justify-center md:order-2 drop-shadow-lg">
                 <ProfileImage loading={loading} />
             </div>

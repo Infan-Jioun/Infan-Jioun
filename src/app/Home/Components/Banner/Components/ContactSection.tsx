@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import emailjs from "@emailjs/browser";
-import { toast } from "react-toastify";
 import Skeleton from "react-loading-skeleton";
+import toast from "react-hot-toast";
 
 const ContactSection = ({ formRef, loading }: { formRef: any; loading: boolean }) => {
     const form = useRef<HTMLFormElement>(null);
@@ -25,7 +25,7 @@ const ContactSection = ({ formRef, loading }: { formRef: any; loading: boolean }
                 form.current?.reset();
             })
             .catch(() => {
-                toast.error("Please try again", { position: "top-center", autoClose: 2000 });
+                toast.error("Please try again", { position: "top-center" });
             });
     }, []);
 

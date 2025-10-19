@@ -1,41 +1,37 @@
 'use client';
 
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AiOutlineClose } from "react-icons/ai";
-import { HiOutlineMenu } from "react-icons/hi";
-import { useEffect, useState } from "react";
-import { MdDownloading } from "react-icons/md";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { AiOutlineClose } from 'react-icons/ai';
+import { HiOutlineMenu } from 'react-icons/hi';
+import { MdDownloading } from 'react-icons/md';
 import TextType from '@/components/TextType';
 
-
 interface NavbarProps {
-    setScrolled: (scrolled: boolean) => void;
+    setScrolled: (value: boolean) => void;
 }
 
-const Navbar = ({ setScrolled }: NavbarProps) => {
-    const [isScrolled, setIsScrolled] = useState(false);
+const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
+    const [isScrolled, setIsScrolledState] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     const pathname = usePathname();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollCheck = window.scrollY > 50;
-            setIsScrolled(scrollCheck);
-            setScrolled(scrollCheck);
-        };
+    const handleScroll = useCallback(() => {
+        const scrollCheck = window.scrollY > 50;
+        setIsScrolledState(scrollCheck);
+        setScrolled(scrollCheck);
+    }, [setScrolled]);
 
+    useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [setScrolled]);
+    }, [handleScroll]);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
         setIsOpen(false);
@@ -47,106 +43,84 @@ const Navbar = ({ setScrolled }: NavbarProps) => {
     const scrollToSection = (id: string) => {
         const section = document.getElementById(id);
         if (section) {
-            section.scrollIntoView({ behavior: "smooth" });
+            section.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
     const navItems = [
-        { path: "about", label: "ABOUT" },
-        { path: "myProjects", label: "MY PROJECTS" },
-        { path: "skills", label: "MY SKILLS" },
-        { path: "education", label: "EDUCATION" },
-        { path: "contact", label: "CONTACT US" },
+        { path: 'about', label: 'ABOUT' },
+        { path: 'myProjects', label: 'MY PROJECTS' },
+        { path: 'skills', label: 'MY SKILLS' },
+        { path: 'education', label: 'EDUCATION' },
+        { path: 'contact', label: 'CONTACT US' },
     ];
 
-    const navLinks = navItems.map(({ path, label }) => (
-        <Button
-            key={path}
-            variant="ghost"
-            onClick={() => {
-                scrollToSection(path);
-                closeDropdown();
-            }}
-            className="font-bold text-white relative inline-block transition-colors duration-300 p-0 h-auto hover:bg-transparent"
-        >
-            <span className="relative before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded">
-                {label}
-            </span>
-        </Button>
-    ));
-
     return (
-        <div>
-            <div
-                className={cn(
-                    "navbar bg-transparent border-2 border-white backdrop-blur-xl max-w-screen-xl rounded-3xl drop-shadow-xl w-full mx-auto px-2 md:px-20 text-white z-40 transition-all duration-300",
-                    isScrolled ? 'fixed top-0' : 'relative mt-3'
-                )}
-            >
-                <div className="navbar-start flex items-center gap-4">
-                    <div className="dropdown md:hidden block">
-                        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-                            <DropdownMenuTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    className="btn btn-ghost btn-circle text-xl text-white cursor-pointer hover:bg-transparent p-2 h-auto"
-                                    onClick={toggleDropdown}
-                                >
-                                    {isOpen ? <AiOutlineClose /> : <HiOutlineMenu />}
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent
-                                className="bg-transparent w-48 border-2 border-white backdrop-blur-xl ml-3 mt-3 text-white z-[1000]"
-                                align="start"
-                            >
+        <nav
+            className={`navbar bg-transparent border-2 border-white backdrop-blur-xl rounded-3xl drop-shadow-xl text-white z-40 transition-all duration-300
+                ${isScrolled ? 'fixed top-3 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-screen-xl' : 'relative mt-3 w-full max-w-screen-xl mx-auto'}
+            `}
+        >
+            <div className="flex justify-between items-center py-3 px-4 md:px-20">
+
+                <div className="flex items-center gap-4">
+                    <div className="block md:hidden">
+                        <button
+                            onClick={toggleDropdown}
+                            className="text-2xl text-white cursor-pointer"
+                            aria-label="Toggle menu"
+                        >
+                            {isOpen ? <AiOutlineClose /> : <HiOutlineMenu />}
+                        </button>
+
+                        {isOpen && (
+                            <div className="absolute bg-black/60 border-2 border-white backdrop-blur-xl w-8/12 rounded-xl left-4 mt-3 p-4 space-y-3 z-50">
                                 {navItems.map(({ path, label }) => (
-                                    <DropdownMenuItem
+                                    <button
                                         key={path}
-                                        className="hover:bg-transparent focus:bg-transparent cursor-pointer p-3"
                                         onClick={() => {
                                             scrollToSection(path);
                                             closeDropdown();
                                         }}
+                                        className="block w-full text-left font-bold text-white hover:text-purple-300 transition-all duration-200"
                                     >
-                                        <span className="font-bold text-white relative inline-block transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 before:transition-transform before:duration-300 hover:before:scale-100 rounded">
-                                            {label}
-                                        </span>
-                                    </DropdownMenuItem>
+                                        {label}
+                                    </button>
                                 ))}
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                            </div>
+                        )}
+
                     </div>
 
-                    <Link href="/" className="font-bold text-xl flex drop-shadow-2xl select-none min-h-[30px] items-center">
-                        <TextType
-                            text={["INFAN"]}
-                            typingSpeed={75}
-                            pauseDuration={1500}
-                            showCursor={true}
-                            cursorCharacter="|"
-                        />
-                    </Link>
+                    <ul className="hidden md:flex gap-6 font-bold">
+                        {navItems.map(({ path, label }) => (
+                            <li key={path}>
+                                <button
+                                    onClick={() => scrollToSection(path)}
+                                    className="relative transition-colors duration-300 before:content-[''] before:absolute before:bottom-[-2px] before:left-0 before:w-full before:h-[2px] before:bg-white before:scale-0 hover:before:scale-100 before:transition-transform before:duration-300"
+                                >
+                                    {label}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+
                 </div>
 
-                <div className="flex-none navbar-end flex items-center gap-4">
-                    <div className="navbar-center hidden lg:flex">
-                        <div className="flex items-center gap-5 font-bold">
-                            {navLinks}
-                        </div>
-                    </div>
-                    <Link
-                        href="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title='Resume'
-                        className="w-36 flex lg:hidden justify-center items-center bg-transparent border-2 border-white backdrop-blur drop-shadow-2xl text-white p-2 rounded-full transform transition-transform duration-300 hover:scale-105 hover:bg-white/10"
-                    >
-                        <MdDownloading className="text-xl mr-2" />
-                        RESUME
-                    </Link>
-                </div>
+                {/* Desktop Navigation */}
+
+                {/* Resume Button */}
+                <Link
+                    href="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 border-2 border-white rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 hover:bg-white/10 hover:scale-105"
+                >
+                    <MdDownloading className="text-lg" />
+                    RESUME
+                </Link>
             </div>
-        </div>
+        </nav>
     );
 };
 

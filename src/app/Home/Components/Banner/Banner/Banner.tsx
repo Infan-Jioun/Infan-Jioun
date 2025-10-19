@@ -47,27 +47,13 @@ const Banner = () => {
         onScrollToForm={scrollToForm}
       />
 
-      {loading ? (
-        <div className="mt-12 space-y-8">
-          <UICard className="w-full h-48 bg-gray-800 border-none">
-            <CardContent className="p-0">
-              <Skeleton className="h-full w-full bg-gray-700" />
-            </CardContent>
-          </UICard>
-          <UICard className="w-full h-48 bg-gray-800 border-none">
-            <CardContent className="p-0">
-              <Skeleton className="h-full w-full bg-gray-700" />
-            </CardContent>
-          </UICard>
-        </div>
-      ) : (
-        <>
-          <Card/>
-          <div id='myProjects' className="mt-16">
-            <MyProjects />
-          </div>
-        </>
-      )}
+
+      <Card />
+      <div id='myProjects' className="mt-16">
+        <MyProjects />
+      </div>
+
+
 
       <div id="skills" className="mt-16">
         <Skills />

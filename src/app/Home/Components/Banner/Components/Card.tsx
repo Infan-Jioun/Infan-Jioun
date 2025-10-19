@@ -50,6 +50,7 @@ const Card = () => {
     const [isInView, setIsInView] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [scaleTitle, setScaleTitle] = useState(false);
+    const [showSkeleton, setShowSkeleton] = useState(true);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const handleImageLoad = useCallback((index: number) => {
@@ -64,6 +65,8 @@ const Card = () => {
                     setIsInView(true);
                     setTimeout(() => setIsVisible(true), 100);
                     setTimeout(() => setScaleTitle(true), 300);
+                    // Hide skeleton after content loads
+                    setTimeout(() => setShowSkeleton(false), 1000);
                 }
             },
             { threshold: 0.1, rootMargin: '-50px' }
@@ -86,7 +89,7 @@ const Card = () => {
 
     const CardItem = useCallback(({ card, index }: { card: CardItem; index: number }) => (
         <div
-            className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/10 backdrop-blur-2xl border border-white/30 shadow-xl transition-all duration-300 hover:shadow-purple-500/20 hover:scale-105 active:scale-95 cursor-pointer"
+            className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/10 backdrop-blur-2xl border border-white/30 shadow-xl transition-all duration-300 hover:shadow-purple-500/20 hover:scale-105 active:scale-95 cursor-pointer group"
             style={{
                 transform: isInView ? 'scale(1)' : 'scale(0.9)',
                 opacity: isInView ? 1 : 0,
@@ -95,9 +98,7 @@ const Card = () => {
         >
             <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
                 {!loadedImages[index] && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-gray-700/50 via-gray-600/50 to-gray-700/50 backdrop-blur-sm rounded-lg">
-                        <div className="h-full w-full bg-gray-600/30 rounded-lg animate-pulse" />
-                    </div>
+                    <Skeleton className="absolute inset-0 w-full h-full bg-gradient-to-r from-gray-700/50 via-gray-600/50 to-gray-700/50 rounded-lg" />
                 )}
                 <Image
                     src={card.image}
@@ -106,7 +107,9 @@ const Card = () => {
                     height={160}
                     loading="lazy"
                     onLoad={() => handleImageLoad(index)}
-                    className={`rounded-lg w-full h-40 object-cover transition-all duration-500 ${loadedImages[index] ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    className={`rounded-lg w-full h-40 object-cover transition-all duration-500 ${loadedImages[index]
+                            ? 'opacity-100 scale-100 group-hover:scale-110'
+                            : 'opacity-0 scale-95'
                         }`}
                     style={{
                         filter: 'drop-shadow(0 0 8px rgba(147, 112, 219, 0.8))',
@@ -122,32 +125,30 @@ const Card = () => {
         </div>
     ), [loadedImages, handleImageLoad, isInView]);
 
+    // Shadcn Skeleton Loader
     const skeletonCards = useMemo(() =>
         Array.from({ length: 5 }, (_, index) => (
             <SwiperSlide key={`skeleton-${index}`} className="flex justify-center pb-10">
                 <div className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/5 backdrop-blur-2xl border border-white/20 shadow-xl">
-                    {/* Image Skeleton with Glass Effect */}
+                    {/* Image Skeleton */}
                     <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-gray-700/40 via-gray-600/40 to-gray-700/40 backdrop-blur-md rounded-lg">
-                            <div className="h-full w-full bg-gray-500/20 rounded-lg animate-pulse" />
-                        </div>
+                        <Skeleton className="w-full h-full bg-gradient-to-r from-gray-700/40 via-gray-600/40 to-gray-700/40 rounded-lg" />
                     </div>
 
                     {/* Title Skeleton */}
                     <div className="flex justify-center mb-3">
-                        <div className="h-6 w-4/5 bg-gradient-to-r from-gray-600/50 to-gray-700/50 rounded-full animate-pulse" />
+                        <Skeleton className="h-6 w-4/5 bg-gradient-to-r from-gray-600/50 to-gray-700/50 rounded-full" />
                     </div>
 
                     {/* Description Skeletons */}
                     <div className="space-y-2">
-                        <div className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full animate-pulse" />
-                        <div className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full animate-pulse" />
-                        <div className="h-4 w-2/3 bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full animate-pulse" />
+                        <Skeleton className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full" />
+                        <Skeleton className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full" />
+                        <Skeleton className="h-4 w-2/3 bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full" />
                     </div>
                 </div>
             </SwiperSlide>
-        ))
-        , []);
+        )), []);
 
     return (
         <div
@@ -175,20 +176,23 @@ const Card = () => {
                 spaceBetween={20}
                 loop={true}
                 autoplay={{
-                    delay: 1000,
+                    delay: 3000,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true
                 }}
-
-                speed={300}
+                speed={800}
                 breakpoints={breakpoints}
                 className="pb-12"
             >
-                {cards.map((card, index) => (
-                    <SwiperSlide key={index} className="flex justify-center pb-10">
-                        <CardItem card={card} index={index} />
-                    </SwiperSlide>
-                ))}
+                {showSkeleton ? (
+                    skeletonCards
+                ) : (
+                    cards.map((card, index) => (
+                        <SwiperSlide key={index} className="flex justify-center pb-10">
+                            <CardItem card={card} index={index} />
+                        </SwiperSlide>
+                    ))
+                )}
             </Swiper>
         </div>
     );

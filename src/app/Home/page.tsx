@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default function Home() {
     return (
         <div className="">
+            
             <Banner/>
         </div>
     );
