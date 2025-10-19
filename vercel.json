@@ -2,10 +2,9 @@
     "version": 2,
     "builds": [
         {
-            "src": "src/app/page.tsx",
+            "src": "package.json",
             "use": "@vercel/next"
         }
     ],
-    "framework": "nextjs",
-    "outputDirectory": ".next"
+    "framework": "nextjs"
 }
