@@ -54,7 +54,7 @@ const MyProjects = () => {
 
     const hasMoreProjects = visibleProjects < projects.length;
 
-    // Skeleton Loader Component
+    
     const ProjectSkeleton = useCallback(({ index }: { index: number }) => (
         <div
             className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl p-6 shadow-2xl transition-all duration-500 hover:shadow-purple-500/20"
