@@ -7,10 +7,10 @@ export const metadata: Metadata = {
     description: "Infan Jioun Rahman's Developer Portfolio",
 };
 
-export default function Home() {
+export default function HomePage() {
     return (
         <div className="">
-            
+
             <Banner/>
         </div>
     );
