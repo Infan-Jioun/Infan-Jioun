@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
     return (
         <nav
             className={`navbar bg-transparent border-2 border-white backdrop-blur-xl rounded-3xl drop-shadow-xl text-white z-40 transition-all duration-300
-                ${isScrolled ? 'fixed top-3 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-screen-xl' : 'relative mt-3 w-full max-w-screen-xl mx-auto'}
+                ${isScrolled ? 'fixed top-1 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-screen-xl' : 'relative mt-3 w-full max-w-screen-xl mx-auto'}
             `}
         >
             <div className="flex justify-between items-center py-3 px-4 md:px-20">

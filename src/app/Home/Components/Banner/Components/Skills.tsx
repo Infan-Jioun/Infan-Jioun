@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import React, { useMemo } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import Image from "next/image";
+
 interface Skill {
     name: string;
     icon: string;
@@ -15,44 +18,37 @@ interface SkillCategory {
 
 const SKILLS_DATA: SkillCategory[] = [
     {
-        title: "Frontend",
+        title: "Frontend Development",
         skills: [
-            { name: "HTML 5", icon: "https://i.ibb.co.com/2tqj250/html.webp" },
-            { name: "CSS", icon: "https://i.ibb.co.com/FKdDmVy/css.webp" },
-            { name: "JAVASCRIPT", icon: "https://i.ibb.co.com/zRpT9jC/javascript.webp" },
-            { name: "TYPESCRIPT", icon: "https://i.ibb.co.com/HL0sSj4C/typescript.webp" },
-            { name: "REACT JS", icon: "https://i.ibb.co.com/gRXXrDs/react.webp" },
-            { name: "NEXT JS", icon: "https://i.ibb.co.com/xtCck3wG/nextJs.webp" },
-            { name: "TAILWIND CSS", icon: "https://i.ibb.co.com/jJzXpx5/tailwind.webp" },
-            { name: "SHADCN", icon: "https://i.ibb.co.com/0R3TKXmx/shadcn.webp" },
-            { name: "REDUX TOOLKIT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
-            { name: "DAISYUI", icon: "https://i.ibb.co.com/6s0HLvL/DaisyUI.webp" },
-            { name: "FRAMER MOTION", icon: "https://cdn.worldvectorlogo.com/logos/framer-motion.svg" },
-            { name: "TANSTACK", icon: "https://i.ibb.co/pvXrXCPX/splash-light-CHq-Msyq8.png" },
-            { name: "AXIOS", icon: "https://axios-http.com/assets/logo.svg" },
-            { name: "REACT HOOK FORM", icon: "https://react-hook-form.com/images/logo/react-hook-form-logo-only.png" },
+            { name: "HTML 5", icon: "https://i.ibb.co/2tqj250/html.webp" },
+            { name: "CSS", icon: "https://i.ibb.co/FKdDmVy/css.webp" },
+            { name: "JavaScript", icon: "https://i.ibb.co/zRpT9jC/javascript.webp" },
+            { name: "TypeScript", icon: "https://i.ibb.co/HL0sSj4C/typescript.webp" },
+            { name: "React JS", icon: "https://i.ibb.co/gRXXrDs/react.webp" },
+            { name: "Next JS", icon: "https://i.ibb.co/xtCck3wG/nextJs.webp" },
+            { name: "Tailwind CSS", icon: "https://i.ibb.co/jJzXpx5/tailwind.webp" },
+            { name: "Shadcn/ui", icon: "https://i.ibb.co/0R3TKXmx/shadcn.webp" },
+            { name: "Redux Toolkit", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
+            { name: "Framer Motion", icon: "https://cdn.worldvectorlogo.com/logos/framer-motion.svg" },
         ],
     },
     {
-        title: "Backend",
+        title: "Backend & Database",
         skills: [
-            { name: "NODE.JS", icon: "https://i.ibb.co.com/jVnm9XT/nodeJS.webp" },
-            { name: "EXPRESS.JS", icon: "https://i.ibb.co.com/ZYWHXHn/express-Js.webp" },
-            { name: "NEXT JS (SSR)", icon: "https://i.ibb.co.com/xtCck3wG/nextJs.webp" },
+            { name: "Node.js", icon: "https://i.ibb.co/jVnm9XT/nodeJS.webp" },
+            { name: "Express.js", icon: "https://i.ibb.co/ZYWHXHn/express-Js.webp" },
+            { name: "Next.js (SSR)", icon: "https://i.ibb.co/xtCck3wG/nextJs.webp" },
+            { name: "MongoDB", icon: "https://i.ibb.co/6v93hD0/mongoDB.webp" },
         ],
     },
     {
-        title: "Database",
-        skills: [{ name: "MONGODB", icon: "https://i.ibb.co.com/6v93hD0/mongoDB.webp" }],
-    },
-    {
-        title: "Tools",
+        title: "Tools & Platforms",
         skills: [
-            { name: "GIT", icon: "https://i.ibb.co.com/chkqwLD/git.webp" },
-            { name: "GITHUB", icon: "https://i.ibb.co.com/5jCZwV7/github.webp" },
-            { name: "FIREBASE", icon: "https://i.ibb.co.com/GJwBw0r/firebase.webp" },
-            { name: "VS CODE", icon: "https://i.ibb.co.com/ncjrw8y/download-1-removebg-preview.png" },
-            { name: "NOTION", icon: "https://i.ibb.co.com/jMVL967/image-processing20210629-17620-1wabg7i.png" },
+            { name: "Git", icon: "https://i.ibb.co/chkqwLD/git.webp" },
+            { name: "GitHub", icon: "https://i.ibb.co/5jCZwV7/github.webp" },
+            { name: "Firebase", icon: "https://i.ibb.co/GJwBw0r/firebase.webp" },
+            { name: "VS Code", icon: "https://i.ibb.co/ncjrw8y/download-1-removebg-preview.png" },
+            { name: "Notion", icon: "https://i.ibb.co/jMVL967/image-processing20210629-17620-1wabg7i.png" },
         ],
     },
 ];
@@ -67,117 +63,115 @@ const PROGRESS_SKILLS = [
     { name: "Node JS", percentage: 90 },
     { name: "MongoDB", percentage: 65 },
     { name: "Tailwind", percentage: 96 },
-    { name: "Redux-Toolkit", percentage: 80 },
+    { name: "Redux Toolkit", percentage: 80 },
 ];
 
+const SkillCard = React.memo(({ skill }: { skill: Skill }) => (
+    <Card className="group hover:shadow-lg transition-all duration-300 border-border/40 bg-card/50 backdrop-blur-sm">
+        <CardContent className="p-4 flex flex-col items-center text-center">
+            <div className="w-12 h-12 mb-3 flex items-center justify-center">
+                <Image
+                    src={skill.icon}
+                    alt={skill.name}
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 object-contain"
+                    loading="lazy"
+                />
+            </div>
+            <span className="text-sm font-medium text-card-foreground">{skill.name}</span>
+        </CardContent>
+    </Card>
+));
+SkillCard.displayName = "SkillCard";
 
-const SkillCategory = React.memo(({ category }: { category: SkillCategory }) => {
-    const [loaded, setLoaded] = useState<Record<string, boolean>>({});
-
-    const handleLoad = useCallback((name: string) => {
-        setLoaded((prev) => ({ ...prev, [name]: true }));
-    }, []);
-
-    return (
-        <div className="mb-12">
-            <h3 className="text-xl font-semibold text-white mb-6">{category.title}</h3>
+const SkillCategorySection = React.memo(({ category }: { category: SkillCategory }) => (
+    <Card className="border-border/40 bg-card/20 backdrop-blur-sm">
+        <CardHeader className="pb-4">
+            <CardTitle className="text-xl font-semibold text-card-foreground flex items-center gap-2">
+                <div className="w-2 h-6 bg-purple-500 rounded-full " />
+                <p className="text-white">   {category.title}</p>
+            </CardTitle>
+        </CardHeader>
+        <CardContent>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {category.skills.map((skill) => (
-                    <div
-                        key={skill.name}
-                        className="p-4 rounded-xl border border-gray-700 bg-gray-900 backdrop-blur shadow-lg text-center transition-transform hover:scale-105"
-                    >
-                        <div className="relative w-12 h-12 mx-auto mb-3">
-                            {!loaded[skill.name] && (
-                                <div className="absolute inset-0 bg-gray-700 rounded-full animate-pulse" />
-                            )}
-                            <img
-                                src={skill.icon}
-                                alt={skill.name}
-                                loading="lazy"
-                                onLoad={() => handleLoad(skill.name)}
-                                className={`w-12 h-12 mx-auto object-contain transition-opacity duration-500 ${loaded[skill.name] ? "opacity-100" : "opacity-0"
-                                    }`}
-                            />
-                        </div>
-                        <p className="text-sm text-white font-medium">{skill.name}</p>
-                    </div>
+                    <SkillCard key={skill.name} skill={skill} />
                 ))}
             </div>
-        </div>
-    );
-});
-SkillCategory.displayName = "SkillCategory";
-interface SkillProgressBarProps {
-    name: string;
-    percentage: number;
-    visible: number;
-}
+        </CardContent>
+    </Card>
+));
+SkillCategorySection.displayName = "SkillCategorySection";
 
-const SkillProgressBar = React.memo(
-    ({ name, percentage, visible }: SkillProgressBarProps) => {
-        return (
-            <div className="w-full mb-5">
-                <div className="flex justify-between text-white text-sm mb-1">
-                    <span>{name}</span>
-                    <span>{visible}%</span>
-                </div>
-                <Progress value={visible} className="h-2 bg-white" />
-            </div>
-        );
-    }
-);
+const SkillProgressBar = React.memo(({ skill }: { skill: { name: string; percentage: number } }) => (
+    <div className="space-y-2">
+        <div className="flex justify-between items-center">
+            <span className="text-sm font-medium text-white">{skill.name}</span>
+            <Badge variant="secondary" className="text-xs">
+                {skill.percentage}%
+            </Badge>
+        </div>
+        <Progress value={skill.percentage} className="h-2 bg-white" />
+    </div>
+));
 SkillProgressBar.displayName = "SkillProgressBar";
 
 const Skills: React.FC = () => {
-    const [visible, setVisible] = useState<Record<string, number>>({});
     const skillsData = useMemo(() => SKILLS_DATA, []);
     const progressSkills = useMemo(() => PROGRESS_SKILLS, []);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            const updated: Record<string, number> = {};
-            progressSkills.forEach((skill) => {
-                updated[skill.name] = skill.percentage;
-            });
-            setVisible(updated);
-        }, 400);
-
-        return () => clearTimeout(timer);
-    }, [progressSkills]);
-
     return (
-        <section
-            id="skills-section"
-            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
-        >
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12 uppercase">
-                My Skills
+        <section id="skills-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            {/* Header */}
+            <h2 className="text-2xl md:text-4xl font-bold text-center uppercase text-white drop-shadow-lg mb-8">
+                Technologies
             </h2>
 
-            <div className="space-y-12">
+            {/* Skills Grid */}
+            <div className="space-y-8 mb-20">
                 {skillsData.map((category) => (
-                    <SkillCategory key={category.title} category={category} />
+                    <SkillCategorySection key={category.title} category={category} />
                 ))}
             </div>
 
-            <div className="my-16">
-                <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-12 uppercase">
-                    Skill Proficiency
-                </h3>
-                <Card className="max-w-2xl mx-auto bg-gray-900/40 backdrop-blur border border-gray-700 p-6">
-                    <CardContent>
-                        {progressSkills.map((skill) => (
-                            <SkillProgressBar
-                                key={skill.name}
-                                name={skill.name}
-                                percentage={skill.percentage}
-                                visible={visible[skill.name] || 0}
-                            />
-                        ))}
-                    </CardContent>
-                </Card>
-            </div>
+            {/* Progress Section */}
+            <Card className="border-border/40 bg-card/20 backdrop-blur-sm">
+                <CardHeader className="text-center pb-8">
+                    <CardTitle className="text-2xl md:text-4xl font-bold text-center uppercase text-white drop-shadow-lg mb-8foreground">
+                        Skill Proficiency
+                    </CardTitle>
+                    <p className="text-white">
+                        My expertise level across different technologies
+                    </p>
+                </CardHeader>
+                <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-white">
+                        <div className="space-y-6">
+                            {progressSkills.slice(0, 5).map((skill) => (
+                                <SkillProgressBar key={skill.name} skill={skill} />
+                            ))}
+                        </div>
+                        <div className="space-y-6 ">
+                            {progressSkills.slice(5).map((skill) => (
+                                <SkillProgressBar key={skill.name} skill={skill} />
+                            ))}
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+
+            {/* Summary Card */}
+            <Card className="mt-12 border-primary/20 bg-primary/5 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                    <h3 className="text-xl font-semibold text-foreground mb-2 text-white">
+                        Always Learning, Always Growing
+                    </h3>
+                    <p className="text-white">
+                        Always exploring new tools and tech to stay one step ahead in the dev game.
+                    </p>
+                </CardContent>
+            </Card>
         </section>
     );
 };

@@ -54,13 +54,11 @@ const MyProjects = () => {
 
     const hasMoreProjects = visibleProjects < projects.length;
 
-    
+
     const ProjectSkeleton = useCallback(({ index }: { index: number }) => (
         <div
             className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl p-6 shadow-2xl transition-all duration-500 hover:shadow-purple-500/20"
-            style={{
-                animationDelay: `${index * 150}ms`
-            }}
+
         >
             <div className="flex flex-col md:flex-row gap-6">
                 {/* Image Skeleton */}
@@ -105,12 +103,12 @@ const MyProjects = () => {
     ), []);
 
     return (
-        <div className="py-12 max-w-7xl mx-auto">
+        <div className="py-12 max-w-7xl mx-auto rounded-lg" id="projects-section">
             <h2 className="text-3xl mt-7 md:text-4xl uppercase font-bold text-center mb-10 drop-shadow-2xl text-white">
                 My PROJECTS
             </h2>
 
-            <div className="mx-auto px-6 md:px-16 py-10 grid gap-8 drop-shadow-2xl">
+            <div className="mx-auto px-6 md:px-16 py-10 grid gap-8 drop-shadow-2xl rounded-lg">
                 {loading ? (
                     // Show skeleton loaders while loading
                     Array.from({ length: 3 }).map((_, index) => (

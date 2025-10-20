@@ -64,7 +64,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
 
     if (loading) {
         return (
-            <div className="group relative flex flex-col lg:flex-row bg-[#ffffff08] border border-purple-500/30 backdrop-blur-md shadow-2xl rounded overflow-hidden">
+            <div className="group relative flex flex-col lg:flex-row  border border-purple-500/30 backdrop-blur-md shadow-2xl rounded overflow-hidden rounded-lg">
                 <div className="lg:w-1/2 overflow-hidden">
                     <Skeleton className="h-64 w-full bg-gray-700" />
                 </div>
@@ -95,9 +95,9 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
     return (
         <div
             ref={cardRef}
-            className={`group relative flex flex-col lg:flex-row bg-[#ffffff08] border border-purple-500/30 backdrop-blur-md shadow-2xl rounded overflow-hidden transition-all duration-300 hover:shadow-purple-500/30 drop-shadow-lg hover:scale-[1.02] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            className={`group relative flex flex-col lg:flex-row  border border-purple-500/30 backdrop-blur-md shadow-2xl rounded overflow-hidden transition-all duration-300 hover:shadow-purple-500/30 drop-shadow-lg hover:scale-[1.02] rounded-lg bg-card/20 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
-            style={{ transitionDelay: isInView ? `${index * 100}ms` : '0ms' }}
+        
         >
             {/* Image Section */}
             <div className="lg:w-1/2 overflow-hidden drop-shadow-lg relative">

@@ -32,15 +32,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-poppins bg-dark`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-poppins bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white animate-gradient`}
       >
-
-        <div className="bg-dark">
+        <div className="">
           <SplashCursor />
           <NavbarPage />
           <Toaster />
           {children}
-          <Footer/>
+          <Footer />
         </div>
       </body>
     </html>
