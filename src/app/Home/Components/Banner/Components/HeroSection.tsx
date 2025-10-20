@@ -66,7 +66,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                         </h1>
                     </div>
 
-                    <Card className="bg-transpanrent border border-white/20 mb-6">
+                    <Card className="bg-white/10 border border-white/20 mb-6">
                         <CardContent className="p-4">
                             <h2 className="text-lg md:text-2xl font-semibold text-white min-h-[40px] flex items-center">
                                 <TextType
@@ -111,7 +111,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                         <Button
                             asChild
                             variant="outline"
-                            className="flex-1 border-2 border-white/30 bg-transpanrent hover:bg-white/20 text-white hover:text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
+                            className="flex-1 border-2 border-white/30 bg-white/10 hover:bg-white/20 text-white hover:text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
                         >
                             <Link
                                 href="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"
@@ -129,7 +129,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
         );
 
     return (
-        <section className="min-h-screen flex items-center justify-center px-4 lg:px-8 py-20 bg-transparent">
+        <section className="min-h-screen flex items-center justify-center px-4 lg:px-8 py-20 bg-transparent" id="about">
             <div className="max-w-7xl mx-auto w-full">
                 {/* Mobile: Image on top, Desktop: Image on right */}
                 <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16">

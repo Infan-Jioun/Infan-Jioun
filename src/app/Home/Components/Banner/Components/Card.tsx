@@ -45,13 +45,14 @@ const TechnologySlider = () => {
         },
         {
             title: "Next.js Developer",
-            image: "https://i.ibb.co/xtCck3wG/nextJs.webp",
+            image: "https://i.ibb.co/TqmxqhgX/hero-1.webp",
             description: "Building server-rendered React applications with Next.js for optimal performance, SEO, and user experience.",
         },
     ], []);
 
     const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
     const [isInView, setIsInView] = useState(false);
+    const [showSkeletons, setShowSkeletons] = useState(true);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const handleImageLoad = useCallback((index: number) => {
@@ -64,6 +65,8 @@ const TechnologySlider = () => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsInView(true);
+                    // Hide skeletons after a short delay
+                    setTimeout(() => setShowSkeletons(false), 500);
                 }
             },
             { threshold: 0.1, rootMargin: '-50px' }
@@ -75,6 +78,13 @@ const TechnologySlider = () => {
 
         return () => observer.disconnect();
     }, []);
+
+    
+    useEffect(() => {
+        if (Object.keys(loadedImages).length === cards.length) {
+            setShowSkeletons(false);
+        }
+    }, [loadedImages, cards.length]);
 
     const breakpoints = useMemo(() => ({
         320: { slidesPerView: 1, spaceBetween: 16 },
@@ -91,7 +101,7 @@ const TechnologySlider = () => {
                 {/* Image Section */}
                 <div className="relative h-40 mb-6 rounded-xl overflow-hidden">
                     {!loadedImages[index] && (
-                        <Skeleton className="absolute inset-0 w-full h-full bg-white/20 rounded-xl" />
+                        <Skeleton className="absolute inset-0 w-full h-full bg-white/20 rounded-xl z-10" />
                     )}
                     <Image
                         src={card.image}
@@ -178,21 +188,11 @@ const TechnologySlider = () => {
                         speed={800}
                         grabCursor={true}
                         breakpoints={breakpoints}
-                        navigation={{
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        }}
-                        pagination={{
-                            clickable: true,
-                            dynamicBullets: true,
-                            renderBullet: function (index, className) {
-                                return `<span class="${className} bg-white/30 hover:bg-white/50 transition-colors duration-200"></span>`;
-                            }
-                        }}
+
                         className="pb-16"
                     >
-                        {/* Show skeletons initially, then actual cards */}
-                        {Object.keys(loadedImages).length === 0 ? (
+                        {/* Show skeletons or actual cards */}
+                        {showSkeletons ? (
                             skeletonCards
                         ) : (
                             cards.map((card, index) => (
@@ -202,12 +202,10 @@ const TechnologySlider = () => {
                             ))
                         )}
                     </Swiper>
-
-            
-                  
                 </div>
 
 
+               
             </div>
 
 
