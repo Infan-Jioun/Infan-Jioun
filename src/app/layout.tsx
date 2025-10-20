@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import SplashCursor from './Components/SplashCursor/SplashCursor';
 import NavbarPage from "./NavbarPage/page";
 import Footer from "./Components/Footer/Footer";
-
+import { Analytics } from "@vercel/analytics/next"
 
 
 const geistSans = Geist({
@@ -39,6 +39,7 @@ export default function RootLayout({
           <NavbarPage />
           <Toaster />
           {children}
+          <Analytics/>
           <Footer />
         </div>
       </body>
