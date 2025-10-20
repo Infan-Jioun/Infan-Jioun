@@ -5,6 +5,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent } from '@/components/ui/card';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -15,7 +16,7 @@ interface CardItem {
     description: string;
 }
 
-const Card = () => {
+const TechnologySlider = () => {
     const cards = useMemo<CardItem[]>(() => [
         {
             title: "JavaScript Developer",
@@ -42,15 +43,15 @@ const Card = () => {
             image: "https://i.ibb.co/zWp07PwB/2b750a26.webp",
             description: "Efficiently managing app state using Redux Toolkit with slices, async thunks, and scalable architecture for modern applications.",
         },
+        {
+            title: "Next.js Developer",
+            image: "https://i.ibb.co/xtCck3wG/nextJs.webp",
+            description: "Building server-rendered React applications with Next.js for optimal performance, SEO, and user experience.",
+        },
     ], []);
 
-    const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>(
-        cards.reduce((acc, _, index) => ({ ...acc, [index]: false }), {})
-    );
+    const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
     const [isInView, setIsInView] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-    const [scaleTitle, setScaleTitle] = useState(false);
-    const [showSkeleton, setShowSkeleton] = useState(true);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const handleImageLoad = useCallback((index: number) => {
@@ -63,10 +64,6 @@ const Card = () => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsInView(true);
-                    setTimeout(() => setIsVisible(true), 100);
-                    setTimeout(() => setScaleTitle(true), 300);
-                    // Hide skeleton after content loads
-                    setTimeout(() => setShowSkeleton(false), 1000);
                 }
             },
             { threshold: 0.1, rootMargin: '-50px' }
@@ -80,122 +77,142 @@ const Card = () => {
     }, []);
 
     const breakpoints = useMemo(() => ({
-        320: { slidesPerView: 1 },
-        480: { slidesPerView: 1 },
-        640: { slidesPerView: 1.2 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
+        320: { slidesPerView: 1, spaceBetween: 16 },
+        480: { slidesPerView: 1, spaceBetween: 20 },
+        640: { slidesPerView: 1.2, spaceBetween: 24 },
+        768: { slidesPerView: 2, spaceBetween: 24 },
+        1024: { slidesPerView: 3, spaceBetween: 32 },
+        1280: { slidesPerView: 3, spaceBetween: 32 },
     }), []);
 
-    const CardItem = useCallback(({ card, index }: { card: CardItem; index: number }) => (
-        <div
-            className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/10 backdrop-blur-2xl border border-white/30 shadow-xl transition-all duration-300 hover:shadow-purple-500/20 hover:scale-105 active:scale-95 cursor-pointer group"
-            style={{
-                transform: isInView ? 'scale(1)' : 'scale(0.9)',
-                opacity: isInView ? 1 : 0,
-                transition: `all 0.3s ease ${index * 100}ms`
-            }}
-        >
-            <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
-                {!loadedImages[index] && (
-                    <Skeleton className="absolute inset-0 w-full h-full bg-gradient-to-r from-gray-700/50 via-gray-600/50 to-gray-700/50 rounded-lg" />
-                )}
-                <Image
-                    src={card.image}
-                    alt={card.title}
-                    width={320}
-                    height={160}
-                    loading="lazy"
-                    onLoad={() => handleImageLoad(index)}
-                    className={`rounded-lg w-full h-40 object-cover transition-all duration-500 ${loadedImages[index]
-                            ? 'opacity-100 scale-100 group-hover:scale-110'
-                            : 'opacity-0 scale-95'
-                        }`}
-                    style={{
-                        filter: 'drop-shadow(0 0 8px rgba(147, 112, 219, 0.8))',
-                    }}
-                />
-            </div>
-            <h3 className="text-xl font-semibold text-center text-white mb-3 line-clamp-1 bg-gradient-to-r from-white to-gray-300 bg-clip-text ">
-                {card.title}
-            </h3>
-            <p className="text-sm text-center text-white/90 leading-relaxed line-clamp-4">
-                {card.description}
-            </p>
-        </div>
-    ), [loadedImages, handleImageLoad, isInView]);
+    const TechnologyCard = useCallback(({ card, index }: { card: CardItem; index: number }) => (
+        <Card className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 group h-full">
+            <CardContent className="p-6 h-full flex flex-col">
+                {/* Image Section */}
+                <div className="relative h-40 mb-6 rounded-xl overflow-hidden">
+                    {!loadedImages[index] && (
+                        <Skeleton className="absolute inset-0 w-full h-full bg-white/20 rounded-xl" />
+                    )}
+                    <Image
+                        src={card.image}
+                        alt={card.title}
+                        width={320}
+                        height={160}
+                        loading="lazy"
+                        onLoad={() => handleImageLoad(index)}
+                        className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 ${loadedImages[index] ? 'opacity-100' : 'opacity-0'
+                            }`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+
+                {/* Content Section */}
+                <div className="flex-1 flex flex-col">
+                    <h3 className="text-xl font-bold text-white text-center mb-3 group-hover:text-blue-300 transition-colors duration-300">
+                        {card.title}
+                    </h3>
+                    <p className="text-white/80 text-sm leading-relaxed text-center flex-1">
+                        {card.description}
+                    </p>
+                </div>
+
+                {/* Gradient Border Effect */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+            </CardContent>
+        </Card>
+    ), [loadedImages, handleImageLoad]);
 
     // Shadcn Skeleton Loader
     const skeletonCards = useMemo(() =>
-        Array.from({ length: 5 }, (_, index) => (
-            <SwiperSlide key={`skeleton-${index}`} className="flex justify-center pb-10">
-                <div className="w-full h-[400px] max-w-xs sm:max-w-sm md:max-w-md rounded-2xl p-4 bg-white/5 backdrop-blur-2xl border border-white/20 shadow-xl">
-                    {/* Image Skeleton */}
-                    <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
-                        <Skeleton className="w-full h-full bg-gradient-to-r from-gray-700/40 via-gray-600/40 to-gray-700/40 rounded-lg" />
-                    </div>
+        Array.from({ length: 6 }, (_, index) => (
+            <SwiperSlide key={`skeleton-${index}`}>
+                <Card className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl h-full">
+                    <CardContent className="p-6 h-full flex flex-col">
+                        {/* Image Skeleton */}
+                        <div className="relative h-40 mb-6 rounded-xl overflow-hidden">
+                            <Skeleton className="w-full h-full bg-white/20 rounded-xl" />
+                        </div>
 
-                    {/* Title Skeleton */}
-                    <div className="flex justify-center mb-3">
-                        <Skeleton className="h-6 w-4/5 bg-gradient-to-r from-gray-600/50 to-gray-700/50 rounded-full" />
-                    </div>
+                        {/* Title Skeleton */}
+                        <div className="flex justify-center mb-3">
+                            <Skeleton className="h-6 w-3/4 bg-white/20 rounded-full" />
+                        </div>
 
-                    {/* Description Skeletons */}
-                    <div className="space-y-2">
-                        <Skeleton className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full" />
-                        <Skeleton className="h-4 w-full bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full" />
-                        <Skeleton className="h-4 w-2/3 bg-gradient-to-r from-gray-600/40 to-gray-700/40 rounded-full" />
-                    </div>
-                </div>
+                        {/* Description Skeletons */}
+                        <div className="space-y-2 flex-1">
+                            <Skeleton className="h-4 w-full bg-white/20 rounded-full" />
+                            <Skeleton className="h-4 w-full bg-white/20 rounded-full" />
+                            <Skeleton className="h-4 w-2/3 bg-white/20 rounded-full mx-auto" />
+                        </div>
+                    </CardContent>
+                </Card>
             </SwiperSlide>
         )), []);
 
     return (
-        <div
-            ref={containerRef}
-            className="max-w-screen-xl mx-auto my-14 px-4 md:px-6"
-            style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(60px)',
-                transition: 'all 0.3s ease'
-            }}
-        >
-            <h2
-                className="text-3xl md:text-4xl font-bold text-center mb-10 uppercase text-white drop-shadow-md bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text "
-                style={{
-                    transform: scaleTitle ? 'scale(1)' : 'scale(0.9)',
-                    opacity: scaleTitle ? 1 : 0,
-                    transition: 'all 0.5s ease'
-                }}
-            >
-                Technologies I Work With
-            </h2>
+        <section className="py-20 bg-transparent" ref={containerRef}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="text-center mb-16">
+                    <h2 className="text-2xl md:text-4xl font-bold text-center uppercase text-white drop-shadow-lg mb-8">
+                        Technologies I Work With
+                    </h2>
+                    <p className="text-xl text-white max-w-2xl mx-auto">
+                        Explore the cutting-edge technologies and frameworks I use to build amazing web applications
+                    </p>
+                </div>
 
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                spaceBetween={20}
-                loop={true}
-                autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true
-                }}
-                speed={800}
-                breakpoints={breakpoints}
-                className="pb-12"
-            >
-                {showSkeleton ? (
-                    skeletonCards
-                ) : (
-                    cards.map((card, index) => (
-                        <SwiperSlide key={index} className="flex justify-center pb-10">
-                            <CardItem card={card} index={index} />
-                        </SwiperSlide>
-                    ))
-                )}
-            </Swiper>
-        </div>
+                {/* Swiper Slider */}
+                <div className={`transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}>
+                    <Swiper
+                        modules={[Navigation, Pagination, Autoplay]}
+                        spaceBetween={32}
+                        loop={true}
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
+                            waitForTransition: true
+                        }}
+                        speed={800}
+                        grabCursor={true}
+                        breakpoints={breakpoints}
+                        navigation={{
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        }}
+                        pagination={{
+                            clickable: true,
+                            dynamicBullets: true,
+                            renderBullet: function (index, className) {
+                                return `<span class="${className} bg-white/30 hover:bg-white/50 transition-colors duration-200"></span>`;
+                            }
+                        }}
+                        className="pb-16"
+                    >
+                        {/* Show skeletons initially, then actual cards */}
+                        {Object.keys(loadedImages).length === 0 ? (
+                            skeletonCards
+                        ) : (
+                            cards.map((card, index) => (
+                                <SwiperSlide key={index}>
+                                    <TechnologyCard card={card} index={index} />
+                                </SwiperSlide>
+                            ))
+                        )}
+                    </Swiper>
+
+            
+                  
+                </div>
+
+
+            </div>
+
+
+        </section>
     );
 };
 
-export default Card;
+export default TechnologySlider;

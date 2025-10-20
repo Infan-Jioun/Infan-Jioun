@@ -66,7 +66,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                         </h1>
                     </div>
 
-                    <Card className="bg-white/10 border border-white/20 mb-6">
+                    <Card className="bg-transpanrent border border-white/20 mb-6">
                         <CardContent className="p-4">
                             <h2 className="text-lg md:text-2xl font-semibold text-white min-h-[40px] flex items-center">
                                 <TextType
@@ -80,7 +80,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                         </CardContent>
                     </Card>
 
-                    <p className="text-white/80 leading-relaxed text-base md:text-lg">
+                    <p className="text-white leading-relaxed text-base md:text-lg">
                         Passionate <span className="text-white font-semibold">Full-Stack Developer</span> specializing in modern web technologies. I create dynamic, scalable, and high-performance applications using <span className="text-white font-semibold">React</span>, <span className="text-white font-semibold">Next.js</span>, <span className="text-white font-semibold">TypeScript</span>, and <span className="text-white font-semibold">Node.js</span> with MongoDB.
                     </p>
                 </CardContent>
@@ -111,7 +111,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                         <Button
                             asChild
                             variant="outline"
-                            className="flex-1 border-2 border-white/30 bg-white/10 hover:bg-white/20 text-white hover:text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
+                            className="flex-1 border-2 border-white/30 bg-transpanrent hover:bg-white/20 text-white hover:text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
                         >
                             <Link
                                 href="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"

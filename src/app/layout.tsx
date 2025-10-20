@@ -39,7 +39,7 @@ export default function RootLayout({
           <NavbarPage />
           <Toaster />
           {children}
-          <Analytics/>
+          <Analytics />
           <Footer />
         </div>
       </body>
