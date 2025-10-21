@@ -52,8 +52,16 @@ export const PROJECTS_DATA: Project[] = [
         backendRepo: "https://github.com/Infan-Jioun/FoodHub-Backend-Projects",
         imageUrl: "https://i.ibb.co.com/fzkTN1Tw/screenshot-1748712980940.png",
         additionalImages: [
-            "https://i.ibb.co.com/fzkTN1Tw/screenshot-1748712980940.png",
-            "https://i.ibb.co.com/fzkTN1Tw/screenshot-1748712980940.png",
+            "https://i.ibb.co.com/wF8pThMZ/screenshot-1761052286918.png",
+            "https://i.ibb.co.com/6MdNbD8/screenshot-1761052242852.png",
+            "https://i.ibb.co.com/20kn311y/screenshot-1761052200349.png",
+            "https://i.ibb.co.com/prrY9jkC/screenshot-1761052066141.png",
+            "https://i.ibb.co.com/PszCdDYt/screenshot-1761052014311.png",
+            "https://i.ibb.co.com/6GrTMVV/screenshot-1761051919967.png",
+            "https://i.ibb.co.com/vvw2Y5H4/screenshot-1761051824502.png",
+            "https://i.ibb.co.com/8n7LpFJ7/screenshot-1761051736482.png",
+            "https://i.ibb.co.com/DgmRn3nx/screenshot-1761051694588.png",
+            "https://i.ibb.co.com/5XWHcKHw/screenshot-1761051638702.png",
         ],
         techStack: [
             { name: "JavaScript", icon: "https://i.ibb.co.com/zRpT9jC/javascript.webp" },

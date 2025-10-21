@@ -122,21 +122,4 @@
   }
 }
 
-.bg-dark {
-  background: linear-gradient(135deg, rgba(17, 9, 42, 0.584), rgba(2, 82, 255, 0.6));
-  border: 2px solid rgba(44, 6, 125, 0.948);
-  box-shadow: inset 0 0 40px rgb(23, 8, 187);
 
-
-  color: white;
-  transition: all 0.4s ease-in-out;
-  cursor: pointer;
-}
-
-/* Hover effect: background becomes brighter and animated */
-.bg-dark:hover,
-.bg-dark:focus {
-  background: linear-gradient(135deg, rgba(2, 82, 255, 0.6), rgba(17, 9, 42, 0.584));
-
-  ;
-}
