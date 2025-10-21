@@ -79,7 +79,7 @@ const TechnologySlider = () => {
         return () => observer.disconnect();
     }, []);
 
-    
+
     useEffect(() => {
         if (Object.keys(loadedImages).length === cards.length) {
             setShowSkeletons(false);
@@ -205,7 +205,7 @@ const TechnologySlider = () => {
                 </div>
 
 
-               
+
             </div>
 
 
