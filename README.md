@@ -2,7 +2,7 @@
 
 
 <div align="center">
-<img height="auto" width="100%" src="https://i.ibb.co/6cqLMqmG/github-2.jpg" alt="Banner" />
+<img height="auto" width="100%" src="https://i.ibb.co.com/6cqLMqmG/github-2.jpg" alt="Banner" />
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&duration=3000&pause=1000&color=fff&center=true&vCenter=true&width=500&lines=Passionate+Full+Stack+Developer;Crafting+Digital+Experiences;Clean+Code+Enthusiast;" alt="Typing SVG" /></div>
 
 ---

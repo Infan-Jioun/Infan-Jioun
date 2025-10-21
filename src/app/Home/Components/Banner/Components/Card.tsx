@@ -20,32 +20,32 @@ const TechnologySlider = () => {
     const cards = useMemo<CardItem[]>(() => [
         {
             title: "JavaScript Developer",
-            image: "https://i.ibb.co/Hy3SnXB/1-p2-P4-Zxi2-Vdp29b-Kg-Mz0i-Dg.jpg",
+            image: "https://i.ibb.co.com/Hy3SnXB/1-p2-P4-Zxi2-Vdp29b-Kg-Mz0i-Dg.jpg",
             description: "Mastering JavaScript for dynamic interactions, event-driven programming, and building real-time user experiences with modern ES6+ practices.",
         },
         {
             title: "TypeScript Developer",
-            image: "https://i.ibb.co/QFmSqP6q/1756647436086.jpg",
+            image: "https://i.ibb.co.com/QFmSqP6q/1756647436086.jpg",
             description: "Type-safe development, advanced JavaScript patterns, and building scalable, maintainable, real-time web applications.",
         },
         {
             title: "MERN Stack Developer",
-            image: "https://i.ibb.co/h1TyXcV4/8901671.jpg",
+            image: "https://i.ibb.co.com/h1TyXcV4/8901671.jpg",
             description: "Building full-stack web applications using MongoDB, Express.js, React.js, and Node.js. Clean code, REST APIs, and scalability guaranteed.",
         },
         {
             title: "React Developer",
-            image: "https://i.ibb.co/KjP896gk/react-starter.png",
+            image: "https://i.ibb.co.com/KjP896gk/react-starter.png",
             description: "Crafting component-based UIs using React.js, React Router, and hooks for fast, maintainable, and interactive web apps.",
         },
         {
             title: "Redux Toolkit",
-            image: "https://i.ibb.co/zWp07PwB/2b750a26.webp",
+            image: "https://i.ibb.co.com/zWp07PwB/2b750a26.webp",
             description: "Efficiently managing app state using Redux Toolkit with slices, async thunks, and scalable architecture for modern applications.",
         },
         {
             title: "Next.js Developer",
-            image: "https://i.ibb.co/TqmxqhgX/hero-1.webp",
+            image: "https://i.ibb.co.com/TqmxqhgX/hero-1.webp",
             description: "Building server-rendered React applications with Next.js for optimal performance, SEO, and user experience.",
         },
     ], []);

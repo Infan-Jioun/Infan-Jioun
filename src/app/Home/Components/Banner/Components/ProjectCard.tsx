@@ -148,7 +148,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                 <Link href={project.frontendRepo} target="_blank" rel="noopener noreferrer">
                                     <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
                                         <Image
-                                            src="https://i.ibb.co/5jCZwV7/github.webp"
+                                            src="https://i.ibb.co.com/5jCZwV7/github.webp"
                                             alt="GitHub Frontend"
                                             width={20}
                                             height={20}
@@ -162,7 +162,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                     <Link href={project.backendRepo} target="_blank" rel="noopener noreferrer">
                                         <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
                                             <Image
-                                                src="https://i.ibb.co/5jCZwV7/github.webp"
+                                                src="https://i.ibb.co.com/5jCZwV7/github.webp"
                                                 alt="GitHub Backend"
                                                 width={20}
                                                 height={20}

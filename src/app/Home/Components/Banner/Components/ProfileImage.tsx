@@ -26,7 +26,7 @@ const ProfileImage = ({ loading }: ProfileImageProps) => {
             <Card className="relative border-0 shadow-lg group-hover:shadow-2xl transition-all duration-500 overflow-hidden bg-black/20 backdrop-blur-sm">
                 <CardContent className="p-0">
                     <Image
-                        src={"https://i.ibb.co/hxVK2S3c/IMG-20250907-122427-2.jpg"}
+                        src={"https://i.ibb.co.com/hxVK2S3c/IMG-20250907-122427-2.jpg"}
                         alt="Infan Jioun Rahman - Full Stack Developer"
                         width={384}
                         height={384}
