@@ -25,13 +25,13 @@ const ProfileImage = ({ loading }: ProfileImageProps) => {
 
             <Card className="relative border-0 shadow-lg group-hover:shadow-2xl transition-all duration-500 overflow-hidden bg-black/20 backdrop-blur-sm">
                 <CardContent className="p-0">
-                    <Image
+                    <img
                         src={"https://i.ibb.co.com/hxVK2S3c/IMG-20250907-122427-2.jpg"}
                         alt="Infan Jioun Rahman - Full Stack Developer"
                         width={384}
                         height={384}
                         className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover transition-transform duration-500 group-hover:scale-110"
-                        priority
+                        
                         draggable={false}
                     />
                 </CardContent>

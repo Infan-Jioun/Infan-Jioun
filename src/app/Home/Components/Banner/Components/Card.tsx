@@ -103,7 +103,7 @@ const TechnologySlider = () => {
                     {!loadedImages[index] && (
                         <Skeleton className="absolute inset-0 w-full h-full bg-white/20 rounded-xl z-10" />
                     )}
-                    <Image
+                    <img
                         src={card.image}
                         alt={card.title}
                         width={320}

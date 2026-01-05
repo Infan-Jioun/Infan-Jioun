@@ -19,10 +19,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "INFAN JIOUN RAHMAN",
-  description: "Protfolio",
+export const metadata = {
+  title: "Infan Jioun Rahman | Web Developer",
+  description: "Next.js & TypeScript Developer Portfolio",
 };
+
 
 export default function RootLayout({
   children,

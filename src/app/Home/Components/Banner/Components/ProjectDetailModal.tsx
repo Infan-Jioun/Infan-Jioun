@@ -148,13 +148,13 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                             exit="hidden"
                        
                         >
-                            <Image
+                            <img
                                 src={project.additionalImages[currentImageIndex]}
                                 alt={`${project.title} - Image ${currentImageIndex + 1}`}
                                 width={1200}
                                 height={800}
                                 className="max-w-full max-h-full object-contain"
-                                priority
+                                
                                 onLoad={handleImageLoad}
                             />
                             {!imageLoaded && (
@@ -233,13 +233,13 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                                     exit="hidden"
                                  
                                 >
-                                    <Image
+                                    <img
                                         src={project.additionalImages[currentImageIndex]}
                                         alt={`${project.title} - Image ${currentImageIndex + 1}`}
                                         width={800}
                                         height={400}
                                         className="w-full h-full object-cover"
-                                        priority
+                                        
                                         onLoad={handleImageLoad}
                                     />
                                     {!imageLoaded && (
@@ -362,10 +362,10 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                                         className="flex items-center space-x-3 p-3 bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-colors duration-200"
                                     >
                                         <div className="relative w-8 h-8">
-                                            <Image
+                                            <img
                                                 src={tech.icon}
                                                 alt={tech.name}
-                                                fill
+                                           
                                                 className="object-contain rounded-lg"
                                             />
                                         </div>

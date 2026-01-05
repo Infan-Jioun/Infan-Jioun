@@ -85,7 +85,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                             {!imageLoaded && !imageError && (
                                 <Skeleton className="h-full w-full bg-white/20 absolute inset-0" />
                             )}
-                            <Image
+                            <img
                                 src={project.imageUrl}
                                 alt={project.title}
                                 width={600}
@@ -119,7 +119,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                         key={i}
                                         className="flex items-center gap-2 px-3 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur-sm"
                                     >
-                                        <Image
+                                        <img
                                             src={tech.icon}
                                             alt={tech.name}
                                             width={20}
@@ -147,7 +147,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                             <div className="flex items-center gap-3">
                                 <Link href={project.frontendRepo} target="_blank" rel="noopener noreferrer">
                                     <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
-                                        <Image
+                                        <img
                                             src="https://i.ibb.co.com/5jCZwV7/github.webp"
                                             alt="GitHub Frontend"
                                             width={20}
@@ -161,7 +161,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                 {project.backendRepo && (
                                     <Link href={project.backendRepo} target="_blank" rel="noopener noreferrer">
                                         <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
-                                            <Image
+                                            <img
                                                 src="https://i.ibb.co.com/5jCZwV7/github.webp"
                                                 alt="GitHub Backend"
                                                 width={20}

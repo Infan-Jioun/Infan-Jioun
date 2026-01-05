@@ -113,7 +113,7 @@ const EducationSection = ({ loading }: EducationSectionProps) => {
 
                             {/* Certificate Button */}
                             <Link
-                                href="https://drive.google.com/file/d/1LRG-O9v8Xi0APntm4gbi6gR7BODlmqBu/view?usp=sharing"
+                                href="https://drive.google.com/file/d/19KYaO4wQdPsMMO3ky-jzsL4XJqM6CfS1/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group/btn inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-lg border border-purple-400/40 text-white py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:bg-purple-500/30 hover:border-purple-300 hover:shadow-purple-500/40 mt-auto"

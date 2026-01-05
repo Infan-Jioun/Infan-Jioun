@@ -70,7 +70,7 @@ const SkillCard = React.memo(({ skill }: { skill: Skill }) => (
     <Card className="group hover:shadow-lg transition-all duration-300 border-border/40 bg-card/50 backdrop-blur-sm">
         <CardContent className="p-4 flex flex-col items-center text-center">
             <div className="w-12 h-12 mb-3 flex items-center justify-center">
-                <Image
+                <img
                     src={skill.icon}
                     alt={skill.name}
                     width={40}
