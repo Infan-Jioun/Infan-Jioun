@@ -4,11 +4,11 @@ import Head from "next/head";
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
-       
+    
             <Head>
                 <meta
                     name="google-site-verification"
-                    content="945qTSDrLsILlzga1753n4g9rViHZ5VvaWaTJNas0VI"
+                    content="6m7v72DyRNHTN6Gy7kgsYLxlebc4tynlDQdo_YNLIgQ"
                 />
             </Head>
             <Component {...pageProps} />
