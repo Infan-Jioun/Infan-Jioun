@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { Toaster } from 'react-hot-toast';
-import SplashCursor from './Components/SplashCursor/SplashCursor';
+import { Toaster } from "react-hot-toast";
+import SplashCursor from "./Components/SplashCursor/SplashCursor";
 import NavbarPage from "./NavbarPage/page";
 import Footer from "./Components/Footer/Footer";
-import { Analytics } from "@vercel/analytics/next"
-
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,10 +33,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Infan Jioun Rahman",
+              url: "https://infan-jioun.vercel.app",
+              sameAs: [
+                "https://www.linkedin.com/in/infan-jioun-rahman",
+                "https://github.com/Infan-Jioun",
+                "https://twitter.com/RahmanJito",
+                "https://www.instagram.com/infan_jioun_rahman",
+                "https://www.facebook.com/InfanJiounRahmanJito.9"
+              ],
+              jobTitle: "Web Developer",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "BD"
+              }
+            }),
+          }}
+        />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-poppins bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white animate-gradient`}
       >
-        <div className="">
+        <div>
           <SplashCursor />
           <NavbarPage />
           <Toaster />
