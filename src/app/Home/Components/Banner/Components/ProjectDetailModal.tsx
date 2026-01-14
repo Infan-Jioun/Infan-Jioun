@@ -18,11 +18,11 @@ interface Project {
     description: string;
     detailedDescription: string;
     liveLink: string;
-    frontendRepo: string;
-    backendRepo: string | null;
+    frontendRepo?: string | null;
+    backendRepo?: string | null;
     imageUrl: string;
     additionalImages: string[];
-    techStack: TechStack[];
+    techStack: Array<{ name: string; icon: string }>;
     features: string[];
 }
 
@@ -146,7 +146,7 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
-                       
+
                         >
                             <img
                                 src={project.additionalImages[currentImageIndex]}
@@ -154,7 +154,7 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                                 width={1200}
                                 height={800}
                                 className="max-w-full max-h-full object-contain"
-                                
+
                                 onLoad={handleImageLoad}
                             />
                             {!imageLoaded && (
@@ -221,7 +221,7 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-              
+
                     >
                         <div className="relative h-64 md:h-80 bg-gray-200 cursor-pointer" onClick={toggleFullscreen}>
                             <AnimatePresence mode="wait">
@@ -231,7 +231,7 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
-                                 
+
                                 >
                                     <img
                                         src={project.additionalImages[currentImageIndex]}
@@ -239,7 +239,7 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                                         width={800}
                                         height={400}
                                         className="w-full h-full object-cover"
-                                        
+
                                         onLoad={handleImageLoad}
                                     />
                                     {!imageLoaded && (
@@ -365,7 +365,7 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                                             <img
                                                 src={tech.icon}
                                                 alt={tech.name}
-                                           
+
                                                 className="object-contain rounded-lg"
                                             />
                                         </div>
@@ -383,11 +383,13 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: ProjectDetailModa
                                 Live Demo
                             </Button>
                         </Link>
-                        <Link href={project.frontendRepo} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[200px]">
-                            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 border-0">
-                                Frontend Code
-                            </Button>
-                        </Link>
+                        {project.frontendRepo && (
+                            <Link href={project.frontendRepo} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[200px]">
+                                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 border-0">
+                                    Frontend Code
+                                </Button>
+                            </Link>
+                        )}
                         {project.backendRepo && (
                             <Link href={project.backendRepo} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[200px]">
                                 <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 border-0">

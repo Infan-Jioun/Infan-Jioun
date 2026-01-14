@@ -13,8 +13,8 @@ interface Project {
     description: string;
     detailedDescription: string;
     liveLink: string;
-    frontendRepo: string;
-    backendRepo: string | null;
+    frontendRepo?: string | null;
+    backendRepo?: string | null;
     imageUrl: string;
     additionalImages: string[];
     techStack: Array<{ name: string; icon: string }>;
