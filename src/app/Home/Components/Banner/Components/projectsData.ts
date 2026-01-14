@@ -3,7 +3,7 @@ export interface Project {
     description: string;
     detailedDescription: string;
     liveLink: string;
-    frontendRepo: string;
+    frontendRepo: string | null;
     backendRepo: string | null;
     imageUrl: string;
     additionalImages: string[];
@@ -78,6 +78,36 @@ export const PROJECTS_DATA: Project[] = [
             "Order Tracking System",
             "Payment Integration",
             "Real-time Updates"
+        ]
+    },
+    {
+        title: "FASTBIT COMMUNICATION",
+        description: "A professional ISP management platform featuring automated billing, dynamic package administration, and role-based access control.",
+        detailedDescription: "Fastbit Communication is a comprehensive Internet Service Provider (ISP) management system designed to streamline network operations. It features a multi-role architecture allowing Admins, Moderators, and Subscribers to interact through specialized dashboards. The platform handles subscriber lifecycles, internet package customization, automated billing cycles, and real-time connectivity status monitoring to ensure high-quality service delivery.",
+        liveLink: "https://fastbit-communication.vercel.app/", // Replace with your actual ISP live link if available
+        frontendRepo: "https://github.com/Infan-Jioun/Fastbit-Communication",
+        backendRepo: null,
+        imageUrl: "https://i.ibb.co.com/svBkcs0h/Screenshot-14-1-2026-20735-fastbit-communication-vercel-app.jpg",
+        additionalImages: [
+            "https://i.ibb.co.com/BHyXZHfT/image-2.png",
+            "https://i.ibb.co.com/wFbPHY4h/image-3.jpg",
+            "https://i.ibb.co.com/TqBcjdvb/image-3.png"
+           
+        ],
+        techStack: [
+            { name: "TypeScript", icon: "https://i.ibb.co.com/HL0sSj4C/typescript.webp" },
+            { name: "Next.js", icon: "https://i.ibb.co.com/xtCck3wG/nextJs.webp" },
+            { name: "Tailwind CSS", icon: "https://i.ibb.co.com/jJzXpx5/tailwind.webp" },
+            { name: "Shadcn UI", icon: "https://i.ibb.co.com/0R3TKXmx/shadcn.webp" },
+            { name: "MongoDB", icon: "https://i.ibb.co.com/hJhwkTcL/mongoDB.webp" }
+        ],
+        features: [
+            "Multi-role Authentication (Admin, Moderator, Subscriber)",
+            "Dynamic Internet Package & Speed Management",
+            "Automated Billing & Invoice Generation",
+            "Real-time Connection Status Tracking",
+            "User Profile & Subscription Management",
+            "Responsive Admin Dashboard for Network Control"
         ]
     },
     {
