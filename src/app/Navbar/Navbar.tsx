@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { AiOutlineClose } from 'react-icons/ai';
 import { HiOutlineMenu } from 'react-icons/hi';
 import { MdDownloading } from 'react-icons/md';
-import TextType from '@/components/TextType';
 
 interface NavbarProps {
     setScrolled: (value: boolean) => void;

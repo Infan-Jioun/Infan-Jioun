@@ -25,13 +25,13 @@ interface SocialLink {
 
 const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
     const socialLinks: SocialLink[] = [
-      { icon: <FaGithub />, href: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
-  { icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
-  { icon: <IoIosMail />, href: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
-  { icon: <FaInstagram />, href: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-600' },
-  { icon: <FaFacebook />, href: 'https://www.facebook.com/profile.php?id=61572744838042', color: 'text-blue-700' },
-  { icon: <FaTelegram />, href: 'https://t.me/infanjioun', color: 'text-cyan-500' },
-  { icon: <FaSquareXTwitter />, href: 'https://twitter.com/RahmanJito', color: 'text-black' },
+        { icon: <FaGithub />, href: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
+        { icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
+        { icon: <IoIosMail />, href: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
+        { icon: <FaInstagram />, href: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-600' },
+        { icon: <FaFacebook />, href: 'https://www.facebook.com/profile.php?id=61572744838042', color: 'text-blue-700' },
+        { icon: <FaTelegram />, href: 'https://t.me/infanjioun', color: 'text-cyan-500' },
+        { icon: <FaSquareXTwitter />, href: 'https://twitter.com/RahmanJito', color: 'text-black' },
     ];
 
     // Text content component
