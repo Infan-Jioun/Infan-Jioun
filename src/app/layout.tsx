@@ -7,6 +7,7 @@ import SplashCursor from "./Components/SplashCursor/SplashCursor";
 import NavbarPage from "./NavbarPage/page";
 import Footer from "./Components/Footer/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import LenisProvider from "./Components/LenisProvider/LenisProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,12 +64,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-poppins bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white animate-gradient`}
       >
         <div>
-          <SplashCursor />
-          <NavbarPage />
-          <Toaster />
-          {children}
-          <Analytics />
-          <Footer />
+          <LenisProvider>
+            <SplashCursor />
+            <NavbarPage />
+            <Toaster />
+            {children}
+            <Analytics />
+            <Footer />
+          </LenisProvider>
         </div>
       </body>
     </html>
