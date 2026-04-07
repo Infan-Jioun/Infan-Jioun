@@ -12,6 +12,39 @@ export interface Project {
 }
 
 export const PROJECTS_DATA: Project[] = [
+
+    {
+        title: "HELPS NEAR",
+        description: "Bangladesh Help is a real-time emergency assistance platform that connects users with verified volunteers nearby, ensuring quick response and reliable support during critical moments.",
+        detailedDescription: "Bangladesh Help is an emergency support platform built with Next.js that connects users with verified volunteers in real-time during critical situations. The system includes location-based assistance, fast response coordination, and a secure OTP-based authentication system. It also features an admin dashboard for managing users and activities, along with advanced filtering to quickly find nearby help, ensuring a smooth and reliable user experience when it matters most..",
+        liveLink: "https://helps-near-frontend.vercel.app/",
+        frontendRepo: "https://github.com/Infan-Jioun/helps-near-frontend",
+        backendRepo: "https://github.com/Infan-Jioun/Helps-Near",
+        imageUrl: "https://i.ibb.co.com/5DCyCRq/Helps-Near-1.png",
+        additionalImages: [
+            "https://i.ibb.co.com/pDvDrsk/helps-near-2.png",
+            "https://i.ibb.co.com/RpjYqH2B/helps-near-3.png",
+            "https://i.ibb.co.com/Tx9LGmfc/helps-4.png"
+        ],
+        techStack: [
+            { name: "TypeScript", icon: "https://i.ibb.co.com/HL0sSj4C/typescript.webp" },
+            { name: "Next.js", icon: "https://i.ibb.co.com/xtCck3wG/nextJs.webp" },
+            { name: "Tailwind CSS", icon: "https://i.ibb.co.com/jJzXpx5/tailwind.webp" },
+            { name: "Node.js", icon: "https://i.ibb.co.com/jVnm9XT/nodeJS.webp" },
+            { name: "Express.js", icon: "https://i.ibb.co.com/ZYWHXHn/express-Js.webp" },
+            { name: "PostgreSQL", icon: "https://i.ibb.co.com/j9Dh6Xgj/Postgr-SQL.png" },
+            { name: "Prisma", icon: "https://i.ibb.co.com/6cbzwXXv/Prisma.png" },
+            { name: "Better Auth", icon: "https://i.ibb.co.com/cSwKdnCS/Better-Auth.png" }
+        ],
+        features: [
+            "Emargency Listings & Search",
+            "Volunteer Profiles & Management",
+            "OTP Authentication",
+            "Admin Dashboard",
+            "Responsive Design",
+        
+        ]
+    },
     {
         title: "NESTIFY",
         description: "Nestify is a modern Next.js real estate platform with property listings, agent profiles, and real estate services. It includes OTP authentication.",
@@ -92,7 +125,7 @@ export const PROJECTS_DATA: Project[] = [
             "https://i.ibb.co.com/BHyXZHfT/image-2.png",
             "https://i.ibb.co.com/wFbPHY4h/image-3.jpg",
             "https://i.ibb.co.com/TqBcjdvb/image-3.png"
-           
+
         ],
         techStack: [
             { name: "TypeScript", icon: "https://i.ibb.co.com/HL0sSj4C/typescript.webp" },

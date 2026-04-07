@@ -37,6 +37,8 @@ const SKILLS_DATA: SkillCategory[] = [
         skills: [
             { name: "Node.js", icon: "https://i.ibb.co.com/jVnm9XT/nodeJS.webp" },
             { name: "Express.js", icon: "https://i.ibb.co.com/ZYWHXHn/express-Js.webp" },
+            { name: "Prisma ORM", icon: "https://i.ibb.co.com/6cbzwXXv/Prisma.png" },
+            { name: "PostgreSQL", icon: "https://i.ibb.co.com/j9Dh6Xgj/PostgrSQL.png" },
             { name: "Next.js (SSR)", icon: "https://i.ibb.co.com/xtCck3wG/nextJs.webp" },
             { name: "MongoDB", icon: "https://i.ibb.co.com/6v93hD0/mongoDB.webp" },
         ],
@@ -46,6 +48,7 @@ const SKILLS_DATA: SkillCategory[] = [
         skills: [
             { name: "Git", icon: "https://i.ibb.co.com/chkqwLD/git.webp" },
             { name: "GitHub", icon: "https://i.ibb.co.com/5jCZwV7/github.webp" },
+            { name: "Postman", icon: "https://i.ibb.co.com/XfX2L5rX/postman.png" },
             { name: "Firebase", icon: "https://i.ibb.co.com/GJwBw0r/firebase.webp" },
             { name: "VS Code", icon: "https://i.ibb.co.com/ncjrw8y/download-1-removebg-preview.png" },
             { name: "Notion", icon: "https://i.ibb.co.com/jMVL967/image-processing20210629-17620-1wabg7i.png" },
@@ -54,15 +57,14 @@ const SKILLS_DATA: SkillCategory[] = [
 ];
 
 const PROGRESS_SKILLS = [
-    { name: "HTML", percentage: 90 },
-    { name: "CSS", percentage: 90 },
     { name: "JavaScript", percentage: 80 },
     { name: "TypeScript", percentage: 60 },
     { name: "React JS", percentage: 80 },
     { name: "Next JS", percentage: 60 },
     { name: "Node JS", percentage: 90 },
-    { name: "MongoDB", percentage: 65 },
-    { name: "Tailwind", percentage: 96 },
+    { name: "Express Js", percentage: 70 },
+    { name: "Prisma ORM", percentage: 75 },
+    { name: "PostgreSQL", percentage: 65 },
     { name: "Redux Toolkit", percentage: 80 },
 ];
 
@@ -125,11 +127,13 @@ const Skills: React.FC = () => {
         <section id="skills-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             {/* Header */}
             <h2 className="text-2xl md:text-4xl font-bold text-center uppercase text-white drop-shadow-lg mb-8">
-                Technologies
+                Technologies I Work With
             </h2>
-
+            <p className="text-white text-center text-lg max-w-xl mx-auto justify-center items-center leading-relaxed">
+                From pixel-perfect frontends to rock-solid backends — every tool chosen with purpose.
+            </p>
             {/* Skills Grid */}
-            <div className="space-y-8 mb-20">
+            <div className="space-y-8 mb-20 mt-5">
                 {skillsData.map((category) => (
                     <SkillCategorySection key={category.title} category={category} />
                 ))}

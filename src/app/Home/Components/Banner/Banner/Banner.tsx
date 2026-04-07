@@ -51,7 +51,7 @@ const Banner = () => {
       </div>
 
 
-      <Card />
+      {/* <Card /> */}
 
 
 

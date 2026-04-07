@@ -206,7 +206,7 @@ const TechCard = ({ card }: { card: CardItem }) => {
     return (
         <div
             ref={cardRef}
-            className="relative h-[290px] rounded-2xl overflow-hidden border border-white/10 p-6 flex flex-col gap-3 cursor-default select-none"
+            className="relative h-[290px] rounded-2xl  overflow-hidden border border-white/10 p-6 flex flex-col gap-3 cursor-default select-none"
             style={{ background: "rgba(255,255,255,0.04)", transformStyle: "preserve-3d", willChange: "transform" }}
         >
             <div ref={glowRef}

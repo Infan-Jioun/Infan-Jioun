@@ -81,7 +81,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                     </Card>
 
                     <p className="text-white leading-relaxed text-base md:text-lg">
-                        Passionate <span className="text-white font-semibold">Full-Stack Developer</span> specializing in modern web technologies. I create dynamic, scalable, and high-performance applications using <span className="text-white font-semibold">React</span>, <span className="text-white font-semibold">Next.js</span>, <span className="text-white font-semibold">TypeScript</span>, and <span className="text-white font-semibold">Node.js</span> with MongoDB.
+                        Passionate <span className="text-white font-semibold">Full-Stack Developer</span> specializing in modern web technologies. I create dynamic, scalable, and high-performance applications using <span className="text-white font-semibold">React</span>, <span className="text-white font-semibold">Next.js</span>, <span className="text-white font-semibold">TypeScript</span>, and <span className="text-white font-semibold">Node.js</span>, with experience in <span className="text-white font-semibold">MongoDB</span>, <span className="text-white font-semibold">PostgreSQL</span>, and <span className="text-white font-semibold">Prisma</span>.
                     </p>
                 </CardContent>
             </Card>
