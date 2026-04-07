@@ -46,12 +46,12 @@ const Banner = () => {
         loading={loading}
         onScrollToForm={scrollToForm}
       />
-
-
-      <Card />
       <div id='myProjects' className="mt-16">
         <MyProjects />
       </div>
+
+
+      <Card />
 
 
 
