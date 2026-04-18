@@ -24,8 +24,9 @@ interface Props {
 
 const MODAL_STYLES = `
 .modal-backdrop { background: rgba(0,0,0,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
-.glass-modal { background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.07) 100%); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(255,255,255,0.14); border-radius: 28px; box-shadow: 0 32px 80px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.20), inset 0 -1px 0 rgba(255,255,255,0.05); }
-.modal-scroll::-webkit-scrollbar { width:4px; }
+.glass-modal { background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.07) 100%); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(255,255,255,0.14); border-radius: 28px; box-shadow: 0 32px 80px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.20), inset 0 -1px 0 rgba(255,255,255,0.05); display:flex; flex-direction:column; max-height:92vh; }
+.modal-scroll { overflow-y:auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.18) transparent; }
+.modal-scroll::-webkit-scrollbar { width: 6px; }
 .modal-scroll::-webkit-scrollbar-track { background: transparent; }
 .modal-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius:99px; }
 .glass-section { background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:16px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); padding:20px 22px; margin-bottom:16px; }
@@ -50,10 +51,8 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
     const [playing, setPlaying] = useState(true);
     const [fullscreen, setFullscreen] = useState(false);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-    const scrollRef = useRef<HTMLDivElement>(null);
     const total = project.additionalImages.length;
 
-    // ─── Slider functions ───
     const goNext = () => setIdx(p => (p + 1) % total);
     const goPrev = () => setIdx(p => (p - 1 + total) % total);
     const goTo = (i: number) => setIdx(i);
@@ -89,7 +88,6 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
 
     if (!isOpen) return null;
 
-    // ─── FULLSCREEN ───
     if (fullscreen) {
         return (
             <div className="fixed inset-0 z-[60] backdrop-blur-md flex items-center justify-center">
@@ -105,13 +103,11 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
         );
     }
 
-    // ─── NORMAL MODAL ───
     return (
         <div className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4">
             <style>{MODAL_STYLES}</style>
             <div className="absolute inset-0" onClick={onClose} />
-            <div className="glass-modal relative z-10 w-full max-w-4xl flex flex-col" style={{ maxHeight: "92vh" }}>
-                {/* Header */}
+            <div className="glass-modal relative z-10 w-full max-w-4xl">
                 <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: "1px solid rgba(255,255,255,0.10)" }}>
                     <div>
                         <p className="text-[11px] text-white/40 uppercase mb-1">Project Detail</p>
@@ -120,73 +116,67 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
                     <button className="glass-close" onClick={onClose}><X size={16} /></button>
                 </div>
 
-                {/* Body */}
-                <div ref={scrollRef} className="modal-scroll overflow-y-scroll flex-1">
-                    <div className="p-5">
+                <div className="modal-scroll p-5 flex flex-col gap-5">
+                    {/* Image Slider */}
+                    <div className="relative rounded-lg overflow-hidden" style={{ height: 300, background: "#0a0a12" }}>
+                        <img src={project.additionalImages[idx]} alt={`${project.title} ${idx + 1}`} className="w-full h-full object-cover select-none" draggable={false} />
+                        {total > 1 && <>
+                            <button onClick={goPrev} className="slide-nav absolute left-3 top-1/2 -translate-y-1/2"><ChevronLeft size={20} /></button>
+                            <button onClick={goNext} className="slide-nav absolute right-3 top-1/2 -translate-y-1/2"><ChevronRight size={20} /></button>
+                            <button onClick={() => setPlaying(p => !p)} className="slide-ctrl absolute top-3 right-3">{playing ? <Pause size={16} /> : <Play size={16} />}</button>
+                            <button onClick={() => setFullscreen(true)} className="slide-ctrl absolute top-3 left-3">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                            </button>
+                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-sm select-none">{idx + 1}/{total}</div>
+                        </>}
+                    </div>
 
-                        {/* Image Slider */}
-                        <div className="relative rounded-lg overflow-hidden mb-5" style={{ height: 300, background: "#0a0a12" }}>
-                            <img src={project.additionalImages[idx]} alt={`${project.title} ${idx + 1}`} className="w-full h-full object-cover select-none" draggable={false} />
-                            {total > 1 && <>
-                                <button onClick={goPrev} className="slide-nav absolute left-3 top-1/2 -translate-y-1/2"><ChevronLeft size={20} /></button>
-                                <button onClick={goNext} className="slide-nav absolute right-3 top-1/2 -translate-y-1/2"><ChevronRight size={20} /></button>
-                                <button onClick={() => setPlaying(p => !p)} className="slide-ctrl absolute top-3 right-3">{playing ? <Pause size={16} /> : <Play size={16} />}</button>
-                                <button onClick={() => setFullscreen(true)} className="slide-ctrl absolute top-3 left-3">
-                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
-                                </button>
-                                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-sm select-none">{idx + 1}/{total}</div>
-                            </>}
-                        </div>
+                    {/* Dots */}
+                    {total > 1 && <div className="flex justify-center items-center gap-2">
+                        {project.additionalImages.map((_, i) => (
+                            <button key={i} className={`dot-btn ${i === idx ? "active" : "inactive"}`} onClick={() => goTo(i)} />
+                        ))}
+                    </div>}
 
-                        {/* Dots */}
-                        {total > 1 && <div className="flex justify-center items-center gap-2 mb-4">
-                            {project.additionalImages.map((_, i) => (
-                                <button key={i} className={`dot-btn ${i === idx ? "active" : "inactive"}`} onClick={() => goTo(i)} />
+                    {/* Overview */}
+                    <div className="glass-section">
+                        <p className="text-white/45 text-sm mb-2">Overview</p>
+                        <p className="text-white text-base">{project.detailedDescription}</p>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="glass-section">
+                        <p className="text-white/45 text-sm mb-2">Tech Stack</p>
+                        <div className="flex flex-wrap gap-3">
+                            {project.techStack.map((tech, i) => (
+                                <div key={i} className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-md">
+                                    <img src={tech.icon} alt={tech.name} className="w-5 h-5" />
+                                    <span className="text-white text-sm">{tech.name}</span>
+                                </div>
                             ))}
-                        </div>}
-
-                        {/* Overview */}
-                        <div className="glass-section">
-                            <p className="text-white/45 text-sm mb-2">Overview</p>
-                            <p className="text-white text-base">{project.detailedDescription}</p>
                         </div>
+                    </div>
 
-                        {/* Tech Stack */}
-                        <div className="glass-section">
-                            <p className="text-white/45 text-sm mb-2">Tech Stack</p>
-                            <div className="flex flex-wrap gap-3">
-                                {project.techStack.map((tech, i) => (
-                                    <div key={i} className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-md">
-                                        <img src={tech.icon} alt={tech.name} className="w-5 h-5" />
-                                        <span className="text-white text-sm">{tech.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    {/* Features */}
+                    {project.features.length > 0 && <div className="glass-section">
+                        <p className="text-white/45 text-sm mb-2">Features</p>
+                        <ul className="flex flex-col gap-2">
+                            {project.features.map((f, i) => (
+                                <li key={i} className="flex items-center gap-2">
+                                    <span className="feature-dot" />
+                                    <span className="text-white text-sm">{f}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>}
 
-                        {/* Features */}
-                        {project.features.length > 0 && <div className="glass-section">
-                            <p className="text-white/45 text-sm mb-2">Features</p>
-                            <ul className="flex flex-col gap-2">
-                                {project.features.map((f, i) => (
-                                    <li key={i} className="flex items-center gap-2">
-                                        <span className="feature-dot" />
-                                        <span className="text-white text-sm">{f}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>}
-
-                        {/* Links */}
-                        <div className="flex flex-wrap gap-4 mt-3">
-                            {project.liveLink && <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="glass-btn">Live Demo</a>}
-                            {project.frontendRepo && <a href={project.frontendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Frontend Repo</a>}
-                            {project.backendRepo && <a href={project.backendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Backend Repo</a>}
-                        </div>
-
+                    {/* Links */}
+                    <div className="flex flex-wrap gap-4 mt-3">
+                        {project.liveLink && <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="glass-btn">Live Demo</a>}
+                        {project.frontendRepo && <a href={project.frontendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Frontend Repo</a>}
+                        {project.backendRepo && <a href={project.backendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Backend Repo</a>}
                     </div>
                 </div>
-
             </div>
         </div>
     );

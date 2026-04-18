@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+
   output: "export",
   images: {
-    unoptimized: true, 
+    formats: ["image/avif", "image/webp"],
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -13,7 +15,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "i.ibb.co", 
+        hostname: "i.ibb.co",
         port: "",
         pathname: "/**",
       },
