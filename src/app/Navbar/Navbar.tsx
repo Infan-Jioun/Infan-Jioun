@@ -56,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
 
     return (
         <nav
-            className={`navbar bg-transparent border-2 border-white backdrop-blur-xl rounded-3xl drop-shadow-xl text-white z-40 transition-all duration-300
+            className={`navbar bg-transparent border-2 border-white backdrop-blur-xl rounded-3xl drop-shadow-xl text-white z-40 
                 ${isScrolled ? 'fixed top-1 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-screen-xl' : 'relative mt-3 w-full max-w-screen-xl mx-auto'}
             `}
         >
