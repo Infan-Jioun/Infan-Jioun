@@ -93,8 +93,8 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
             <Card className="bg-black/20 backdrop-blur-lg border border-white/10 shadow-2xl">
                 <CardContent className="p-6">
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Skeleton className="h-12 w-36 bg-white/20 rounded-xl" />
-                        <Skeleton className="h-12 w-44 bg-white/20 rounded-xl" />
+                        <Skeleton className="flex-1 h-12 bg-white/20 rounded-xl" />
+                        <Skeleton className="flex-1 h-12 bg-white/20 rounded-xl" />
                     </div>
                 </CardContent>
             </Card>

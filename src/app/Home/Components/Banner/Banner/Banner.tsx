@@ -10,7 +10,7 @@ import MyProjects from '../Components/MyProjects';
 import Skills from '../Components/Skills';
 import EducationSection from '../Components/EducationSection';
 import ContactSection from '../Components/ContactSection';
-import ScrollToTopButton from '../Components/ScrollToTopButton';
+// import ScrollToTopButton from '../Components/ScrollToTopButton';
 
 const Banner = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -54,14 +54,14 @@ const Banner = () => {
       {/* <Card /> */}
 
 
-
+      {/* <ScrollToTopButton showScroll={showScroll} onScrollToTop={scrollToTop} /> */}
       <div id="skills" className="mt-16">
         <Skills />
       </div>
 
       <EducationSection loading={loading} />
       <ContactSection formRef={formRef} loading={loading} />
-      <ScrollToTopButton showScroll={showScroll} onScrollToTop={scrollToTop} />
+
     </div>
   );
 };

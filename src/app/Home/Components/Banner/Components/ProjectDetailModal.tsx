@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef, memo } from "react";
 import { Pause, Play, ChevronLeft, ChevronRight, X } from "lucide-react";
+import Lenis from "lenis";
+import Image from "next/image";
 
 interface Project {
     title: string;
@@ -25,10 +27,7 @@ interface Props {
 const MODAL_STYLES = `
 .modal-backdrop { background: rgba(0,0,0,0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
 .glass-modal { background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.07) 100%); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(255,255,255,0.14); border-radius: 28px; box-shadow: 0 32px 80px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.20), inset 0 -1px 0 rgba(255,255,255,0.05); display:flex; flex-direction:column; max-height:92vh; }
-.modal-scroll { overflow-y:auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.18) transparent; }
-.modal-scroll::-webkit-scrollbar { width: 6px; }
-.modal-scroll::-webkit-scrollbar-track { background: transparent; }
-.modal-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius:99px; }
+.modal-wrapper { overflow: hidden; flex: 1; min-height: 0; }
 .glass-section { background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:16px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); padding:20px 22px; margin-bottom:16px; }
 .glass-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:11px 22px; border-radius:14px; font-size:13px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#fff; cursor:pointer; border:1px solid rgba(255,255,255,0.18); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow:0 4px 16px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.20); flex:1; min-width:160px; }
 .glass-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.26); }
@@ -51,18 +50,55 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
     const [playing, setPlaying] = useState(true);
     const [fullscreen, setFullscreen] = useState(false);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const lenisRef = useRef<Lenis | null>(null);
+    const rafRef = useRef<number | null>(null);
+
     const total = project.additionalImages.length;
 
     const goNext = () => setIdx(p => (p + 1) % total);
     const goPrev = () => setIdx(p => (p - 1 + total) % total);
     const goTo = (i: number) => setIdx(i);
 
-    const stopSlider = () => { if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null; } };
+    const stopSlider = () => {
+        if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null; }
+    };
     const startSlider = () => {
         stopSlider();
         if (total <= 1) return;
         intervalRef.current = setInterval(goNext, 4000);
     };
+
+    useEffect(() => {
+        if (!isOpen || fullscreen) return;
+        if (!wrapperRef.current || !contentRef.current) return;
+
+        const lenis = new Lenis({
+            wrapper: wrapperRef.current,
+            content: contentRef.current,
+            duration: 1.2,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: "vertical",
+            smoothWheel: true,
+            touchMultiplier: 2,
+        });
+
+        lenisRef.current = lenis;
+
+        const raf = (time: number) => {
+            lenis.raf(time);
+            rafRef.current = requestAnimationFrame(raf);
+        };
+        rafRef.current = requestAnimationFrame(raf);
+
+        return () => {
+            lenis.destroy();
+            lenisRef.current = null;
+            if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
+        };
+    }, [isOpen, fullscreen]);
 
     useEffect(() => {
         if (isOpen && playing && !fullscreen) startSlider();
@@ -92,8 +128,18 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
         return (
             <div className="fixed inset-0 z-[60] backdrop-blur-md flex items-center justify-center">
                 <style>{MODAL_STYLES}</style>
-                <img src={project.additionalImages[idx]} alt={`${project.title} ${idx + 1}`} className="max-w-full max-h-full object-contain select-none" draggable={false} />
-                <button onClick={() => setFullscreen(false)} className="slide-ctrl absolute top-4 right-4" style={{ width: 40, height: 40 }}><X size={20} /></button>
+                <Image
+                    src={project.additionalImages[idx]}
+                    alt={`${project.title} ${idx + 1}`}
+                    className="max-w-full max-h-full object-contain select-none"
+                    draggable={false}
+                    width={300}
+                    height={300}
+                    suppressHydrationWarning
+                />
+                <button onClick={() => setFullscreen(false)} className="slide-ctrl absolute top-4 right-4" style={{ width: 40, height: 40 }}>
+                    <X size={20} />
+                </button>
                 {total > 1 && <>
                     <button onClick={goPrev} className="slide-ctrl absolute left-4 top-1/2 -translate-y-1/2" style={{ width: 48, height: 48 }}><ChevronLeft size={26} /></button>
                     <button onClick={goNext} className="slide-ctrl absolute right-4 top-1/2 -translate-y-1/2" style={{ width: 48, height: 48 }}><ChevronRight size={26} /></button>
@@ -107,8 +153,10 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
         <div className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4">
             <style>{MODAL_STYLES}</style>
             <div className="absolute inset-0" onClick={onClose} />
+
             <div className="glass-modal relative z-10 w-full max-w-4xl">
-                <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: "1px solid rgba(255,255,255,0.10)" }}>
+                {/* Header */}
+                <div className="flex items-center justify-between px-6 py-5 flex-shrink-0" style={{ borderBottom: "1px solid rgba(255,255,255,0.10)" }}>
                     <div>
                         <p className="text-[11px] text-white/40 uppercase mb-1">Project Detail</p>
                         <h2 className="text-white text-xl font-bold">{project.title}</h2>
@@ -116,65 +164,94 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
                     <button className="glass-close" onClick={onClose}><X size={16} /></button>
                 </div>
 
-                <div className="modal-scroll p-5 flex flex-col gap-5">
-                    {/* Image Slider */}
-                    <div className="relative rounded-lg overflow-hidden" style={{ height: 300, background: "#0a0a12" }}>
-                        <img src={project.additionalImages[idx]} alt={`${project.title} ${idx + 1}`} className="w-full h-full object-cover select-none" draggable={false} />
-                        {total > 1 && <>
-                            <button onClick={goPrev} className="slide-nav absolute left-3 top-1/2 -translate-y-1/2"><ChevronLeft size={20} /></button>
-                            <button onClick={goNext} className="slide-nav absolute right-3 top-1/2 -translate-y-1/2"><ChevronRight size={20} /></button>
-                            <button onClick={() => setPlaying(p => !p)} className="slide-ctrl absolute top-3 right-3">{playing ? <Pause size={16} /> : <Play size={16} />}</button>
-                            <button onClick={() => setFullscreen(true)} className="slide-ctrl absolute top-3 left-3">
-                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
-                            </button>
-                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-sm select-none">{idx + 1}/{total}</div>
-                        </>}
-                    </div>
+                {/* Lenis outer wrapper — overflow:hidden */}
+                <div ref={wrapperRef} className="modal-wrapper">
+                    {/* Lenis inner content — natural height */}
+                    <div ref={contentRef} className="p-5 flex flex-col gap-5">
 
-                    {/* Dots */}
-                    {total > 1 && <div className="flex justify-center items-center gap-2">
-                        {project.additionalImages.map((_, i) => (
-                            <button key={i} className={`dot-btn ${i === idx ? "active" : "inactive"}`} onClick={() => goTo(i)} />
-                        ))}
-                    </div>}
-
-                    {/* Overview */}
-                    <div className="glass-section">
-                        <p className="text-white/45 text-sm mb-2">Overview</p>
-                        <p className="text-white text-base">{project.detailedDescription}</p>
-                    </div>
-
-                    {/* Tech Stack */}
-                    <div className="glass-section">
-                        <p className="text-white/45 text-sm mb-2">Tech Stack</p>
-                        <div className="flex flex-wrap gap-3">
-                            {project.techStack.map((tech, i) => (
-                                <div key={i} className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-md">
-                                    <img src={tech.icon} alt={tech.name} className="w-5 h-5" />
-                                    <span className="text-white text-sm">{tech.name}</span>
+                        {/* Image Slider */}
+                        <div className="relative rounded-lg overflow-hidden flex-shrink-0" style={{ height: 300, background: "#0a0a12" }}>
+                            <Image
+                                src={project.additionalImages[idx]}
+                                alt={`${project.title} ${idx + 1}`}
+                                width={200} height={200}
+                                className="w-full h-full object-cover select-none"
+                                draggable={false}
+                                suppressHydrationWarning
+                            />
+                            {total > 1 && <>
+                                <button onClick={goPrev} className="slide-nav absolute left-3 top-1/2 -translate-y-1/2"><ChevronLeft size={20} /></button>
+                                <button onClick={goNext} className="slide-nav absolute right-3 top-1/2 -translate-y-1/2"><ChevronRight size={20} /></button>
+                                <button onClick={() => setPlaying(p => !p)} className="slide-ctrl absolute top-3 right-3">
+                                    {playing ? <Pause size={16} /> : <Play size={16} />}
+                                </button>
+                                <button onClick={() => setFullscreen(true)} className="slide-ctrl absolute top-3 left-3">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                    </svg>
+                                </button>
+                                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-sm select-none">
+                                    {idx + 1}/{total}
                                 </div>
-                            ))}
+                            </>}
                         </div>
-                    </div>
 
-                    {/* Features */}
-                    {project.features.length > 0 && <div className="glass-section">
-                        <p className="text-white/45 text-sm mb-2">Features</p>
-                        <ul className="flex flex-col gap-2">
-                            {project.features.map((f, i) => (
-                                <li key={i} className="flex items-center gap-2">
-                                    <span className="feature-dot" />
-                                    <span className="text-white text-sm">{f}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>}
+                        {/* Dots */}
+                        {total > 1 && (
+                            <div className="flex justify-center items-center gap-2">
+                                {project.additionalImages.map((_, i) => (
+                                    <button key={i} className={`dot-btn ${i === idx ? "active" : "inactive"}`} onClick={() => goTo(i)} />
+                                ))}
+                            </div>
+                        )}
 
-                    {/* Links */}
-                    <div className="flex flex-wrap gap-4 mt-3">
-                        {project.liveLink && <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="glass-btn">Live Demo</a>}
-                        {project.frontendRepo && <a href={project.frontendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Frontend Repo</a>}
-                        {project.backendRepo && <a href={project.backendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Backend Repo</a>}
+                        {/* Overview */}
+                        <div className="glass-section">
+                            <p className="text-white/45 text-sm mb-2">Overview</p>
+                            <p className="text-white text-base">{project.detailedDescription}</p>
+                        </div>
+
+                        {/* Tech Stack */}
+                        <div className="glass-section">
+                            <p className="text-white/45 text-sm mb-2">Tech Stack</p>
+                            <div className="flex flex-wrap gap-3">
+                                {project.techStack.map((tech, i) => (
+                                    <div key={i} className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-md">
+                                        <Image src={tech.icon} alt={tech.name} width={10} height={10} className="w-5 h-5" />
+                                        <span className="text-white text-sm">{tech.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Features */}
+                        {project.features.length > 0 && (
+                            <div className="glass-section">
+                                <p className="text-white/45 text-sm mb-2">Features</p>
+                                <ul className="flex flex-col gap-2">
+                                    {project.features.map((f, i) => (
+                                        <li key={i} className="flex items-center gap-2">
+                                            <span className="feature-dot" />
+                                            <span className="text-white text-sm">{f}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        {/* Links */}
+                        <div className="flex flex-wrap gap-4 mt-3 pb-2">
+                            {project.liveLink && (
+                                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="glass-btn">Live Demo</a>
+                            )}
+                            {project.frontendRepo && (
+                                <a href={project.frontendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Frontend Repo</a>
+                            )}
+                            {project.backendRepo && (
+                                <a href={project.backendRepo} target="_blank" rel="noopener noreferrer" className="glass-btn">Backend Repo</a>
+                            )}
+                        </div>
+
                     </div>
                 </div>
             </div>

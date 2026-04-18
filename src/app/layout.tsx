@@ -8,15 +8,20 @@ import NavbarPage from "./NavbarPage/page";
 import Footer from "./Components/Footer/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import LenisProvider from "./Components/LenisProvider/LenisProvider";
+import Chatbot from "./ChatBot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -33,8 +38,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-slate-900">
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
+        {/* DNS prefetch — ibb.co image load faster হবে */}
+        <link rel="dns-prefetch" href="//i.ibb.co.com" />
+        <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -48,31 +62,31 @@ export default function RootLayout({
                 "https://github.com/Infan-Jioun",
                 "https://twitter.com/RahmanJito",
                 "https://www.instagram.com/infan_jioun_rahman",
-                "https://www.facebook.com/InfanJiounRahmanJito.9"
+                "https://www.facebook.com/InfanJiounRahmanJito.9",
               ],
               jobTitle: "Web Developer",
               address: {
                 "@type": "PostalAddress",
-                addressCountry: "BD"
-              }
+                addressCountry: "BD",
+              },
             }),
           }}
         />
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-poppins bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white animate-gradient`}
+        className={`${geistSans.variable} ${geistMono.variable} font-poppins bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white antialiased`}
+        suppressHydrationWarning
       >
-        <div>
-          <LenisProvider>
-            <SplashCursor />
-            <NavbarPage />
-            <Toaster />
-            {children}
-            <Analytics />
-            <Footer />
-          </LenisProvider>
-        </div>
+        <LenisProvider>
+          <SplashCursor />
+          <NavbarPage />
+          <Toaster position="top-right" />
+          {children}
+          <Chatbot />
+          <Analytics />
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );
