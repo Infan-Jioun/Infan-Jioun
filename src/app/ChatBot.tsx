@@ -3,10 +3,13 @@
 import {
     MessageCircle, X, Send, Rocket, Home, Hamburger,
     AlertCircle, Globe, ShoppingCart, Settings, Monitor,
-    Database, Briefcase, Mail, FileText, Github, ChevronRight,
+    Database, Briefcase, Mail, FileText, Github,
+    ChevronLeft, ChevronRight, GraduationCap,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import type { ReactNode } from "react";
 import { gsap } from "gsap";
+import Link from "next/link";
 
 type Message = {
     role: "user" | "assistant";
@@ -16,11 +19,12 @@ type Message = {
 type Suggestion = {
     label: string;
     query: string;
-    icon: React.ReactNode;
+    icon: ReactNode;
 };
 
 const ALL_SUGGESTIONS: Suggestion[] = [
     { icon: <Rocket size={12} />, label: "All Projects", query: "Show all your projects with live links" },
+    { icon: <GraduationCap size={12} />, label: "Education", query: "Tell me about your education background" },
     { icon: <Home size={12} />, label: "Nestify", query: "Tell me about your Nestify real estate project" },
     { icon: <Hamburger size={12} />, label: "FoodHub", query: "Tell me about your FoodHub food delivery project" },
     { icon: <AlertCircle size={12} />, label: "Helps Near", query: "Tell me about your Helps Near emergency platform" },
@@ -35,6 +39,29 @@ const ALL_SUGGESTIONS: Suggestion[] = [
     { icon: <Github size={12} />, label: "GitHub", query: "Show me your GitHub profile or project repos" },
 ];
 
+const CHIPS_PER_PAGE = 3;
+
+// ── Link parser ──
+function renderMessage(text: string): ReactNode[] {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts: string[] = text.split(urlRegex);
+    return parts.map((part, i): ReactNode =>
+        /^https?:\/\/[^\s]+$/.test(part) ? (
+
+            <Link key={i}
+                href={part}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 text-purple-300 hover:text-purple-100 transition-colors duration-150 break-all"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {part}
+            </Link >
+        ) : (
+            <span key={i}>{part}</span>
+        )
+    );
+}
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
@@ -43,6 +70,7 @@ export default function Chatbot() {
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
     const [usedSuggestions, setUsedSuggestions] = useState<Set<string>>(new Set());
+    const [suggPage, setSuggPage] = useState(0);
 
     const bottomRef = useRef<HTMLDivElement>(null);
     const chatWinRef = useRef<HTMLDivElement>(null);
@@ -51,32 +79,41 @@ export default function Chatbot() {
     const ring1Ref = useRef<HTMLSpanElement>(null);
     const ring2Ref = useRef<HTMLSpanElement>(null);
     const iconRef = useRef<HTMLDivElement>(null);
+    const sliderRef = useRef<HTMLDivElement>(null);
 
     const visibleSuggestions = ALL_SUGGESTIONS.filter((s) => !usedSuggestions.has(s.label));
+    const totalPages = Math.ceil(visibleSuggestions.length / CHIPS_PER_PAGE);
+    const currentChips = visibleSuggestions.slice(suggPage * CHIPS_PER_PAGE, (suggPage + 1) * CHIPS_PER_PAGE);
 
-    /* ── auto scroll ── */
+    const goPage = (dir: 1 | -1) => {
+        const next = suggPage + dir;
+        if (next < 0 || next >= totalPages) return;
+        if (sliderRef.current) {
+            gsap.fromTo(sliderRef.current,
+                { opacity: 0, x: dir * 24 },
+                { opacity: 1, x: 0, duration: 0.22, ease: "power2.out" }
+            );
+        }
+        setSuggPage(next);
+    };
+
+    useEffect(() => { setSuggPage(0); }, [usedSuggestions]);
+
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, loading]);
 
-    /* ── GSAP: mount sequence ── */
     useEffect(() => {
         const tl = gsap.timeline({ delay: 0.3 });
-
-        // 1) button spins in
         tl.fromTo(btnRef.current,
             { scale: 0, rotate: -180, opacity: 0 },
             { scale: 1, rotate: 0, opacity: 1, duration: 0.7, ease: "back.out(2)" }
         );
-
-        // 2) label slides up
         tl.fromTo(labelRef.current,
             { opacity: 0, y: 12, scale: 0.85 },
             { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(1.7)" },
             "-=0.25"
         );
-
-        // 3) dual pulse rings
         [ring1Ref.current, ring2Ref.current].forEach((el, i) => {
             if (!el) return;
             gsap.fromTo(el,
@@ -86,18 +123,14 @@ export default function Chatbot() {
         });
     }, []);
 
-    /* ── GSAP: label shimmer ── */
     useEffect(() => {
         if (!labelRef.current) return;
         gsap.to(labelRef.current, {
             backgroundPosition: "200% center",
-            duration: 3,
-            repeat: -1,
-            ease: "none",
+            duration: 3, repeat: -1, ease: "none",
         });
     }, []);
 
-    /* ── GSAP: chat open ── */
     useEffect(() => {
         if (!chatWinRef.current || !isOpen) return;
         gsap.fromTo(chatWinRef.current,
@@ -106,7 +139,6 @@ export default function Chatbot() {
         );
     }, [isOpen]);
 
-    /* ── GSAP: new bubble ── */
     useEffect(() => {
         document.querySelectorAll(".chat-bubble:not(.animated)").forEach((el) => {
             el.classList.add("animated");
@@ -114,7 +146,6 @@ export default function Chatbot() {
         });
     }, [messages]);
 
-    /* ── icon wiggle on hover ── */
     const onBtnHover = () => {
         if (!iconRef.current) return;
         gsap.fromTo(iconRef.current,
@@ -171,8 +202,6 @@ export default function Chatbot() {
 
             {/* ── FAB area ── */}
             <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-2.5">
-
-                {/* Animated shimmer label */}
                 {!isOpen && (
                     <div
                         ref={labelRef}
@@ -187,15 +216,16 @@ export default function Chatbot() {
                     </div>
                 )}
 
-                {/* Button wrapper with rings */}
                 <div className="relative flex items-center justify-center">
-                    {/* Dual pulse rings */}
                     <span ref={ring1Ref} className="absolute inset-0 rounded-full bg-purple-500 pointer-events-none" style={{ transformOrigin: "center" }} />
                     <span ref={ring2Ref} className="absolute inset-0 rounded-full bg-indigo-400 pointer-events-none" style={{ transformOrigin: "center" }} />
-
-                    {/* Glow halo */}
-                    <span className="absolute inset-[-4px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%)", animation: "glow-pulse 2.5s ease-in-out infinite" }} />
-
+                    <span
+                        className="absolute inset-[-4px] rounded-full pointer-events-none"
+                        style={{
+                            background: "radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%)",
+                            animation: "glow-pulse 2.5s ease-in-out infinite",
+                        }}
+                    />
                     <button
                         ref={btnRef}
                         onClick={toggleChat}
@@ -231,20 +261,46 @@ export default function Chatbot() {
                         <span className="ml-auto w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_#4ade80]" />
                     </div>
 
-                    {/* Suggestions */}
+                    {/* Suggestions Slider */}
                     {visibleSuggestions.length > 0 && (
                         <div className="px-3 pt-2.5 pb-2 border-b border-white/10 shrink-0">
-                            <p className="text-[10px] text-white/30 uppercase tracking-widest mb-1.5">Suggestions</p>
-                            <div className="flex gap-1.5 overflow-x-auto pb-0.5" style={{ scrollbarWidth: "none" }}>
-                                {visibleSuggestions.map((s) => (
+                            <div className="flex items-center justify-between mb-1.5">
+                                <p className="text-[10px] text-white/30 uppercase tracking-widest">Suggestions</p>
+                                <div className="flex items-center gap-1">
+                                    <div className="flex gap-1 mr-1">
+                                        {Array.from({ length: totalPages }).map((_, i) => (
+                                            <span
+                                                key={i}
+                                                className="w-1 h-1 rounded-full transition-all duration-200"
+                                                style={{ background: i === suggPage ? "#a78bfa" : "rgba(255,255,255,0.2)" }}
+                                            />
+                                        ))}
+                                    </div>
+                                    <button
+                                        onClick={() => goPage(-1)}
+                                        disabled={suggPage === 0}
+                                        className="w-5 h-5 rounded-full bg-white/10 hover:bg-purple-500 disabled:opacity-20 flex items-center justify-center transition-all duration-200"
+                                    >
+                                        <ChevronLeft size={11} />
+                                    </button>
+                                    <button
+                                        onClick={() => goPage(1)}
+                                        disabled={suggPage >= totalPages - 1}
+                                        className="w-5 h-5 rounded-full bg-white/10 hover:bg-purple-500 disabled:opacity-20 flex items-center justify-center transition-all duration-200"
+                                    >
+                                        <ChevronRight size={11} />
+                                    </button>
+                                </div>
+                            </div>
+                            <div ref={sliderRef} className="flex gap-1.5">
+                                {currentChips.map((s) => (
                                     <button
                                         key={s.label}
                                         onClick={() => handleSuggestion(s)}
-                                        className="shrink-0 flex items-center gap-1.5 text-[11px] bg-white/10 hover:bg-purple-500 px-2.5 py-1.5 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap"
+                                        className="flex-1 flex items-center justify-center gap-1 text-[11px] bg-white/10 hover:bg-purple-500 px-2 py-1.5 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap"
                                     >
                                         {s.icon}
-                                        {s.label}
-                                        <ChevronRight size={10} className="opacity-50" />
+                                        <span className="truncate">{s.label}</span>
                                     </button>
                                 ))}
                             </div>
@@ -263,7 +319,7 @@ export default function Chatbot() {
                                     <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold mr-1.5 mt-1 shrink-0">AI</div>
                                 )}
                                 <div className={`max-w-[78%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${msg.role === "user" ? "bg-purple-500 text-white rounded-br-sm" : "bg-white/10 text-white rounded-bl-sm"}`}>
-                                    {msg.content}
+                                    {renderMessage(msg.content)}
                                 </div>
                             </div>
                         ))}

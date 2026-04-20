@@ -110,7 +110,7 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
 
                 {/* Resume Button */}
                 <Link
-                    href="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"
+                    href="https://drive.google.com/file/d/1XjAiQH6JHOdD0OoZ0HxZF9bQtBYoNK-x/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 border-2 border-white rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 hover:bg-white/10 hover:scale-105"

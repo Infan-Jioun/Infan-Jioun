@@ -114,7 +114,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                             className="flex-1 border-2 border-white/30 bg-white/10 hover:bg-white/20 text-white hover:text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
                         >
                             <Link
-                                href="https://drive.google.com/file/d/1m0CAV3xMaVYH13jH_NyW320G9SlJeDOE/view?usp=sharing"
+                                href="https://drive.google.com/file/d/1XjAiQH6JHOdD0OoZ0HxZF9bQtBYoNK-x/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-2"

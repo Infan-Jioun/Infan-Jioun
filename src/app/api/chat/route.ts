@@ -126,7 +126,7 @@ Tools: Git, GitHub, Postman, Firebase, VS Code, Notion
 
 export async function POST(req: NextRequest) {
     try {
-        const apiKey = "AIzaSyDRuirTVA8hRrE0KIbUtrZ46b7H1XhkCxg";
+        const apiKey = process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
             return NextResponse.json(
