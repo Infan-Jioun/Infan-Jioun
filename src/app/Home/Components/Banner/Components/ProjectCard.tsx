@@ -5,24 +5,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Project } from "@/app/types/project";
 
-interface TechStack {
-    name: string;
-    icon: string;
-}
-
-interface Project {
-    title: string;
-    description: string;
-    detailedDescription: string;
-    liveLink: string;
-    frontendRepo?: string | null;
-    backendRepo?: string | null;
-    imageUrl: string;
-    additionalImages: string[];
-    techStack: Array<{ name: string; icon: string }>;
-    features: string[];
-}
 
 interface ProjectCardProps {
     project: Project;

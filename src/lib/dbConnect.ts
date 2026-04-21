@@ -1,18 +1,24 @@
+import mongoose from "mongoose";
 
-const mongoose = require('mongoose');
-const uri = process.env.MONGODB_URL
+const MONGODB_URI = process.env.MONGODB_URI!;
 
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+if (!MONGODB_URI) throw new Error("MONGODB_URI is not defined");
 
-async function run() {
-    try {
-        // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
-        await mongoose.connect(uri, clientOptions);
-        await mongoose.connection.db.admin().command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } finally {
-        // Ensures that the client will close when you finish/error
-        await mongoose.disconnect();
-    }
+let cached = (global as any).mongoose;
+
+if (!cached) {
+    cached = (global as any).mongoose = { conn: null, promise: null };
 }
-run().catch(console.dir);
+
+export async function dbConnect() {
+    if (cached.conn) return cached.conn;
+
+    if (!cached.promise) {
+        cached.promise = mongoose.connect(MONGODB_URI, {
+            bufferCommands: false,
+        });
+    }
+
+    cached.conn = await cached.promise;
+    return cached.conn;
+}

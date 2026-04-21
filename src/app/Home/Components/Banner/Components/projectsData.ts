@@ -11,7 +11,8 @@ export interface Project {
     features: string[];
 }
 
-export const PROJECTS_DATA: Project[] = [
+export const PROJECTS_DATA: Project[] =
+ [
 
     {
         title: "HELPS NEAR",

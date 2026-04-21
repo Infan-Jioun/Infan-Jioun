@@ -2,33 +2,38 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Card as UICard, CardContent } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
 import HeroSection from '../Components/HeroSection';
-import Card from '../Components/Card';
 import MyProjects from '../Components/MyProjects';
 import Skills from '../Components/Skills';
 import EducationSection from '../Components/EducationSection';
 import ContactSection from '../Components/ContactSection';
-// import ScrollToTopButton from '../Components/ScrollToTopButton';
+import { Project } from '@/app/types/project';
 
 const Banner = () => {
   const formRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [showScroll, setShowScroll] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        setProjects(data.data ?? []);
+        console.log(data)
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScroll(window.scrollY > 400);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => setShowScroll(window.scrollY > 400);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToForm = useCallback(() => {
@@ -36,32 +41,23 @@ const Banner = () => {
   }, []);
 
   const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 sm:px-8 py-14">
-      {/* Hero Section */}
       <HeroSection
         loading={loading}
         onScrollToForm={scrollToForm}
       />
-      <div id='myProjects' className="mt-16">
-        <MyProjects />
+      <div id="myProjects" className="mt-16">
+        <MyProjects projects={projects} loading={loading} />
       </div>
-
-
-      {/* <Card /> */}
-
-
-      {/* <ScrollToTopButton showScroll={showScroll} onScrollToTop={scrollToTop} /> */}
       <div id="skills" className="mt-16">
         <Skills />
       </div>
-
       <EducationSection loading={loading} />
       <ContactSection formRef={formRef} loading={loading} />
-
     </div>
   );
 };
