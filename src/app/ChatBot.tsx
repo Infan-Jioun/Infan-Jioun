@@ -45,22 +45,26 @@ const CHIPS_PER_PAGE = 3;
 function renderMessage(text: string): ReactNode[] {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts: string[] = text.split(urlRegex);
-    return parts.map((part, i): ReactNode =>
-        /^https?:\/\/[^\s]+$/.test(part) ? (
 
-            <Link key={i}
-                href={part}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 text-purple-300 hover:text-purple-100 transition-colors duration-150 break-all"
-                onClick={(e) => e.stopPropagation()}
-            >
-                {part}
-            </Link >
-        ) : (
-            <span key={i}>{part}</span>
-        )
-    );
+    return parts.map((part, i): ReactNode => {
+        if (/^https?:\/\/[^\s]+$/.test(part)) {
+            const cleanUrl = part.replace(/[.,)\]'"!?]+$/, "");
+
+            return (
+                <Link
+                    key={i}
+                    href={cleanUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 text-purple-300 hover:text-purple-100 transition-colors duration-150 break-all"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {cleanUrl}
+                </Link>
+            );
+        }
+        return <span key={i}>{part}</span>;
+    });
 }
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
