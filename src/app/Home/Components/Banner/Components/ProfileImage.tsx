@@ -1,47 +1,53 @@
-"use client"
+"use client";
+
 import Image from 'next/image';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent } from '@/components/ui/card';
-import profileImage from "../../../../assests/profileImage.jpg";
+import profileImage from "../../../../assests/profileImage.png";
+
 interface ProfileImageProps {
     loading: boolean;
 }
 
 const ProfileImage = ({ loading }: ProfileImageProps) => {
+    // Loading Skeleton State
     if (loading) {
         return (
-            <Card className="border-0 shadow-none bg-transparent">
-                <CardContent className="p-0">
-                    <Skeleton className="h-64 w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 rounded-2xl bg-white/20" />
-                </CardContent>
-            </Card>
+            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-[2rem] overflow-hidden p-1 bg-white/5 border border-white/10">
+                <Skeleton className="w-full h-full rounded-[1.8rem] bg-white/10 animate-pulse" />
+            </div>
         );
     }
 
     return (
-        <div className="relative group">
-            {/* Background gradient effect */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="relative group select-none">
+            {/* 1. Dynamic Ambient Background Glow */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 rounded-[2.5rem] blur-xl opacity-40 group-hover:opacity-85 transition-all duration-700 ease-out group-hover:scale-105"></div>
 
-            <Card className="relative border-0 shadow-lg group-hover:shadow-2xl transition-all duration-500 overflow-hidden bg-black/20 backdrop-blur-sm">
-                <CardContent className="p-0">
-                    <Image
-                        src={profileImage || "https://i.ibb.co.com/hxVK2S3c/IMG-20250907-122427-2.jpg"}
-                        alt="Infan Jioun Rahman - Full Stack Developer"
-                        width={384}
-                        height={384}
-                        className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover"
+            {/* 2. Glassmorphic Outer Border Wrapper */}
+            <div className="relative rounded-[2rem] p-1.5 bg-gradient-to-b from-white/20 via-white/5 to-transparent backdrop-blur-2xl border border-white/15 group-hover:border-purple-400/40 transition-all duration-500 shadow-2xl">
 
-                        priority
-                    />
-                </CardContent>
+                {/* 3. Main Card Container */}
+                <Card className="relative border-0 bg-slate-950/50 backdrop-blur-md rounded-[1.7rem] overflow-hidden shadow-inner">
+                    <CardContent className="p-0 relative overflow-hidden">
 
-                {/* Status badge */}
-                <div className="absolute top-4 right-4 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg flex items-center gap-1">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                    Available
-                </div>
-            </Card>
+                        {/* Profile Image with Smooth Zoom */}
+                        <Image
+                            src={profileImage || "https://i.ibb.co.com/hxVK2S3c/IMG-20250907-122427-2.jpg"}
+                            alt="Infan Jioun Rahman - Full Stack Developer"
+                            width={384}
+                            height={384}
+                            className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                            priority
+                        />
+
+                        {/* 4. Cinematic Vignette & Lighting Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none group-hover:opacity-80 transition-opacity duration-500" />
+                    
+
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
 };

@@ -75,7 +75,7 @@ export default function Chatbot() {
     const [loading, setLoading] = useState(false);
     const [usedSuggestions, setUsedSuggestions] = useState<Set<string>>(new Set());
     const [suggPage, setSuggPage] = useState(0);
-
+    const [isHovered, setIsHovered] = useState(false);
     const bottomRef = useRef<HTMLDivElement>(null);
     const chatWinRef = useRef<HTMLDivElement>(null);
     const btnRef = useRef<HTMLButtonElement>(null);
@@ -88,7 +88,14 @@ export default function Chatbot() {
     const visibleSuggestions = ALL_SUGGESTIONS.filter((s) => !usedSuggestions.has(s.label));
     const totalPages = Math.ceil(visibleSuggestions.length / CHIPS_PER_PAGE);
     const currentChips = visibleSuggestions.slice(suggPage * CHIPS_PER_PAGE, (suggPage + 1) * CHIPS_PER_PAGE);
+    useEffect(() => {
+        if (isHovered || totalPages <= 1) return;
 
+        const interval = setInterval(() => {
+            setSuggPage((prev) => (prev + 1) % totalPages);
+        }, 3500); 
+        return () => clearInterval(interval);
+    }, [isHovered, totalPages]);
     const goPage = (dir: 1 | -1) => {
         const next = suggPage + dir;
         if (next < 0 || next >= totalPages) return;
@@ -267,46 +274,51 @@ export default function Chatbot() {
 
                     {/* Suggestions Slider */}
                     {visibleSuggestions.length > 0 && (
-                        <div className="px-3 pt-2.5 pb-2 border-b border-white/10 shrink-0">
-                            <div className="flex items-center justify-between mb-1.5">
-                                <p className="text-[10px] text-white/30 uppercase tracking-widest">Suggestions</p>
-                                <div className="flex items-center gap-1">
-                                    <div className="flex gap-1 mr-1">
-                                        {Array.from({ length: totalPages }).map((_, i) => (
-                                            <span
-                                                key={i}
-                                                className="w-1 h-1 rounded-full transition-all duration-200"
-                                                style={{ background: i === suggPage ? "#a78bfa" : "rgba(255,255,255,0.2)" }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <button
-                                        onClick={() => goPage(-1)}
-                                        disabled={suggPage === 0}
-                                        className="w-5 h-5 rounded-full bg-white/10 hover:bg-purple-500 disabled:opacity-20 flex items-center justify-center transition-all duration-200"
-                                    >
-                                        <ChevronLeft size={11} />
-                                    </button>
-                                    <button
-                                        onClick={() => goPage(1)}
-                                        disabled={suggPage >= totalPages - 1}
-                                        className="w-5 h-5 rounded-full bg-white/10 hover:bg-purple-500 disabled:opacity-20 flex items-center justify-center transition-all duration-200"
-                                    >
-                                        <ChevronRight size={11} />
-                                    </button>
+                        <div
+                            className="px-3 pt-2.5 pb-2 border-b border-white/10 shrink-0 select-none"
+                            onMouseEnter={() => setIsHovered(true)}  /* মাউস আনলে অটো-প্লে পজ হবে */
+                            onMouseLeave={() => setIsHovered(false)} /* মাউস সরিয়ে নিলে আবার চালু হবে */
+                        >
+                            {/* Header Label */}
+                            <p className="text-[10px] font-semibold text-white/40 uppercase tracking-widest mb-2">
+                                Suggestions
+                            </p>
+
+                            {/* Slider Container with Left & Right Arrows */}
+                            <div className="flex items-center gap-2">
+                                {/* Left Arrow Button */}
+                                <button
+                                    onClick={() => goPage(-1)}
+                                    disabled={suggPage === 0}
+                                    className="w-6 h-6 shrink-0 rounded-full bg-white/10 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-white/10 flex items-center justify-center transition-all duration-200 active:scale-90"
+                                    aria-label="Previous suggestions"
+                                >
+                                    <ChevronLeft size={12} />
+                                </button>
+
+                                {/* Suggestions Track */}
+                                <div ref={sliderRef} className="flex-1 flex items-center gap-2 overflow-hidden">
+                                    {currentChips.map((s) => (
+                                        <button
+                                            key={s.label}
+                                            onClick={() => handleSuggestion(s)}
+                                            className="flex-1 flex items-center justify-center gap-1.5 text-[11px] bg-white/10 hover:bg-purple-600/90 text-white/90 hover:text-white px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap border border-white/5"
+                                        >
+                                            {s.icon}
+                                            <span className="truncate">{s.label}</span>
+                                        </button>
+                                    ))}
                                 </div>
-                            </div>
-                            <div ref={sliderRef} className="flex gap-1.5">
-                                {currentChips.map((s) => (
-                                    <button
-                                        key={s.label}
-                                        onClick={() => handleSuggestion(s)}
-                                        className="flex-1 flex items-center justify-center gap-1 text-[11px] bg-white/10 hover:bg-purple-500 px-2 py-1.5 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap"
-                                    >
-                                        {s.icon}
-                                        <span className="truncate">{s.label}</span>
-                                    </button>
-                                ))}
+
+                                {/* Right Arrow Button */}
+                                <button
+                                    onClick={() => goPage(1)}
+                                    disabled={suggPage >= totalPages - 1}
+                                    className="w-6 h-6 shrink-0 rounded-full bg-white/10 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-white/10 flex items-center justify-center transition-all duration-200 active:scale-90"
+                                    aria-label="Next suggestions"
+                                >
+                                    <ChevronRight size={12} />
+                                </button>
                             </div>
                         </div>
                     )}
