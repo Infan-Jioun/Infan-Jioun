@@ -6,8 +6,7 @@
 <br/>
 <img src="https://img.shields.io/badge/STATUS-ONLINE-00f0ff?style=for-the-badge&labelColor=0a0714" />
 <img src="https://img.shields.io/badge/LOCATION-CHATTOGRAM%2C%20BD-ff2bd6?style=for-the-badge&labelColor=0a0714" />
-<img src="https://img.shields.io/badge/BUILDING-LANDING%20PAGE%20BUILDER-7c3aff?style=for-the-badge&labelColor=0a0714" />
-</div>
+
 <br/>
 
 
