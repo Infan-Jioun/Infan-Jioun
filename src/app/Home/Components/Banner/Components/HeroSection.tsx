@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdDownloading } from 'react-icons/md';
 import { FaGithub, FaLinkedinIn, FaInstagram, FaFacebook, FaTelegram } from "react-icons/fa";
 import { IoIosMail } from 'react-icons/io';
@@ -12,17 +12,18 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent } from '@/components/ui/card';
 import TextType from '@/components/TextType';
-import SocialLinks from './SocialLink';
 
 interface HeroSectionProps {
     loading: boolean;
     onScrollToForm: () => void;
 }
 
-interface SocialLinkItem {
-    icon: React.ReactNode;
-    href: string;
+interface SocialLink {
+    icon: React.ReactElement;
+    url: string;
     color: string;
+    hoverShadow: string;
+    label: string;
 }
 
 // Updated Neo-Brutalist Cyber Style Object matching Footer
@@ -32,17 +33,70 @@ const neoBrutalistCardStyle: React.CSSProperties = {
     WebkitBackdropFilter: "blur(20px)",
 };
 
-const socialLinks: SocialLinkItem[] = [
-    { icon: <FaGithub />, href: 'https://github.com/Infan-Jioun', color: 'text-slate-200 hover:text-cyan-400' },
-    { icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-400 hover:text-blue-300' },
-    { icon: <IoIosMail />, href: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-400 hover:text-red-300' },
-    { icon: <FaInstagram />, href: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-400 hover:text-pink-300' },
-    { icon: <FaFacebook />, href: 'https://www.facebook.com/profile.php?id=61572744838042', color: 'text-blue-500 hover:text-blue-400' },
-    { icon: <FaTelegram />, href: 'https://t.me/infanjioun', color: 'text-cyan-400 hover:text-cyan-300' },
-    { icon: <FaSquareXTwitter />, href: 'https://twitter.com/RahmanJito', color: 'text-slate-300 hover:text-white' },
+// Same social config + styling as Footer (icon, hover color, hover shadow)
+const socialLinks: SocialLink[] = [
+    {
+        icon: <FaGithub />,
+        url: 'https://github.com/Infan-Jioun',
+        color: 'text-white hover:text-cyan-400',
+        hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#22d3ee]',
+        label: 'GitHub',
+    },
+    {
+        icon: <FaLinkedinIn />,
+        url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/',
+        color: 'text-blue-400 hover:text-blue-300',
+        hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#3b82f6]',
+        label: 'LinkedIn',
+    },
+    {
+        icon: <IoIosMail />,
+        url: 'mailto:infanjiounrahman20606@gmail.com',
+        color: 'text-red-400 hover:text-red-300',
+        hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#ef4444]',
+        label: 'Email',
+    },
+    {
+        icon: <FaInstagram />,
+        url: 'https://www.instagram.com/infan_jioun_rahman/',
+        color: 'text-pink-400 hover:text-pink-300',
+        hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#ec4899]',
+        label: 'Instagram',
+    },
+    {
+        icon: <FaFacebook />,
+        url: 'https://www.facebook.com/profile.php?id=61572744838042',
+        color: 'text-blue-500 hover:text-blue-400',
+        hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#2563eb]',
+        label: 'Facebook',
+    },
+    {
+        icon: <FaTelegram />,
+        url: 'https://t.me/infanjioun',
+        color: 'text-cyan-400 hover:text-cyan-300',
+        hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#06b6d4]',
+        label: 'Telegram',
+    },
+    {
+        icon: <FaSquareXTwitter />,
+        url: 'https://twitter.com/RahmanJito',
+        color: 'text-slate-200 hover:text-white',
+        hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#f8fafc]',
+        label: 'Twitter',
+    },
 ];
 
 const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        if (!loading) {
+            // slight delay so the bounce-in animation feels intentional after content loads
+            const t = setTimeout(() => setIsVisible(true), 100);
+            return () => clearTimeout(t);
+        }
+    }, [loading]);
+
     return (
         <section
             id="about"
@@ -60,12 +114,29 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                     50% { background-position: 100% 50%; }
                     100% { background-position: 0% 50%; }
                 }
+                @keyframes bounceIn {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.6) translateY(10px);
+                    }
+                    70% {
+                        opacity: 1;
+                        transform: scale(1.05) translateY(-2px);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: scale(1) translateY(0);
+                    }
+                }
                 .text-gradient-hero {
                     background: linear-gradient(-45deg, #ffffff, #38bdf8, #818cf8, #c084fc, #ffffff);
                     background-size: 300% 300%;
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     animation: gradientShift 8s ease infinite;
+                }
+                .animate-bounce-in {
+                    animation: bounceIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
                 }
             `}</style>
 
@@ -96,8 +167,8 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                                 background: "linear-gradient(135deg, rgba(34,211,238,0.5), rgba(99,102,241,0.5), rgba(168,85,247,0.4))",
                             }}
                         />
-                        <Card 
-                            className="relative rounded-none border-2 border-indigo-500/40 shadow-[8px_8px_0px_0px_#4f46e5] overflow-hidden p-4 md:p-6 transition-all duration-300 hover:border-indigo-400" 
+                        <Card
+                            className="relative rounded-none border-2 border-indigo-500/40 shadow-[8px_8px_0px_0px_#4f46e5] overflow-hidden p-4 md:p-6 transition-all duration-300 hover:border-indigo-400"
                             style={neoBrutalistCardStyle}
                         >
                             <CardContent className="p-0">
@@ -108,13 +179,13 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
 
                     {/* Main Content Area */}
                     <div className="order-2 lg:order-1 w-full lg:flex-1 space-y-6 md:space-y-6">
-                        
+
                         {/* Text Content */}
                         {loading ? (
                             <Card className="rounded-none border-2 border-indigo-500/40 shadow-[6px_6px_0px_0px_#4f46e5]" style={neoBrutalistCardStyle}>
-                                <CardContent className="p-6 md:p-8">
-                                    <Skeleton className="w-72 h-10 mb-6 bg-slate-800 rounded-none animate-pulse" />
-                                    <Skeleton className="w-64 h-8 mb-6 bg-slate-800 rounded-none animate-pulse" />
+                                <CardContent className="p-5 sm:p-6 md:p-8">
+                                    <Skeleton className="w-56 sm:w-72 h-8 sm:h-10 mb-6 bg-slate-800 rounded-none animate-pulse" />
+                                    <Skeleton className="w-48 sm:w-64 h-6 sm:h-8 mb-6 bg-slate-800 rounded-none animate-pulse" />
                                     <div className="space-y-3">
                                         <Skeleton className="w-full h-4 bg-slate-800 rounded-none" />
                                         <Skeleton className="w-full h-4 bg-slate-800 rounded-none" />
@@ -123,20 +194,20 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                                 </CardContent>
                             </Card>
                         ) : (
-                            <Card 
-                                className="rounded-none border-2 border-indigo-500/40 shadow-[6px_6px_0px_0px_#4f46e5] transition-all duration-300 hover:border-indigo-400" 
+                            <Card
+                                className="rounded-none border-2 border-indigo-500/40 shadow-[6px_6px_0px_0px_#4f46e5] transition-all duration-300 hover:border-indigo-400"
                                 style={neoBrutalistCardStyle}
                             >
-                                <CardContent className="p-6 md:p-8">
+                                <CardContent className="p-5 sm:p-6 md:p-8">
                                     <div className="mb-6">
                                         {/* Neo-brutalist Greeting Badge matching Footer */}
-                                        <span className="inline-flex items-center gap-2 bg-slate-950 border-2 border-indigo-500/40 shadow-[3px_3px_0px_0px_#4f46e5] px-4 py-1.5 rounded-none text-indigo-300 text-xs font-black tracking-widest uppercase mb-4 select-none">
-                                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                                        <span className="inline-flex items-center gap-2 bg-slate-950 border-2 border-indigo-500/40 shadow-[3px_3px_0px_0px_#4f46e5] px-3 sm:px-4 py-1.5 rounded-none text-indigo-300 text-[10px] sm:text-xs font-black tracking-widest uppercase mb-4 select-none">
+                                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
                                             👋 Assalamoalaikum, I'm
                                         </span>
 
-                                        {/* Name Heading */}
-                                        <h1 className="text-3xl sm:text-xl md:text-5xl font-black text-gradient-hero mb-3 min-h-[60px] flex items-center tracking-tight">
+                                        {/* Name Heading — mobile-first responsive scale, no shrink-then-grow */}
+                                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gradient-hero mb-3 min-h-[40px] sm:min-h-[48px] md:min-h-[56px] lg:min-h-[64px] flex items-center tracking-tight leading-tight break-words">
                                             <TextType
                                                 text={["Infan Jioun Rahman"]}
                                                 typingSpeed={75}
@@ -149,9 +220,9 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
 
                                     {/* Role Subtitle Box matching Footer Card Theme */}
                                     <div
-                                        className="rounded-none p-4 mb-6 border-2 border-indigo-500/30 bg-slate-950/80 shadow-[4px_4px_0px_0px_#4f46e5] transition-all duration-300"
+                                        className="rounded-none p-3 sm:p-4 mb-6 border-2 border-indigo-500/30 bg-slate-950/80 shadow-[4px_4px_0px_0px_#4f46e5] transition-all duration-300"
                                     >
-                                        <h2 className="text-lg md:text-2xl font-bold text-cyan-400 min-h-[40px] flex items-center">
+                                        <h2 className="text-sm sm:text-lg md:text-2xl font-bold text-cyan-400 min-h-[28px] sm:min-h-[36px] md:min-h-[40px] flex items-center leading-snug">
                                             <TextType
                                                 text={["JavaScript Developer", "TypeScript Developer", "Next JS Developer", 'React JS Developer', "MERN Developer", "Full Stack Developer"]}
                                                 typingSpeed={50}
@@ -163,7 +234,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                                     </div>
 
                                     {/* Bio Description */}
-                                    <p className="text-slate-300 leading-relaxed text-base md:text-lg font-normal">
+                                    <p className="text-slate-300 leading-relaxed text-sm sm:text-base md:text-lg font-normal">
                                         Passionate <span className="text-cyan-400 font-semibold underline decoration-indigo-500/50 underline-offset-4">Full-Stack Developer</span> specializing in modern web technologies. I create dynamic, scalable, and high-performance applications using{' '}
                                         <span className="text-cyan-400 font-semibold">React</span>,{' '}
                                         <span className="text-white font-semibold">Next.js</span>,{' '}
@@ -177,17 +248,47 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                             </Card>
                         )}
 
-                        {/* Social Links Container */}
+                        {/* Social Links Container — Footer-style icons */}
                         <Card className="rounded-none border-2 border-indigo-500/40 shadow-[6px_6px_0px_0px_#4f46e5]" style={neoBrutalistCardStyle}>
-                            <CardContent className="p-6">
-                                <SocialLinks loading={loading} socialLinks={socialLinks} />
+                            <CardContent className="p-5 sm:p-6">
+                                <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
+                                    {loading ? (
+                                        Array.from({ length: 7 }).map((_, i) => (
+                                            <Skeleton
+                                                key={i}
+                                                className="w-11 h-11 sm:w-12 sm:h-12 bg-slate-800 rounded-none border border-indigo-500/30 animate-pulse"
+                                            />
+                                        ))
+                                    ) : (
+                                        socialLinks.map(({ icon, url, color, hoverShadow, label }, index) => (
+                                            
+                                               <a key={index}
+                                                href={url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                aria-label={label}
+                                                className={`
+                                                    w-11 h-11 sm:w-12 sm:h-12 text-lg sm:text-xl flex items-center justify-center 
+                                                    bg-slate-950 border-2 border-indigo-500/40 rounded-none
+                                                    shadow-[4px_4px_0px_0px_#4f46e5] transition-all duration-200
+                                                    hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none
+                                                    ${color} ${hoverShadow}
+                                                    ${isVisible ? 'animate-bounce-in' : 'opacity-0'}
+                                                `}
+                                                style={{ animationDelay: `${index * 90}ms` }}
+                                            >
+                                                {icon}
+                                            </a>
+                                        ))
+                                    )}
+                                </div>
                             </CardContent>
                         </Card>
 
                         {/* Action Buttons with Cyber Neo-Brutalist Theme */}
                         {loading ? (
                             <Card className="rounded-none border-2 border-indigo-500/40 shadow-[6px_6px_0px_0px_#4f46e5]" style={neoBrutalistCardStyle}>
-                                <CardContent className="p-6">
+                                <CardContent className="p-5 sm:p-6">
                                     <div className="flex flex-col sm:flex-row gap-4">
                                         <Skeleton className="flex-1 h-12 bg-slate-800 rounded-none animate-pulse" />
                                         <Skeleton className="flex-1 h-12 bg-slate-800 rounded-none animate-pulse" />
@@ -196,7 +297,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                             </Card>
                         ) : (
                             <Card className="rounded-none border-2 border-indigo-500/40 shadow-[6px_6px_0px_0px_#4f46e5]" style={neoBrutalistCardStyle}>
-                                <CardContent className="p-6">
+                                <CardContent className="p-5 sm:p-6">
                                     <div className="flex flex-col sm:flex-row gap-4">
                                         {/* HIRE ME Button */}
                                         <Button
