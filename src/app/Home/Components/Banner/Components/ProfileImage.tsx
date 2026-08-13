@@ -14,7 +14,7 @@ const ProfileImage = ({ loading }: ProfileImageProps) => {
     if (loading) {
         return (
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-[2rem] overflow-hidden p-1 bg-white/5 border border-white/10">
-                <Skeleton className="w-full h-full rounded-[1.8rem] bg-white/10 animate-pulse" />
+                <Skeleton className="w-full h-full rounded-[1.8rem] bg-slate-900/60 animate-pulse" />
             </div>
         );
     }

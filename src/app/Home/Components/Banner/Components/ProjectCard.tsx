@@ -30,7 +30,8 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
 
     if (loading) {
         return (
-            <Card className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl">
+            <Card className="bg-slate-900/60 backdrop-blur-lg border border-white/20 shadow-2xl">
+
                 <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row gap-6">
                         <div className="lg:w-2/5">
@@ -67,7 +68,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
     }
 
     return (
-        <Card className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 group">
+        <Card className="bg-slate-900/60 backdrop-blur-lg border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 group " >
             <CardContent className="p-6">
                 <div className="flex flex-col lg:flex-row gap-6">
                     {/* Image Section */}
@@ -107,7 +108,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                 {project.techStack.map((tech, i) => (
                                     <div
                                         key={i}
-                                        className="flex items-center gap-2 px-3 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur-sm"
+                                        className="flex items-center gap-2 px-3 py-2 bg-slate-900/60 rounded-lg border border-white/10 backdrop-blur-sm"
                                     >
                                         <Image
                                             src={tech.icon}
@@ -138,7 +139,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                 {/* Frontend Link with Fallback Check */}
                                 {project?.frontendRepo && (
                                     <Link href={project.frontendRepo} target="_blank" rel="noopener noreferrer">
-                                        <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
+                                        <div className="w-10 h-10 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
                                             <Image
                                                 src="https://i.ibb.co.com/5jCZwV7/github.webp"
                                                 alt="GitHub Frontend"
@@ -153,7 +154,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                 {/* Backend Link with Null Check */}
                                 {project?.backendRepo && (
                                     <Link href={project.backendRepo} target="_blank" rel="noopener noreferrer">
-                                        <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
+                                        <div className="w-10 h-10 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg hover:scale-110 hover:bg-white/20 transition-all duration-300">
                                             <Image
                                                 src="https://i.ibb.co.com/5jCZwV7/github.webp"
                                                 alt="GitHub Backend" width={10} height={10}
@@ -167,6 +168,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                         </div>
                     </div>
                 </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none group-hover:opacity-80 transition-opacity duration-500" />
             </CardContent>
         </Card>
     );

@@ -40,10 +40,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      className="dark"
       suppressHydrationWarning
     >
       <head>
-        {/* DNS prefetch — ibb.co image load faster হবে */}
+        {/* DNS prefetch */}
         <link rel="dns-prefetch" href="//i.ibb.co.com" />
         <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -75,7 +76,7 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-poppins bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-mono bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-black`}
         suppressHydrationWarning
       >
         <LenisProvider>

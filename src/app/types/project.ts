@@ -6,6 +6,7 @@ export interface TechStack {
 }
 
 export interface Project {
+    category: import("react").JSX.Element;
     _id?: string;
     title: string;
     description: string;

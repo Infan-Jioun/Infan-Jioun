@@ -1,4 +1,5 @@
-"use client"
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import {
   FaFacebook,
@@ -17,16 +18,60 @@ interface SocialLink {
   icon: React.ReactElement;
   url: string;
   color: string;
+  hoverShadow: string;
+  label: string;
 }
 
 const socialLinks: SocialLink[] = [
-  { icon: <FaGithub />, url: 'https://github.com/Infan-Jioun', color: 'text-gray-800' },
-  { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/', color: 'text-blue-600' },
-  { icon: <IoIosMail />, url: 'mailto:infanjiounrahman20606@gmail.com', color: 'text-red-600' },
-  { icon: <FaInstagram />, url: 'https://www.instagram.com/infan_jioun_rahman/', color: 'text-pink-600' },
-  { icon: <FaFacebook />, url: 'https://www.facebook.com/profile.php?id=61572744838042', color: 'text-blue-700' },
-  { icon: <FaTelegram />, url: 'https://t.me/infanjioun', color: 'text-cyan-500' },
-  { icon: <FaSquareXTwitter />, url: 'https://twitter.com/RahmanJito', color: 'text-black' },
+  {
+    icon: <FaGithub />,
+    url: 'https://github.com/Infan-Jioun',
+    color: 'text-white hover:text-cyan-400',
+    hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#22d3ee]',
+    label: 'GitHub',
+  },
+  {
+    icon: <FaLinkedinIn />,
+    url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/',
+    color: 'text-blue-400 hover:text-blue-300',
+    hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#3b82f6]',
+    label: 'LinkedIn',
+  },
+  {
+    icon: <IoIosMail />,
+    url: 'mailto:infanjiounrahman20606@gmail.com',
+    color: 'text-red-400 hover:text-red-300',
+    hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#ef4444]',
+    label: 'Email',
+  },
+  {
+    icon: <FaInstagram />,
+    url: 'https://www.instagram.com/infan_jioun_rahman/',
+    color: 'text-pink-400 hover:text-pink-300',
+    hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#ec4899]',
+    label: 'Instagram',
+  },
+  {
+    icon: <FaFacebook />,
+    url: 'https://www.facebook.com/profile.php?id=61572744838042',
+    color: 'text-blue-500 hover:text-blue-400',
+    hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#2563eb]',
+    label: 'Facebook',
+  },
+  {
+    icon: <FaTelegram />,
+    url: 'https://t.me/infanjioun',
+    color: 'text-cyan-400 hover:text-cyan-300',
+    hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#06b6d4]',
+    label: 'Telegram',
+  },
+  {
+    icon: <FaSquareXTwitter />,
+    url: 'https://twitter.com/RahmanJito',
+    color: 'text-slate-200 hover:text-white',
+    hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#f8fafc]',
+    label: 'Twitter',
+  },
 ];
 
 const Footer: React.FC = () => {
@@ -34,7 +79,7 @@ const Footer: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 1200);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -57,44 +102,62 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 xl:px-52 w-full">
+    <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
       <footer
         id="footer"
-        className="mt-20  backdrop-blur-lg border  rounded-t-3xl pt-8 sm:pt-10 lg:pt-12 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8"
+        className="relative mt-24 bg-slate-900/90 backdrop-blur-xl border-2 border-indigo-500/40 shadow-[8px_8px_0px_0px_#4f46e5] rounded-none pt-10 sm:pt-12 pb-8 px-4 sm:px-8 transition-all duration-300 overflow-hidden"
       >
+        {/* Top Accent Gradient Line */}
+        <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_#6366f1]" />
+
         <div
           className={`
-          max-w-7xl mx-auto text-center space-y-6 sm:space-y-8
-          ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}
-        `}
+            max-w-5xl mx-auto text-center space-y-6 sm:space-y-8
+            ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}
+          `}
         >
           {/* Header */}
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold sm:font-extrabold text-white tracking-wide uppercase">
-            Let&apos;s build something impactful together!
-          </h2>
-
-          <p className="max-w-xl mx-auto text-xs sm:text-sm text-white/90 leading-relaxed px-2">
-            I&apos;m passionate about building clean, modern, and performance-optimized web applications. Let&apos;s connect and create something awesome!
-          </p>
+          <div className="space-y-3">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-widest uppercase">
+              LET&apos;S BUILD SOMETHING <span className="text-cyan-400">IMPACTFUL</span> TOGETHER!
+            </h2>
+            <p className="max-w-2xl mx-auto text-xs sm:text-sm text-slate-300 font-medium leading-relaxed px-2">
+              I&apos;m passionate about building clean, modern, and performance-optimized web applications. Let&apos;s connect and create something awesome!
+            </p>
+          </div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap justify-center gap-5 mt-6">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-6">
             {loading ? (
-              <Skeleton height={40} width={250} baseColor="#2c2c3a" highlightColor="#4338ca" />
+              <div className="flex gap-3">
+                {Array.from({ length: 7 }).map((_, i) => (
+                  <Skeleton
+                    key={i}
+                    height={44}
+                    width={44}
+                    baseColor="#0f172a"
+                    highlightColor="#4f46e5"
+                    className="rounded-none border border-indigo-500/30"
+                  />
+                ))}
+              </div>
             ) : (
-              socialLinks.map(({ icon, url, color }, index) => (
+              socialLinks.map(({ icon, url, color, hoverShadow, label }, index) => (
                 <a
                   key={index}
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={label}
                   className={`
-                  w-7 h-7 md:w-12 md:h-12 text-xl flex items-center justify-center 
-                  rounded-full bg-white shadow-md transition-all duration-300 
-                  hover:scale-110 hover:rotate-6 active:scale-95 ${color}
-                  ${isVisible ? 'animate-bounce-in' : 'opacity-0'}
-                `}
-                  style={{ animationDelay: `${index * 100}ms` }}
+                    w-11 h-11 sm:w-12 sm:h-12 text-lg sm:text-xl flex items-center justify-center 
+                    bg-slate-950 border-2 border-indigo-500/40 rounded-none
+                    shadow-[4px_4px_0px_0px_#4f46e5] transition-all duration-200
+                    hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none
+                    ${color} ${hoverShadow}
+                    ${isVisible ? 'animate-bounce-in' : 'opacity-0'}
+                  `}
+                  style={{ animationDelay: `${index * 90}ms` }}
                 >
                   {icon}
                 </a>
@@ -102,14 +165,18 @@ const Footer: React.FC = () => {
             )}
           </div>
 
-          {/* Divider */}
-          <div className="w-full border-t border-white/30 mt-8 sm:mt-10"></div>
+          {/* Sharp Cyber Divider */}
+          <div className="relative w-full my-8">
+            <div className="w-full border-t border-indigo-500/30" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-cyan-400 rotate-45 shadow-[0_0_8px_#22d3ee]" />
+          </div>
 
           {/* Footer Bottom Text */}
-          <p className="text-xs text-white/80 font-mono mt-4 sm:mt-6 px-2 leading-5">
-            © {new Date().getFullYear()} Infan Jioun Rahman — All rights reserved.
+          <p className="text-xs text-slate-400 font-mono tracking-widest uppercase leading-6">
+            © {new Date().getFullYear()} INFAN JIOUN RAHMAN — ALL RIGHTS RESERVED.
             <br className="sm:hidden" />
-            Crafted with ❤️ using TypeScript & Next JS
+            <span className="hidden sm:inline"> | </span>
+            CRAFTED WITH <span className="text-cyan-400 font-bold">NEXT.JS</span> & <span className="text-indigo-400 font-bold">TYPESCRIPT</span>
           </p>
         </div>
 
@@ -117,38 +184,35 @@ const Footer: React.FC = () => {
           @keyframes fadeInUp {
             from {
               opacity: 0;
-              transform: translateY(40px);
+              transform: translateY(30px);
             }
             to {
               opacity: 1;
               transform: translateY(0);
             }
           }
-          
+
           @keyframes bounceIn {
             0% {
               opacity: 0;
-              transform: scale(0.3);
-            }
-            50% {
-              opacity: 1;
-              transform: scale(1.05);
+              transform: scale(0.6) translateY(10px);
             }
             70% {
-              transform: scale(0.9);
+              opacity: 1;
+              transform: scale(1.05) translateY(-2px);
             }
             100% {
               opacity: 1;
-              transform: scale(1);
+              transform: scale(1) translateY(0);
             }
           }
-          
+
           .animate-fade-in-up {
-            animation: fadeInUp 0.5s ease-out forwards;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
-          
+
           .animate-bounce-in {
-            animation: bounceIn 0.6s ease-out forwards;
+            animation: bounceIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
         `}</style>
       </footer>

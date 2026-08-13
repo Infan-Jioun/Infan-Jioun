@@ -66,6 +66,7 @@ function renderMessage(text: string): ReactNode[] {
         return <span key={i}>{part}</span>;
     });
 }
+
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
@@ -76,6 +77,7 @@ export default function Chatbot() {
     const [usedSuggestions, setUsedSuggestions] = useState<Set<string>>(new Set());
     const [suggPage, setSuggPage] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+
     const bottomRef = useRef<HTMLDivElement>(null);
     const chatWinRef = useRef<HTMLDivElement>(null);
     const btnRef = useRef<HTMLButtonElement>(null);
@@ -88,14 +90,16 @@ export default function Chatbot() {
     const visibleSuggestions = ALL_SUGGESTIONS.filter((s) => !usedSuggestions.has(s.label));
     const totalPages = Math.ceil(visibleSuggestions.length / CHIPS_PER_PAGE);
     const currentChips = visibleSuggestions.slice(suggPage * CHIPS_PER_PAGE, (suggPage + 1) * CHIPS_PER_PAGE);
+
     useEffect(() => {
         if (isHovered || totalPages <= 1) return;
 
         const interval = setInterval(() => {
             setSuggPage((prev) => (prev + 1) % totalPages);
-        }, 3500); 
+        }, 3500);
         return () => clearInterval(interval);
     }, [isHovered, totalPages]);
+
     const goPage = (dir: 1 | -1) => {
         const next = suggPage + dir;
         if (next < 0 || next >= totalPages) return;
@@ -131,14 +135,6 @@ export default function Chatbot() {
                 { scale: 1, opacity: 0.4 },
                 { scale: 2.4, opacity: 0, duration: 1.8, repeat: -1, ease: "power2.out", delay: i * 0.7 }
             );
-        });
-    }, []);
-
-    useEffect(() => {
-        if (!labelRef.current) return;
-        gsap.to(labelRef.current, {
-            backgroundPosition: "200% center",
-            duration: 3, repeat: -1, ease: "none",
         });
     }, []);
 
@@ -201,10 +197,6 @@ export default function Chatbot() {
     return (
         <>
             <style>{`
-                @keyframes shimmer {
-                    0%   { background-position: -200% center; }
-                    100% { background-position:  200% center; }
-                }
                 @keyframes glow-pulse {
                     0%, 100% { box-shadow: 0 0 12px 2px rgba(139,92,246,0.45); }
                     50%       { box-shadow: 0 0 22px 6px rgba(139,92,246,0.7); }
@@ -216,13 +208,9 @@ export default function Chatbot() {
                 {!isOpen && (
                     <div
                         ref={labelRef}
-                        className="text-white text-[11px] font-semibold px-3 py-1 rounded-full border border-purple-500/40 whitespace-nowrap select-none pointer-events-none relative overflow-hidden"
-                        style={{
-                            background: "linear-gradient(90deg,#1a1a2e,#5b21b6,#7c3aed,#a78bfa,#7c3aed,#5b21b6,#1a1a2e)",
-                            backgroundSize: "200% auto",
-                            animation: "shimmer 3s linear infinite, glow-pulse 2.5s ease-in-out infinite",
-                        }}
+                        className="inline-flex items-center gap-2 bg-slate-950 border-2 border-purple-500/50 shadow-[3px_3px_0px_0px_#a855f7] px-4 py-1.5 rounded-none text-purple-300 text-xs font-black tracking-widest uppercase select-none pointer-events-none"
                     >
+                        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                         ✦ Infan AI Assistant
                     </div>
                 )}
@@ -259,8 +247,7 @@ export default function Chatbot() {
             {isOpen && (
                 <div
                     ref={chatWinRef}
-                    className="fixed bottom-24 right-6 w-[340px] h-[520px] bg-[#0f0f1a]/95 backdrop-blur-2xl border border-white/10 text-white rounded-2xl shadow-2xl flex flex-col z-50"
-                    style={{ overflow: "hidden" }}
+                    className="fixed bottom-24 right-6 w-[340px] h-[520px] bg-[#0f0f1a]/95 backdrop-blur-2xl border border-white/10 text-white rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden"
                 >
                     {/* Header */}
                     <div className="bg-gradient-to-r from-purple-700 to-blue-700 px-4 py-3 flex items-center gap-3 shrink-0">
@@ -276,8 +263,8 @@ export default function Chatbot() {
                     {visibleSuggestions.length > 0 && (
                         <div
                             className="px-3 pt-2.5 pb-2 border-b border-white/10 shrink-0 select-none"
-                            onMouseEnter={() => setIsHovered(true)}  /* মাউস আনলে অটো-প্লে পজ হবে */
-                            onMouseLeave={() => setIsHovered(false)} /* মাউস সরিয়ে নিলে আবার চালু হবে */
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
                         >
                             {/* Header Label */}
                             <p className="text-[10px] font-semibold text-white/40 uppercase tracking-widest mb-2">
@@ -290,7 +277,7 @@ export default function Chatbot() {
                                 <button
                                     onClick={() => goPage(-1)}
                                     disabled={suggPage === 0}
-                                    className="w-6 h-6 shrink-0 rounded-full bg-white/10 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-white/10 flex items-center justify-center transition-all duration-200 active:scale-90"
+                                    className="w-6 h-6 shrink-0 rounded-full bg-slate-900/60 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-slate-900/60 flex items-center justify-center transition-all duration-200 active:scale-90"
                                     aria-label="Previous suggestions"
                                 >
                                     <ChevronLeft size={12} />
@@ -302,7 +289,7 @@ export default function Chatbot() {
                                         <button
                                             key={s.label}
                                             onClick={() => handleSuggestion(s)}
-                                            className="flex-1 flex items-center justify-center gap-1.5 text-[11px] bg-white/10 hover:bg-purple-600/90 text-white/90 hover:text-white px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap border border-white/5"
+                                            className="flex-1 flex items-center justify-center gap-1.5 text-[11px] bg-slate-900/60 hover:bg-purple-600/90 text-white/90 hover:text-white px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap border border-white/5"
                                         >
                                             {s.icon}
                                             <span className="truncate">{s.label}</span>
@@ -314,7 +301,7 @@ export default function Chatbot() {
                                 <button
                                     onClick={() => goPage(1)}
                                     disabled={suggPage >= totalPages - 1}
-                                    className="w-6 h-6 shrink-0 rounded-full bg-white/10 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-white/10 flex items-center justify-center transition-all duration-200 active:scale-90"
+                                    className="w-6 h-6 shrink-0 rounded-full bg-slate-900/60 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-slate-900/60 flex items-center justify-center transition-all duration-200 active:scale-90"
                                     aria-label="Next suggestions"
                                 >
                                     <ChevronRight size={12} />
@@ -334,7 +321,7 @@ export default function Chatbot() {
                                 {msg.role === "assistant" && (
                                     <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold mr-1.5 mt-1 shrink-0">AI</div>
                                 )}
-                                <div className={`max-w-[78%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${msg.role === "user" ? "bg-purple-500 text-white rounded-br-sm" : "bg-white/10 text-white rounded-bl-sm"}`}>
+                                <div className={`max-w-[78%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${msg.role === "user" ? "bg-purple-500 text-white rounded-br-sm" : "bg-slate-900/60 text-white rounded-bl-sm"}`}>
                                     {renderMessage(msg.content)}
                                 </div>
                             </div>
@@ -343,7 +330,7 @@ export default function Chatbot() {
                         {loading && (
                             <div className="chat-bubble flex justify-start">
                                 <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold mr-1.5 mt-1 shrink-0">AI</div>
-                                <div className="bg-white/10 px-4 py-3 rounded-2xl rounded-bl-sm flex gap-1 items-center">
+                                <div className="bg-slate-900/60 px-4 py-3 rounded-2xl rounded-bl-sm flex gap-1 items-center">
                                     <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
                                     <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
                                     <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -361,7 +348,7 @@ export default function Chatbot() {
                             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
                             placeholder="Type your message..."
                             disabled={loading}
-                            className="flex-1 bg-white/10 border border-white/15 text-white placeholder-white/30 rounded-xl px-3 py-2 text-sm outline-none focus:border-purple-400 focus:bg-white/15 transition-all duration-200 disabled:opacity-50"
+                            className="flex-1 bg-slate-900/60 border border-white/15 text-white placeholder-white/30 rounded-xl px-3 py-2 text-sm outline-none focus:border-purple-400 focus:bg-white/15 transition-all duration-200 disabled:opacity-50"
                         />
                         <button
                             onClick={() => sendMessage()}
