@@ -136,7 +136,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                                         </span>
 
                                         {/* Name Heading */}
-                                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gradient-hero mb-3 min-h-[60px] flex items-center tracking-tight">
+                                        <h1 className="text-3xl sm:text-xl md:text-5xl font-black text-gradient-hero mb-3 min-h-[60px] flex items-center tracking-tight">
                                             <TextType
                                                 text={["Infan Jioun Rahman"]}
                                                 typingSpeed={75}
