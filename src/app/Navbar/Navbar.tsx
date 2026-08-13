@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
                     >
                         <div className="w-3 h-3 bg-cyan-400 shadow-[0_0_10px_#22d3ee] rounded-none group-hover:bg-indigo-400 transition-colors" />
                         <span className="text-white font-black tracking-widest text-base sm:text-lg uppercase">
-                            INFAN<span className="text-indigo-400">.DEV</span>
+                            INFAN
                         </span>
                     </button>
 
