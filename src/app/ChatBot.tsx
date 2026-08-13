@@ -56,7 +56,7 @@ function renderMessage(text: string): ReactNode[] {
                     href={cleanUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline underline-offset-2 text-purple-300 hover:text-purple-100 transition-colors duration-150 break-all"
+                    className="underline underline-offset-2 text-cyan-300 hover:text-cyan-100 transition-colors duration-150 break-all font-semibold"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {cleanUrl}
@@ -133,7 +133,7 @@ export default function Chatbot() {
             if (!el) return;
             gsap.fromTo(el,
                 { scale: 1, opacity: 0.4 },
-                { scale: 2.4, opacity: 0, duration: 1.8, repeat: -1, ease: "power2.out", delay: i * 0.7 }
+                { scale: 2.2, opacity: 0, duration: 1.8, repeat: -1, ease: "power2.out", delay: i * 0.7 }
             );
         });
     }, []);
@@ -196,132 +196,125 @@ export default function Chatbot() {
 
     return (
         <>
-            <style>{`
-                @keyframes glow-pulse {
-                    0%, 100% { box-shadow: 0 0 12px 2px rgba(139,92,246,0.45); }
-                    50%       { box-shadow: 0 0 22px 6px rgba(139,92,246,0.7); }
-                }
-            `}</style>
-
-            {/* ── FAB area ── */}
-            <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-2.5">
+            {/* ── Floating Trigger Button & Label Area ── */}
+            <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2.5">
                 {!isOpen && (
                     <div
                         ref={labelRef}
                         className="inline-flex items-center gap-2 bg-slate-950 border-2 border-purple-500/50 shadow-[3px_3px_0px_0px_#a855f7] px-4 py-1.5 rounded-none text-purple-300 text-xs font-black tracking-widest uppercase select-none pointer-events-none"
                     >
-                        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                        <span className="w-2 h-2 rounded-none bg-cyan-400 animate-pulse" />
                         ✦ Infan AI Assistant
                     </div>
                 )}
 
                 <div className="relative flex items-center justify-center">
-                    <span ref={ring1Ref} className="absolute inset-0 rounded-full bg-purple-500 pointer-events-none" style={{ transformOrigin: "center" }} />
-                    <span ref={ring2Ref} className="absolute inset-0 rounded-full bg-indigo-400 pointer-events-none" style={{ transformOrigin: "center" }} />
-                    <span
-                        className="absolute inset-[-4px] rounded-full pointer-events-none"
-                        style={{
-                            background: "radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%)",
-                            animation: "glow-pulse 2.5s ease-in-out infinite",
-                        }}
-                    />
+                    {/* Square pulse rings matching Neo-brutalist theme */}
+                    <span ref={ring1Ref} className="absolute inset-0 rounded-none bg-indigo-500/50 pointer-events-none border border-indigo-400" style={{ transformOrigin: "center" }} />
+                    <span ref={ring2Ref} className="absolute inset-0 rounded-none bg-purple-500/50 pointer-events-none border border-purple-400" style={{ transformOrigin: "center" }} />
+                    
                     <button
                         ref={btnRef}
                         onClick={toggleChat}
                         onMouseEnter={onBtnHover}
-                        className="relative z-10 text-white rounded-full w-14 h-14 flex items-center justify-center transition-all duration-300"
-                        style={{
-                            background: "linear-gradient(135deg, #8b5cf6, #6366f1)",
-                            boxShadow: "0 8px 28px rgba(139,92,246,0.55), inset 0 1px 0 rgba(255,255,255,0.15)",
-                        }}
+                        className="relative z-10 text-white rounded-none w-14 h-14 flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 border-2 border-indigo-400 shadow-[4px_4px_0px_0px_#22d3ee] active:translate-x-0.5 active:translate-y-0.5 transition-all duration-200"
                         aria-label="Open chat"
                     >
                         <div ref={iconRef}>
-                            {isOpen ? <X size={26} /> : <MessageCircle size={26} />}
+                            {isOpen ? <X size={26} className="text-cyan-300" /> : <MessageCircle size={26} className="text-cyan-300" />}
                         </div>
                     </button>
                 </div>
             </div>
 
-            {/* ── Chat Window ── */}
+            {/* ── Cyber Neo-Brutalist Chat Window ── */}
             {isOpen && (
                 <div
                     ref={chatWinRef}
-                    className="fixed bottom-24 right-6 w-[340px] h-[520px] bg-[#0f0f1a]/95 backdrop-blur-2xl border border-white/10 text-white rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden"
+                    className="fixed bottom-24 right-6 w-[340px] sm:w-[360px] h-[530px] bg-slate-950/95 backdrop-blur-2xl border-2 border-indigo-500/50 text-white rounded-none shadow-[8px_8px_0px_0px_#4f46e5] flex flex-col z-50 overflow-hidden"
                 >
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-purple-700 to-blue-700 px-4 py-3 flex items-center gap-3 shrink-0">
-                        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">AI</div>
-                        <div>
-                            <p className="font-semibold text-sm leading-none">Infan AI Assistant</p>
-                            <p className="text-[11px] opacity-70 mt-0.5">Portfolio · Projects · Hire Me</p>
+                    <div className="bg-slate-900 border-b-2 border-indigo-500/40 px-4 py-3 flex items-center gap-3 shrink-0">
+                        <div className="w-8 h-8 rounded-none bg-indigo-600 border border-cyan-400 shadow-[2px_2px_0px_0px_#22d3ee] flex items-center justify-center text-xs font-black text-white">
+                            AI
                         </div>
-                        <span className="ml-auto w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_#4ade80]" />
+                        <div>
+                            <p className="font-black text-xs tracking-wider uppercase text-cyan-400 leading-none">
+                                Infan AI Assistant
+                            </p>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">
+                                Portfolio · Projects · Hire Me
+                            </p>
+                        </div>
+                        <span className="ml-auto w-2.5 h-2.5 rounded-none bg-cyan-400 shadow-[0_0_8px_#22d3ee] animate-pulse" />
                     </div>
 
                     {/* Suggestions Slider */}
                     {visibleSuggestions.length > 0 && (
                         <div
-                            className="px-3 pt-2.5 pb-2 border-b border-white/10 shrink-0 select-none"
+                            className="px-3 pt-2.5 pb-2 bg-slate-950/80 border-b-2 border-indigo-500/30 shrink-0 select-none"
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
                         >
-                            {/* Header Label */}
-                            <p className="text-[10px] font-semibold text-white/40 uppercase tracking-widest mb-2">
+                            <p className="text-[10px] font-black text-indigo-300/70 uppercase tracking-widest mb-2">
                                 Suggestions
                             </p>
 
-                            {/* Slider Container with Left & Right Arrows */}
                             <div className="flex items-center gap-2">
-                                {/* Left Arrow Button */}
                                 <button
                                     onClick={() => goPage(-1)}
                                     disabled={suggPage === 0}
-                                    className="w-6 h-6 shrink-0 rounded-full bg-slate-900/60 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-slate-900/60 flex items-center justify-center transition-all duration-200 active:scale-90"
+                                    className="w-7 h-7 shrink-0 rounded-none bg-slate-900 border border-indigo-500/40 text-cyan-400 hover:bg-indigo-600 hover:text-white disabled:opacity-20 disabled:hover:bg-slate-900 disabled:hover:text-cyan-400 flex items-center justify-center transition-all duration-150 shadow-[2px_2px_0px_0px_#4f46e5] active:translate-x-0 active:translate-y-0"
                                     aria-label="Previous suggestions"
                                 >
-                                    <ChevronLeft size={12} />
+                                    <ChevronLeft size={14} />
                                 </button>
 
-                                {/* Suggestions Track */}
                                 <div ref={sliderRef} className="flex-1 flex items-center gap-2 overflow-hidden">
                                     {currentChips.map((s) => (
                                         <button
                                             key={s.label}
                                             onClick={() => handleSuggestion(s)}
-                                            className="flex-1 flex items-center justify-center gap-1.5 text-[11px] bg-slate-900/60 hover:bg-purple-600/90 text-white/90 hover:text-white px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap border border-white/5"
+                                            className="flex-1 flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-wider bg-slate-900 border border-indigo-500/40 hover:border-cyan-400 hover:bg-indigo-950/80 text-slate-200 hover:text-cyan-300 px-2 py-1.5 rounded-none transition-all duration-150 shadow-[2px_2px_0px_0px_#4f46e5] hover:-translate-y-0.5 whitespace-nowrap"
                                         >
-                                            {s.icon}
+                                            <span className="text-cyan-400">{s.icon}</span>
                                             <span className="truncate">{s.label}</span>
                                         </button>
                                     ))}
                                 </div>
 
-                                {/* Right Arrow Button */}
                                 <button
                                     onClick={() => goPage(1)}
                                     disabled={suggPage >= totalPages - 1}
-                                    className="w-6 h-6 shrink-0 rounded-full bg-slate-900/60 hover:bg-purple-600 text-white disabled:opacity-20 disabled:hover:bg-slate-900/60 flex items-center justify-center transition-all duration-200 active:scale-90"
+                                    className="w-7 h-7 shrink-0 rounded-none bg-slate-900 border border-indigo-500/40 text-cyan-400 hover:bg-indigo-600 hover:text-white disabled:opacity-20 disabled:hover:bg-slate-900 disabled:hover:text-cyan-400 flex items-center justify-center transition-all duration-150 shadow-[2px_2px_0px_0px_#4f46e5] active:translate-x-0 active:translate-y-0"
                                     aria-label="Next suggestions"
                                 >
-                                    <ChevronRight size={12} />
+                                    <ChevronRight size={14} />
                                 </button>
                             </div>
                         </div>
                     )}
 
-                    {/* Messages */}
+                    {/* Messages Container */}
                     <div
-                        className="flex-1 min-h-0 overflow-y-auto px-3 py-3 space-y-2"
-                        style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.08) transparent" }}
+                        className="flex-1 min-h-0 overflow-y-auto px-3 py-3 space-y-3 bg-slate-950"
+                        style={{ scrollbarWidth: "thin", scrollbarColor: "#4f46e5 transparent" }}
                         onWheel={(e) => e.stopPropagation()}
                     >
                         {messages.map((msg, i) => (
                             <div key={i} className={`chat-bubble flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                                 {msg.role === "assistant" && (
-                                    <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold mr-1.5 mt-1 shrink-0">AI</div>
+                                    <div className="w-6 h-6 rounded-none bg-indigo-600 border border-cyan-400 shadow-[1.5px_1.5px_0px_0px_#22d3ee] flex items-center justify-center text-[9px] font-black mr-2 mt-0.5 shrink-0 text-white">
+                                        AI
+                                    </div>
                                 )}
-                                <div className={`max-w-[78%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${msg.role === "user" ? "bg-purple-500 text-white rounded-br-sm" : "bg-slate-900/60 text-white rounded-bl-sm"}`}>
+                                <div
+                                    className={`max-w-[82%] px-3.5 py-2.5 rounded-none text-xs leading-relaxed font-normal ${
+                                        msg.role === "user"
+                                            ? "bg-indigo-600 text-white border-2 border-indigo-400 shadow-[3px_3px_0px_0px_#22d3ee]"
+                                            : "bg-slate-900 text-slate-200 border-2 border-indigo-500/40 shadow-[3px_3px_0px_0px_#4f46e5]"
+                                    }`}
+                                >
                                     {renderMessage(msg.content)}
                                 </div>
                             </div>
@@ -329,34 +322,36 @@ export default function Chatbot() {
 
                         {loading && (
                             <div className="chat-bubble flex justify-start">
-                                <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold mr-1.5 mt-1 shrink-0">AI</div>
-                                <div className="bg-slate-900/60 px-4 py-3 rounded-2xl rounded-bl-sm flex gap-1 items-center">
-                                    <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                                    <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                                    <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                                <div className="w-6 h-6 rounded-none bg-indigo-600 border border-cyan-400 shadow-[1.5px_1.5px_0px_0px_#22d3ee] flex items-center justify-center text-[9px] font-black mr-2 mt-0.5 shrink-0 text-white">
+                                    AI
+                                </div>
+                                <div className="bg-slate-900 border-2 border-indigo-500/40 shadow-[3px_3px_0px_0px_#4f46e5] px-4 py-3 rounded-none flex gap-1.5 items-center">
+                                    <span className="w-1.5 h-1.5 bg-cyan-400 rounded-none animate-bounce" style={{ animationDelay: "0ms" }} />
+                                    <span className="w-1.5 h-1.5 bg-cyan-400 rounded-none animate-bounce" style={{ animationDelay: "150ms" }} />
+                                    <span className="w-1.5 h-1.5 bg-cyan-400 rounded-none animate-bounce" style={{ animationDelay: "300ms" }} />
                                 </div>
                             </div>
                         )}
                         <div ref={bottomRef} />
                     </div>
 
-                    {/* Input */}
-                    <div className="px-3 py-3 border-t border-white/10 flex gap-2 shrink-0">
+                    {/* Input Area */}
+                    <div className="px-3 py-3 bg-slate-900 border-t-2 border-indigo-500/40 flex gap-2 shrink-0">
                         <input
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
                             placeholder="Type your message..."
                             disabled={loading}
-                            className="flex-1 bg-slate-900/60 border border-white/15 text-white placeholder-white/30 rounded-xl px-3 py-2 text-sm outline-none focus:border-purple-400 focus:bg-white/15 transition-all duration-200 disabled:opacity-50"
+                            className="flex-1 bg-slate-950 border-2 border-indigo-500/40 text-white placeholder-slate-500 rounded-none px-3 py-2 text-xs outline-none focus:border-cyan-400 shadow-[2px_2px_0px_0px_#4f46e5] transition-all duration-200 disabled:opacity-50 font-medium"
                         />
                         <button
                             onClick={() => sendMessage()}
                             disabled={loading || !input.trim()}
-                            className="bg-purple-500 hover:bg-purple-600 disabled:opacity-40 disabled:cursor-not-allowed text-white p-2.5 rounded-xl transition-all duration-200 active:scale-95"
+                            className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed border-2 border-indigo-400 text-white px-3 py-2 rounded-none shadow-[3px_3px_0px_0px_#22d3ee] active:translate-x-0.5 active:translate-y-0.5 transition-all duration-150 flex items-center justify-center"
                             aria-label="Send"
                         >
-                            <Send size={16} />
+                            <Send size={15} className="text-cyan-300" />
                         </button>
                     </div>
                 </div>
