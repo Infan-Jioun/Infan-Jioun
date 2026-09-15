@@ -44,7 +44,7 @@ const socialLinks: SocialLink[] = [
     },
     {
         icon: <FaLinkedinIn />,
-        url: 'https://www.linkedin.com/in/infan-jioun-rahman-81a1b2295/',
+        url: 'https://www.linkedin.com/in/infan-jioun-rahman',
         color: 'text-blue-400 hover:text-blue-300',
         hoverShadow: 'hover:shadow-[4px_4px_0px_0px_#3b82f6]',
         label: 'LinkedIn',

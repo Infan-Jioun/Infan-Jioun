@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
 
     return (
         <header
-            className={`fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] max-w-7xl transition-all duration-300 rounded-none ${isScrolled ? 'top-2' : 'top-4'
+            className={`fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] max-w-7xl transition-all duration-300 rounded-none  ${isScrolled ? 'top-2' : 'top-4'
                 }`}
         >
             {/* 3D Glass Navbar Container */}
