@@ -43,7 +43,7 @@ const RightSkeletonItem = ({ delay = 0 }: { delay?: number }) => (
         className="rounded-none border-2 border-purple-500/20 bg-slate-950 p-2.5 sm:p-3 flex gap-3 shadow-[3px_3px_0px_0px_#a855f7] animate-pulse"
         style={{ animationDelay: `${delay}s` }}
     >
-        <div className="w-14 h-12 sm:w-16 sm:h-14 bg-slate-800 rounded-none flex-shrink-0 border border-slate-700" />
+        <div className="w-14 h-12 sm:w-16 sm:h-14 bg-slate-800 rounded-none shrink-0 border border-slate-700" />
         <div className="flex flex-col gap-2 flex-1 justify-center">
             <div className="h-4 w-3/4 bg-slate-800 rounded-none" />
             <div className="h-3 w-1/2 bg-slate-800 rounded-none" />
@@ -65,10 +65,10 @@ const FeaturedCard = ({ project, onViewDetails }: FeaturedCardProps) => (
             className="featured-card relative rounded-none border-2 border-purple-500/40 bg-slate-900/90 backdrop-blur-xl shadow-[4px_4px_0px_0px_#a855f7] sm:shadow-[6px_6px_0px_0px_#a855f7] transition-all duration-300 hover:border-purple-400 hover:shadow-[8px_8px_0px_0px_#c084fc] flex flex-col h-full overflow-hidden"
         >
             {/* Top Cyber Accent Line */}
-            <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7] z-20" />
+            <div className="absolute top-0 left-0 h-[2px] w-full bg-linear-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7] z-20" />
 
             {/* Image Container */}
-            <div className="relative w-full overflow-hidden border-b-2 border-purple-500/30" style={{ aspectRatio: "16/10", flexShrink: 0 }}>
+            <div className="relative w-full overflow-hidden border-b-2 border-purple-500/30 shrink-0" style={{ aspectRatio: "16/10" }}>
                 {project.imageUrl ? (
                     <Image
                         src={project.imageUrl}
@@ -85,7 +85,7 @@ const FeaturedCard = ({ project, onViewDetails }: FeaturedCardProps) => (
                 )}
 
                 {/* Dark Vignette Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
 
                 {/* Cyber Category Badge */}
                 {project.category && (
@@ -388,7 +388,7 @@ const MyProjects = ({ projects, loading }: Props) => {
     }, []);
 
     return (
-        <section ref={sectionRef} id="projects-section" className="relative py-16 sm:py-24 bg-transparent overflow-hidden">
+        <section ref={sectionRef} id="projects-section" className="relative w-full py-4 sm:py-8 bg-transparent overflow-hidden">
             {/* Custom Cyber Scrollbar */}
             <style>{`
                 .cyber-scrollbar::-webkit-scrollbar {
@@ -409,7 +409,7 @@ const MyProjects = ({ projects, loading }: Props) => {
             {/* Background Glow */}
             <div className="absolute left-10 top-1/3 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <div className="relative z-10 w-full text-white">
 
                 {/* Header */}
                 <div ref={headerRef} className="text-center mb-10 sm:mb-16">

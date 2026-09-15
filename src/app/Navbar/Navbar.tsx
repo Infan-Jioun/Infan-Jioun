@@ -59,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
                 className="relative bg-slate-900/90 backdrop-blur-xl border-2 border-indigo-500/40 shadow-[6px_6px_0px_0px_#4f46e5] rounded-none transition-all duration-300"
             >
                 {/* Top Accent Gradient Line */}
-                <div className="h-[2px] w-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_#6366f1]" />
+                <div className="h-[2px] w-full bg-linear-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_#6366f1]" />
 
                 <div className="flex justify-between items-center py-3 px-4 sm:px-6 md:px-8">
 

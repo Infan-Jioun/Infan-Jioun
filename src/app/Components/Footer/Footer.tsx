@@ -102,13 +102,13 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div className="w-[calc(100%-1.5rem)] max-w-7xl mx-auto pb-10">
       <footer
         id="footer"
-        className="relative mt-24 bg-slate-900/90 backdrop-blur-xl border-2 border-indigo-500/40 shadow-[8px_8px_0px_0px_#4f46e5] rounded-none pt-10 sm:pt-12 pb-8 px-4 sm:px-8 transition-all duration-300 overflow-hidden"
+        className="relative mt-12 sm:mt-16 bg-slate-900/90 backdrop-blur-xl border-2 border-indigo-500/40 shadow-[8px_8px_0px_0px_#4f46e5] rounded-none pt-10 sm:pt-12 pb-8 px-4 sm:px-8 transition-all duration-300 overflow-hidden"
       >
         {/* Top Accent Gradient Line */}
-        <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_#6366f1]" />
+        <div className="absolute top-0 left-0 h-[2px] w-full bg-linear-to-r from-cyan-500 via-indigo-500 to-purple-500 shadow-[0_0_12px_#6366f1]" />
 
         <div
           className={`

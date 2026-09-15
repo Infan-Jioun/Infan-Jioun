@@ -245,7 +245,7 @@ const SkillCategorySection = React.memo(({ category }: { category: SkillCategory
       className="group relative overflow-hidden rounded-none border-2 border-indigo-500/40 bg-slate-900/90 backdrop-blur-xl shadow-[6px_6px_0px_0px_#4f46e5] hover:shadow-[8px_8px_0px_0px_#6366f1] transition-all duration-300"
     >
       {/* Top Accent Gradient Line */}
-      <div className={`h-[2px] w-full bg-gradient-to-r ${a.overlay} shadow-[0_0_10px_#6366f1]`} />
+      <div className={`h-[2px] w-full bg-linear-to-r ${a.overlay} shadow-[0_0_10px_#6366f1]`} />
 
       {/* Card Header */}
       <div className="p-5 sm:p-6 pb-3 relative z-10 space-y-1">
@@ -278,7 +278,7 @@ const Skills: React.FC = () => {
   return (
     <section
       id="skills"
-      className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 z-10 isolate block clear-both"
+      className="relative w-full py-4 sm:py-8 z-10 isolate block clear-both"
     >
       {/* Header */}
       <div className="text-center mb-12 sm:mb-16 relative z-10 block space-y-3">
@@ -304,7 +304,7 @@ const Skills: React.FC = () => {
 
       {/* Bottom Summary Card */}
       <div className="relative overflow-hidden rounded-none border-2 border-purple-500/50 bg-slate-900/90 backdrop-blur-xl shadow-[6px_6px_0px_0px_#a855f7] p-6 text-center z-10">
-        <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-cyan-400 via-purple-500 to-indigo-500" />
+        <div className="absolute top-0 left-0 h-[2px] w-full bg-linear-to-r from-cyan-400 via-purple-500 to-indigo-500" />
         <h3 className="text-base sm:text-lg font-black uppercase tracking-wider text-white mb-1">
           ALWAYS LEARNING, ALWAYS <span className="text-cyan-400">GROWING</span>
         </h3>

@@ -133,12 +133,12 @@ const GSAPCard = ({ edu }: { edu: EducationItem }) => {
                 style={{ transformStyle: "preserve-3d" }}
             >
                 {/* Top Cyber Accent Line */}
-                <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7]" />
+                <div className="absolute top-0 left-0 h-[2px] w-full bg-linear-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7]" />
 
                 {/* Glow Effect */}
                 <div
                     ref={glowRef}
-                    className="pointer-events-none absolute h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 blur-3xl opacity-0"
+                    className="pointer-events-none absolute h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-r from-purple-500/20 to-cyan-500/20 blur-3xl opacity-0"
                 />
 
                 <div
@@ -241,9 +241,9 @@ const EducationSection = ({ loading }: EducationSectionProps) => {
 
     if (loading) {
         return (
-            <section className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" id="education">
+            <section className="relative w-full py-4 sm:py-8" id="education">
                 <Skeleton className="mx-auto mb-16 h-12 w-64 rounded-none border-2 border-purple-500/30 bg-slate-900/90" />
-                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-3">
+                <div className="w-full grid grid-cols-1 gap-6 md:grid-cols-3">
                     <Skeleton className="h-72 w-full rounded-none border-2 border-purple-500/30 bg-slate-900/90" />
                     <Skeleton className="h-72 w-full rounded-none border-2 border-purple-500/30 bg-slate-900/90" />
                     <Skeleton className="h-72 w-full rounded-none border-2 border-purple-500/30 bg-slate-900/90" />
@@ -253,7 +253,7 @@ const EducationSection = ({ loading }: EducationSectionProps) => {
     }
 
     return (
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-10" id="education">
+        <section className="relative w-full py-4 sm:py-8 z-10" id="education">
             {/* Header Section */}
             <div className="relative z-10 mb-16 text-center">
                 <h2 className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-widest text-white drop-shadow-lg">

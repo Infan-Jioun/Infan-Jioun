@@ -46,8 +46,8 @@ const Banner = () => {
 
   return (
     <main className="relative min-h-screen w-full bg-slate-950 text-slate-100 overflow-x-hidden">
-      {/* Container with Flex Column and strict gap spacing */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 flex flex-col gap-20 sm:gap-28 relative z-10">
+      {/* Container with Flex Column and strict gap spacing matching Navbar alignment */}
+      <div className="w-[calc(100%-1.5rem)] max-w-7xl mx-auto pt-24 pb-16 sm:pt-28 sm:pb-20 flex flex-col gap-14 sm:gap-20 relative z-10">
 
         {/* Hero Section */}
         <section className="relative w-full z-10">

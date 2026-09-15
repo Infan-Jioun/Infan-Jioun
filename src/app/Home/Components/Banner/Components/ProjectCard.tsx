@@ -87,7 +87,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                                 onLoadingComplete={handleImageLoad}
                                 onError={handleImageError}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@ const ProjectCard = memo(({ project, loading, index, onViewDetails }: ProjectCar
                         </div>
                     </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none group-hover:opacity-80 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none group-hover:opacity-80 transition-opacity duration-500" />
             </CardContent>
         </Card>
     );

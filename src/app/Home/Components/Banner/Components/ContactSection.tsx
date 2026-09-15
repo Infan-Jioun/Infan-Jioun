@@ -101,8 +101,8 @@ const ContactSection = ({
 
     if (loading) {
         return (
-            <section ref={formRef} id="contact" className="py-20 bg-transparent">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section ref={formRef} id="contact" className="w-full py-4 sm:py-8 bg-transparent">
+                <div className="w-full">
                     <div className="text-center mb-16">
                         <Skeleton className="h-12 w-64 mx-auto mb-4 rounded-none border-2 border-purple-500/30 bg-slate-900/90" />
                         <Skeleton className="h-6 w-96 mx-auto rounded-none border-2 border-purple-500/30 bg-slate-900/90" />
@@ -121,11 +121,11 @@ const ContactSection = ({
     }
 
     return (
-        <section ref={formRef} id="contact" className="py-24 relative z-10 bg-transparent">
+        <section ref={formRef} id="contact" className="w-full py-4 sm:py-8 relative z-10 bg-transparent">
             {/* Background Glow */}
             <div className="absolute right-10 bottom-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <div className="w-full text-white">
                 {/* Header */}
                 <div className="text-center mb-16">
                     <h2 className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-widest text-white drop-shadow-lg">
@@ -145,7 +145,7 @@ const ContactSection = ({
                     {/* Form Card */}
                     <Card className="lg:col-span-2 relative overflow-hidden rounded-none border-2 border-purple-500/40 bg-slate-900/90 backdrop-blur-xl shadow-[6px_6px_0px_0px_#a855f7] transition-all duration-300 hover:border-purple-400 hover:shadow-[8px_8px_0px_0px_#c084fc]">
                         {/* Top Accent Line */}
-                        <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7]" />
+                        <div className="absolute top-0 left-0 h-[2px] w-full bg-linear-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7]" />
 
                         <CardHeader className="pb-4 relative z-10">
                             <CardTitle className="flex items-center gap-2.5 text-xl sm:text-2xl font-black uppercase tracking-wider text-white">
@@ -226,7 +226,7 @@ const ContactSection = ({
 
                     {/* Details Card */}
                     <Card className="relative overflow-hidden rounded-none border-2 border-purple-500/40 bg-slate-900/90 backdrop-blur-xl shadow-[6px_6px_0px_0px_#a855f7] transition-all duration-300 hover:border-purple-400 hover:shadow-[8px_8px_0px_0px_#c084fc]">
-                        <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7]" />
+                        <div className="absolute top-0 left-0 h-[2px] w-full bg-linear-to-r from-purple-500 via-indigo-500 to-cyan-500 shadow-[0_0_10px_#a855f7]" />
 
                         <CardHeader className="relative z-10">
                             <CardTitle className="flex items-center gap-2.5 text-xl font-black uppercase tracking-wider text-white">

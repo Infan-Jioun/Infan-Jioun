@@ -100,7 +100,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
     return (
         <section
             id="about"
-            className="relative min-h-[calc(100vh-80px)] flex items-center justify-center px-4 lg:px-8 pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-32 lg:pb-24 bg-transparent overflow-hidden scroll-mt-24"
+            className="relative w-full flex items-center justify-center py-4 sm:py-8 bg-transparent overflow-hidden scroll-mt-24"
         >
             {/* Custom Animations & Styles */}
             <style jsx global>{`
@@ -156,7 +156,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                 }}
             />
 
-            <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <div className="relative z-10 w-full">
                 <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
 
                     {/* Profile Image Container with Footer-Matching Neo-Brutalist Border */}
@@ -202,7 +202,7 @@ const HeroSection = ({ loading, onScrollToForm }: HeroSectionProps) => {
                                     <div className="mb-6">
                                         {/* Neo-brutalist Greeting Badge matching Footer */}
                                         <span className="inline-flex items-center gap-2 bg-slate-950 border-2 border-indigo-500/40 shadow-[3px_3px_0px_0px_#4f46e5] px-3 sm:px-4 py-1.5 rounded-none text-indigo-300 text-[10px] sm:text-xs font-black tracking-widest uppercase mb-4 select-none">
-                                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
+                                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
                                             👋 Assalamoalaikum, I'm
                                         </span>
 

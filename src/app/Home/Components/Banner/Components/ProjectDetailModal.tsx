@@ -193,11 +193,11 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
                 }}
             >
                 {/* 3D Accent Top Bar */}
-                <div className="h-1 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-[0_2px_10px_#6366f1]" />
+                <div className="h-1 w-full bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-[0_2px_10px_#6366f1]" />
 
                 {/* Header */}
                 <div
-                    className="flex items-center justify-between px-6 py-4 flex-shrink-0 relative z-20 bg-slate-900/80 rounded-none"
+                    className="flex items-center justify-between px-6 py-4 shrink-0 relative z-20 bg-slate-900/80 rounded-none"
                     style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}
                 >
                     <div className="flex items-center gap-3">
@@ -234,7 +234,7 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
 
                         {/* Image Slider (3D Frame, Sharp Corners) */}
                         <div
-                            className="relative flex-shrink-0 bg-slate-950 border-2 border-indigo-500/30 shadow-[8px_8px_0px_0px_rgba(15,23,42,0.9)] rounded-none group overflow-hidden"
+                            className="relative shrink-0 bg-slate-950 border-2 border-indigo-500/30 shadow-[8px_8px_0px_0px_rgba(15,23,42,0.9)] rounded-none group overflow-hidden"
                             style={{ height: 300 }}
                         >
                             <Image
@@ -247,8 +247,8 @@ const ProjectDetailModal = memo(({ project, isOpen, onClose }: Props) => {
                             />
 
                             {/* Overlays */}
-                            <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-950/70 to-transparent pointer-events-none" />
-                            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent pointer-events-none" />
+                            <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-slate-950/70 to-transparent pointer-events-none" />
+                            <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-slate-950/90 via-slate-950/30 to-transparent pointer-events-none" />
 
                             {total > 1 && (
                                 <>

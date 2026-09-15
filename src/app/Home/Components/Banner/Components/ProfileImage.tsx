@@ -22,10 +22,10 @@ const ProfileImage = ({ loading }: ProfileImageProps) => {
     return (
         <div className="relative group select-none">
             {/* 1. Dynamic Ambient Background Glow */}
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 rounded-[2.5rem] blur-xl opacity-40 group-hover:opacity-85 transition-all duration-700 ease-out group-hover:scale-105"></div>
+            <div className="absolute -inset-1.5 bg-linear-to-r from-purple-600 via-indigo-500 to-cyan-400 rounded-[2.5rem] blur-xl opacity-40 group-hover:opacity-85 transition-all duration-700 ease-out group-hover:scale-105"></div>
 
             {/* 2. Glassmorphic Outer Border Wrapper */}
-            <div className="relative rounded-[2rem] p-1.5 bg-gradient-to-b from-white/20 via-white/5 to-transparent backdrop-blur-2xl border border-white/15 group-hover:border-purple-400/40 transition-all duration-500 shadow-2xl">
+            <div className="relative rounded-[2rem] p-1.5 bg-linear-to-b from-white/20 via-white/5 to-transparent backdrop-blur-2xl border border-white/15 group-hover:border-purple-400/40 transition-all duration-500 shadow-2xl">
 
                 {/* 3. Main Card Container */}
                 <Card className="relative border-0 bg-slate-950/50 backdrop-blur-md rounded-[1.7rem] overflow-hidden shadow-inner">
@@ -37,12 +37,12 @@ const ProfileImage = ({ loading }: ProfileImageProps) => {
                             alt="Infan Jioun Rahman - Full Stack Developer"
                             width={384}
                             height={384}
-                            className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                            className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                             priority
                         />
 
                         {/* 4. Cinematic Vignette & Lighting Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none group-hover:opacity-80 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none group-hover:opacity-80 transition-opacity duration-500" />
                     
 
                     </CardContent>
