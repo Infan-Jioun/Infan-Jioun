@@ -35,6 +35,10 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
     const closeDropdown = () => setIsOpen(false);
 
     const scrollToSection = (id: string) => {
+        if (pathname !== '/') {
+            window.location.href = `/#${id}`;
+            return;
+        }
         const section = document.getElementById(id);
         if (section) {
             section.scrollIntoView({ behavior: 'smooth' });
@@ -65,7 +69,13 @@ const Navbar: React.FC<NavbarProps> = ({ setScrolled }) => {
 
                     {/* Brand / Logo Emblem */}
                     <button
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        onClick={() => {
+                            if (pathname !== '/') {
+                                window.location.href = '/';
+                            } else {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }
+                        }}
                         className="flex items-center gap-2 group text-left border-none bg-transparent cursor-pointer"
                     >
                         <div className="w-3 h-3 bg-cyan-400 shadow-[0_0_10px_#22d3ee] rounded-none group-hover:bg-indigo-400 transition-colors" />

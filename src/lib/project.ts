@@ -1,4 +1,4 @@
-[
+const projectsData = [
     {
         
         "category": "personal",
@@ -292,4 +292,5 @@
         ]
     }
 
-]
+];
+export default projectsData;

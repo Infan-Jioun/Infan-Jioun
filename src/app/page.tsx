@@ -1,9 +1,8 @@
-import HomePage from "./Home/page";
+import HomeContent from "./Home/Components/HomeContent";
 
 export default function Page() {
   return (
     <main>
-
       <section className="sr-only">
         <h1>Infan Jioun Rahman</h1>
         <h2>Web Developer</h2>
@@ -12,7 +11,7 @@ export default function Page() {
         </p>
       </section>
 
-      <HomePage />
+      <HomeContent />
     </main>
   );
 }
